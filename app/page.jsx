@@ -41,7 +41,7 @@ export default function HomePage() {
             <h2>Latest from Daily Works</h2>
             <div className="daily-grid">
               {dailyWorks.slice(0, 4).map((work) => (
-                <DailyCard key={work.id} work={work} onClick={() => setModal({ type: "daily", item: work })} />
+                <DailyCard key={work.id} work={work} onClick={() => set({ type: "daily", item: work })} />
               ))}
             </div>
             <Link href="/daily" className="back-link" style={{ marginTop: "1.5rem" }}>
@@ -63,10 +63,17 @@ export default function HomePage() {
         </section>
       </main>
 
-      <Modal onClose={() => setModal(null)}>
-        {modal?.type === "product" ? <ProductSummary product={modal.item} /> : null}
-        {modal?.type === "daily" ? <DailyModalContent work={modal.item} /> : null}
-      </Modal>
+      {modal && (
+  <Modal onClose={() => setModal(null)}>
+    {modal.type === "product" ? (
+      <ProductSummary product={modal.item} />
+    ) : null}
+
+    {modal.type === "daily" ? (
+      <DailyModalContent work={modal.item} />
+    ) : null}
+  </Modal>
+)}
     </SiteShell>
   );
 }
