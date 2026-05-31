@@ -17,7 +17,7 @@ export default function PivotArticlePage() {
               <h1>Pivot Door vs Traditional Front Door: Which Is Better for Modern Homes?</h1>
               <div className="article-meta">
                 <span>
-                  <i className="far fa-calendar-alt" style={{ marginRight: "0.3em" }} /> May 15, 2025
+                  <i className="far fa-calendar-alt" style={{ marginRight: "0.3em" }} /> April 1, 2025
                 </span>
               </div>
             </header>
