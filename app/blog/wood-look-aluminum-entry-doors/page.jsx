@@ -24,9 +24,9 @@ export default function WoodLookAluminumArticle() {
             </header>
 
             <img
-              className="article-hero-img"
-              src="https://placehold.co/1200x700/e5e7eb/9ca3af?text=Wood-Look+Aluminum+Entry+Door"
-              alt="Wood Look Aluminum Entry Door For Modern Luxury Home"
+                className="article-hero-img"
+                  src="/assets/images/blog/wood-look-aluminum-entry-doors/hero.jpg"
+                    alt="Wood Look Aluminum Entry Door For Modern Luxury Home"
             />
 
             <div className="article-content">
