@@ -19,7 +19,7 @@ export default function WoodLookAluminumArticle() {
               </h1>
 
               <div className="article-meta">
-                <span>June 1, 2025</span>
+                <span>May 11, 2026</span>
               </div>
             </header>
 
