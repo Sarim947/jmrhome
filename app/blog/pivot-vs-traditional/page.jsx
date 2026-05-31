@@ -37,7 +37,7 @@ export default function PivotArticlePage() {
               <p>This system shifts the weight differently and allows the door to support much larger and heavier panels than conventional hinges.</p>
               <p>Pivot doors are commonly used in modern luxury homes, large-scale residential entrances, contemporary villas, and custom architectural projects.</p>
               <p>Because the pivot point is offset from the edge, the door creates a dramatic floating effect when opened.</p>
-              <ArticleImage src="/assets/images/blog/pivot-closeup.jpg" alt="Oversized pivot door rotating on pivot hinge system" />
+              <ArticleImage src="/assets/images/blog/factory.jpg" alt="Oversized pivot door rotating on pivot hinge system" />
 
               <h2>What Is a Traditional Hinged Front Door?</h2>
               <p>A traditional front door uses side-mounted hinges attached directly to the door frame.</p>
