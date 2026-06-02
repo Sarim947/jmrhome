@@ -8,7 +8,7 @@ const { name, email, message } = await request.json();
 
 const result = await resend.emails.send({
   from: "Website <onboarding@resend.dev>",
-  to: "huan@jmrhome.life",
+  to: "740351598liu@gmail.com",
   subject: "New Inquiry from JMRHOME.LIFE",
   html: `
     <h2>New Website Inquiry</h2>
