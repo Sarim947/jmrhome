@@ -84,8 +84,8 @@ export default function LeadChatBot() {
         onClick={() => setOpen((value) => !value)}
         style={{
           position: "fixed",
-          right: "24px",
-          bottom: "92px",
+          right: "28px",
+          bottom: "100px",
           zIndex: 9999,
           border: "none",
           borderRadius: "999px",
@@ -96,16 +96,16 @@ export default function LeadChatBot() {
           boxShadow: "0 10px 30px rgba(0,0,0,0.25)"
         }}
       >
-        Get Quote
+        Get Chat
       </button>
 
       {open && (
         <div
           style={{
             position: "fixed",
-            right: "24px",
-            bottom: "150px",
-            width: "340px",
+            right: "28px",
+            bottom: "170px",
+            width: "360px",
             maxWidth: "calc(100vw - 32px)",
             height: "460px",
             zIndex: 9999,
@@ -117,12 +117,38 @@ export default function LeadChatBot() {
             flexDirection: "column"
           }}
         >
-          <div style={{ padding: "16px", background: "#111827", color: "white" }}>
-            <strong>Project Assistant</strong>
-            <div style={{ fontSize: "12px", opacity: 0.8 }}>
-              Tell us about your project
-            </div>
-          </div>
+          <div
+  style={{
+    padding: "16px",
+    background: "#111827",
+    color: "white",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start"
+  }}
+>
+  <div>
+    <strong>Project Assistant</strong>
+    <div style={{ fontSize: "12px", opacity: 0.8 }}>
+      Tell us about your project
+    </div>
+  </div>
+
+  <button
+    onClick={() => setOpen(false)}
+    style={{
+      border: "none",
+      background: "transparent",
+      color: "white",
+      fontSize: "22px",
+      cursor: "pointer",
+      lineHeight: 1
+    }}
+    aria-label="Close chat"
+  >
+    ×
+  </button>
+</div>
 
           <div style={{ flex: 1, padding: "14px", overflowY: "auto" }}>
             {messages.map((m, index) => (
