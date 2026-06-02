@@ -71,6 +71,19 @@ export default function LeadChatBot() {
       return;
     }
 
+    await fetch("/api/lead-notify", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    country: updatedLead.country,
+    product: updatedLead.product,
+    project_type: updatedLead.project_type,
+    quantity: updatedLead.quantity,
+    contact: contact
+  })
+});
     setDone(true);
     setMessages((prev) => [
       ...prev,
