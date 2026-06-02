@@ -91,21 +91,45 @@ export default function SiteShell({ children }) {
 function ContactModal({ open, onClose }) {
   const [sending, setSending] = useState(false);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const subject = encodeURIComponent("Website inquiry from JMRHOME.LIFE");
-    const body = encodeURIComponent(
-      `Name: ${form.get("name")}\nEmail: ${form.get("email")}\n\n${form.get("message")}`
-    );
-    setSending(true);
-    window.location.href = `mailto:huan@jmrhome.life?subject=${subject}&body=${body}`;
-    setTimeout(() => {
-      setSending(false);
-      onClose();
-      event.currentTarget.reset();
-    }, 400);
-  }
+  async function handleSubmit(event) {
+event.preventDefault();
+
+const form = new FormData(event.currentTarget);
+
+setSending(true);
+
+try {
+const response = await fetch("/api/contact", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+name: form.get("name"),
+email: form.get("email"),
+message: form.get("message")
+})
+});
+
+```
+const result = await response.json();
+
+if (result.success) {
+  alert("Thank you! Your message has been sent.");
+  event.currentTarget.reset();
+  onClose();
+} else {
+  alert("Failed to send message.");
+}
+```
+
+} catch (error) {
+alert("Failed to send message.");
+}
+
+setSending(false);
+}
+
 
   if (!open) return null;
 
@@ -127,7 +151,7 @@ function ContactModal({ open, onClose }) {
             <textarea name="message" placeholder="How can we help?" required />
           </div>
           <button type="submit" className="submit-btn" disabled={sending}>
-            {sending ? "Opening mail..." : "Send Message"}
+            {sending ? "Sending..." : "Send Message"}
           </button>
         </form>
         <button className="close-modal close-modal-btn" onClick={onClose} aria-label="Close contact form">
