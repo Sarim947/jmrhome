@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
+import LeadChatBot from "@/components/LeadChatBot";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -84,6 +84,7 @@ export default function SiteShell({ children }) {
       </a>
 
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+<LeadChatBot />
     </>
   );
 }
