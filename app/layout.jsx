@@ -1,5 +1,6 @@
 import Script from "next/script";
 import "./globals.css";
+import CookieBanner from "../components/CookieBanner";
 
 export const metadata = {
   title: {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
+        <CookieBanner />
         <Script
     src="https://www.googletagmanager.com/gtag/js?id=G-GWP2L2DV7T"
     strategy="afterInteractive"
