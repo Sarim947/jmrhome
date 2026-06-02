@@ -34,13 +34,17 @@ export default function CookieBanner() {
       </p>
 
       <button
-        onClick={() => {
-          localStorage.setItem("cookie-consent", "accepted");
-          setShow(false);
-        }}
-      >
-        Accept
-      </button>
+  onClick={() => {
+    window.gtag?.("consent", "update", {
+      analytics_storage: "granted"
+    });
+
+    localStorage.setItem("cookie-consent", "accepted");
+    setShow(false);
+  }}
+>
+  Accept
+</button>
 
       <button
         onClick={() => {
