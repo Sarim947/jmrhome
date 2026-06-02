@@ -24,18 +24,31 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
+        <Script id="consent-default" strategy="beforeInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied'
+    });
+  `}
+</Script>
       </head>
       <body>
         {children}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GWP2L2DV7T" />
-        <Script id="ga">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-GWP2L2DV7T');
-          `}
-        </Script>
+        <Script
+    src="https://www.googletagmanager.com/gtag/js?id=G-GWP2L2DV7T"
+    strategy="afterInteractive"
+  />
+
+  <Script id="ga" strategy="afterInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GWP2L2DV7T');
+    `}
+  </Script>
       </body>
     </html>
   );
