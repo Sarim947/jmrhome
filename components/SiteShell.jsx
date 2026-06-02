@@ -92,6 +92,7 @@ function ContactModal({ open, onClose }) {
   const [sending, setSending] = useState(false);
 
   async function handleSubmit(event) {
+console.log("FORM SUBMITTED");
 event.preventDefault();
 
 const form = new FormData(event.currentTarget);
