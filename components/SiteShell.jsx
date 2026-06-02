@@ -92,45 +92,47 @@ function ContactModal({ open, onClose }) {
   const [sending, setSending] = useState(false);
 
   async function handleSubmit(event) {
-console.log("FORM SUBMITTED");
-event.preventDefault();
+    event.preventDefault();
 
-const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
 
-setSending(true);
+    setSending(true);
 
-try {
-const response = await fetch("/api/contact", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
-name: form.get("name"),
-email: form.get("email"),
-message: form.get("message")
-})
-});
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: form.get("name"),
+          email: form.get("email"),
+          message: form.get("message")
+        })
+      });
 
-```
-const result = await response.json();
+      const result = await response.json();
 
-if (result.success) {
-  alert("Thank you! Your message has been sent.");
-  event.currentTarget.reset();
-  onClose();
-} else {
-  alert("Failed to send message.");
-}
-```
+      if (response.ok && result.success) {
+        window.gtag?.("event", "generate_lead", {
+          event_category: "contact",
+          event_label: "contact_form"
+        });
 
-} catch (error) {
-alert("Failed to send message.");
-}
-
-setSending(false);
-}
-
+        alert("Thank you! Your message has been sent.");
+        formElement.reset();
+        onClose();
+      } else {
+        alert(result.error || result.result?.error?.message || "Failed to send message.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message.");
+    } finally {
+      setSending(false);
+    }
+  }
 
   if (!open) return null;
 
