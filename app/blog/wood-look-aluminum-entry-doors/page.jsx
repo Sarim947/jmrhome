@@ -193,45 +193,45 @@ export default function WoodLookAluminumArticle() {
 
               <h2>Wood-Look Aluminum vs Solid Wood Entry Doors</h2>
 
-              <table>
-                <tbody>
-                  <tr>
-                    <th>Feature</th>
-                    <th>Wood-Look Aluminum</th>
-                    <th>Solid Wood</th>
-                  </tr>
-                  <tr>
-                    <td>Appearance</td>
-                    <td>Excellent</td>
-                    <td>Excellent</td>
-                  </tr>
-                  <tr>
-                    <td>Maintenance</td>
-                    <td>Low</td>
-                    <td>High</td>
-                  </tr>
-                  <tr>
-                    <td>Moisture Resistance</td>
-                    <td>Excellent</td>
-                    <td>Moderate</td>
-                  </tr>
-                  <tr>
-                    <td>Dimensional Stability</td>
-                    <td>Excellent</td>
-                    <td>Moderate</td>
-                  </tr>
-                  <tr>
-                    <td>Coastal Performance</td>
-                    <td>Excellent</td>
-                    <td>Limited</td>
-                  </tr>
-                  <tr>
-                    <td>Large Door Capability</td>
-                    <td>Excellent</td>
-                    <td>Limited</td>
-                  </tr>
-                </tbody>
-              </table>
+              <table className="comparison-table">
+  <tbody>
+    <tr>
+      <th>Feature</th>
+      <th className="highlight-col">Wood-Look Aluminum</th>
+      <th>Solid Wood</th>
+    </tr>
+    <tr>
+      <td>Appearance</td>
+      <td className="highlight-col">✓ Excellent</td>
+      <td>✓ Excellent</td>
+    </tr>
+    <tr>
+      <td>Maintenance</td>
+      <td className="highlight-col">✓ Low</td>
+      <td>✕ High</td>
+    </tr>
+    <tr>
+      <td>Moisture Resistance</td>
+      <td className="highlight-col">✓ Excellent</td>
+      <td>△ Moderate</td>
+    </tr>
+    <tr>
+      <td>Dimensional Stability</td>
+      <td className="highlight-col">✓ Excellent</td>
+      <td>△ Moderate</td>
+    </tr>
+    <tr>
+      <td>Coastal Performance</td>
+      <td className="highlight-col">✓ Excellent</td>
+      <td>✕ Limited</td>
+    </tr>
+    <tr>
+      <td>Large Door Capability</td>
+      <td className="highlight-col">✓ Excellent</td>
+      <td>✕ Limited</td>
+    </tr>
+  </tbody>
+</table>
 
               <h2>Frequently Asked Questions</h2>
 
