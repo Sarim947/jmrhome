@@ -85,7 +85,7 @@ export default function WoodLookAluminumArticle() {
               </p>
 
               <ArticleImage
-                src="https://placehold.co/1000x600/e5e7eb/9ca3af?text=Wood+Grain+Finish+Detail"
+                src="/assets/images/blog/blog2/wood-look-aluminum-entry-doors.jpg"
                 alt="Wood Grain Finish Aluminum Entry Door"
               />
 
@@ -117,7 +117,7 @@ export default function WoodLookAluminumArticle() {
               </p>
 
               <ArticleImage
-                src="https://placehold.co/1000x600/e5e7eb/9ca3af?text=Fully+Aluminum+Structure"
+                src="/assets/images/blog/blog2/fully-aluminum-entry-door-construction.jpg"
                 alt="Fully Aluminum Frame And Door Leaf Construction"
               />
 
