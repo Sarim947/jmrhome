@@ -832,7 +832,8 @@ img { content-visibility: auto; }
 }
 
 .comparison-table .highlight-col {
-  background: #f3f8f5;
+  background: #eef8f2;
+  color:#111827;
   font-weight: 700;
 }
 
