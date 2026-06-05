@@ -6,6 +6,7 @@ import { BlogCard, DailyCard, ProductCard } from "@/components/Cards";
 import Modal from "@/components/Modal";
 import { DailyModalContent, ProductSummary } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
+import CustomerReviews from "@/components/CustomerReviews";
 import { blogPosts, dailyWorks, featuredProducts } from "@/lib/data";
 
 export default function HomePage() {
@@ -48,7 +49,7 @@ export default function HomePage() {
               <i className="fas fa-arrow-right" /> View All Daily Works
             </Link>
           </div>
-
+            <CustomerReviews />
           <div className="container" style={{ marginTop: "3rem" }}>
             <h2>From Our Blog</h2>
             <div className="grid">

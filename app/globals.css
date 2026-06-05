@@ -660,3 +660,132 @@ img { content-visibility: auto; }
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -12px rgba(0,0,0,0.05);
 }
+.customer-reviews-section {
+  padding: 80px 0 70px;
+  background: #f7f5f1;
+  overflow: hidden;
+}
+
+.reviews-heading {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.reviews-heading span {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #9a7a45;
+}
+
+.reviews-heading h2 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.2;
+  color: #151515;
+}
+
+.reviews-heading p {
+  margin: 14px auto 0;
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #666;
+}
+
+.reviews-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: reviewsScroll 38s linear infinite;
+}
+
+.reviews-marquee:hover .reviews-track {
+  animation-play-state: paused;
+}
+
+.review-card {
+  width: 340px;
+  min-height: 210px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-top img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.review-top h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111;
+}
+
+.review-top p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #777;
+}
+
+.review-stars {
+  margin-top: 18px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #b88935;
+}
+
+.review-text {
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #444;
+}
+
+@keyframes reviewsScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .customer-reviews-section {
+    padding: 56px 0 50px;
+  }
+
+  .reviews-heading h2 {
+    font-size: 26px;
+  }
+
+  .review-card {
+    width: 290px;
+    min-height: 220px;
+  }
+
+  .reviews-track {
+    animation-duration: 32s;
+  }
+}
