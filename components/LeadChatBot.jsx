@@ -12,7 +12,7 @@ const PROJECT_TYPES = [
   "For my personal home",
   "I have a contractor project",
   "I am a dealer",
-  "I am an architect / designer"
+  "I am an architect / designer",
   "I am not sure yet, just exploring"
 ];
 
