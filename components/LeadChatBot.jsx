@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -8,87 +8,174 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+const PROJECT_TYPES = [
+  "For my personal home",
+  "I have a contractor project",
+  "I am a dealer",
+  "I am an architect / designer"
+];
+
 const questions = [
-  { key: "country", text: "Hi! Which country is your project located in?" },
-  { key: "product", text: "What product are you interested in? Entry door, pivot door, copper door, or SPC wall panel?" },
-  { key: "project_type", text: "Is this for a villa, residential project, dealer order, or construction project?" },
-  { key: "quantity", text: "What is the estimated quantity?" },
-  { key: "contact", text: "How can we contact you? Please leave your email or WhatsApp." }
+  { key: "country", text: "Which country is your project located in?" },
+  { key: "contact", text: "Please leave your email or WhatsApp. This is required so we can contact you." },
+  { key: "message", text: "Any project details? You may also upload photos, drawings or PDFs using the + button. This step is optional." }
 ];
 
 export default function LeadChatBot() {
+  const fileInputRef = useRef(null);
+
   const [open, setOpen] = useState(false);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
   const [lead, setLead] = useState({});
   const [input, setInput] = useState("");
+  const [files, setFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "bot", text: questions[0].text }
+    {
+      role: "bot",
+      text: "Hi! Tell us about your project. What type of project is this?"
+    }
   ]);
   const [done, setDone] = useState(false);
 
+  function addMessage(role, text) {
+    setMessages((prev) => [...prev, { role, text }]);
+  }
+
+  function handleProjectType(type) {
+    const updatedLead = { ...lead, project_type: type };
+    setLead(updatedLead);
+    setStep(0);
+
+    addMessage("user", type);
+    addMessage("bot", questions[0].text);
+  }
+
+  function isEmail(value) {
+    return /\S+@\S+\.\S+/.test(value);
+  }
+
+  async function uploadFiles(selectedFiles) {
+    if (!selectedFiles?.length) return;
+
+    setUploading(true);
+
+    for (const file of selectedFiles) {
+      if (file.size > 25 * 1024 * 1024) {
+        addMessage("bot", `${file.name} is larger than 25MB. Please upload a smaller file.`);
+        continue;
+      }
+
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+
+      if (!allowedTypes.includes(file.type)) {
+        addMessage("bot", `${file.name} is not supported. Please upload JPG, PNG, WEBP or PDF.`);
+        continue;
+      }
+
+      const filePath = `${Date.now()}-${file.name}`;
+
+      const { error } = await supabase.storage
+        .from("project-uploads")
+        .upload(filePath, file);
+
+      if (error) {
+        console.error(error);
+        addMessage("bot", `Failed to upload ${file.name}. Please try again.`);
+        continue;
+      }
+
+      const { data } = supabase.storage
+        .from("project-uploads")
+        .getPublicUrl(filePath);
+
+      const uploadedFile = {
+        name: file.name,
+        url: data.publicUrl
+      };
+
+      setFiles((prev) => [...prev, uploadedFile]);
+      addMessage("user", `📎 ${file.name}`);
+    }
+
+    setUploading(false);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!input.trim() || done) return;
+    if (done) return;
+
+    const currentInput = input.trim();
+
+    if (step === 2 && !currentInput) {
+      await submitLead({ ...lead, message: "" });
+      return;
+    }
+
+    if (!currentInput) return;
 
     const current = questions[step];
-    const updatedLead = { ...lead, [current.key]: input.trim() };
+    const updatedLead = { ...lead, [current.key]: currentInput };
 
-    setMessages((prev) => [...prev, { role: "user", text: input.trim() }]);
+    addMessage("user", currentInput);
     setLead(updatedLead);
     setInput("");
+
+    if (current.key === "contact") {
+      if (!currentInput) {
+        addMessage("bot", "Please leave your email or WhatsApp so we can contact you.");
+        return;
+      }
+    }
 
     const nextStep = step + 1;
 
     if (nextStep < questions.length) {
       setStep(nextStep);
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", text: questions[nextStep].text }
-      ]);
+      addMessage("bot", questions[nextStep].text);
       return;
     }
 
-    const contact = updatedLead.contact || "";
+    await submitLead(updatedLead);
+  }
+
+  async function submitLead(finalLead) {
+    const contact = finalLead.contact || "";
+    const fileUrls = files.map((file) => file.url);
 
     const { error } = await supabase.from("leads").insert({
-      country: updatedLead.country,
-      product: updatedLead.product,
-      project_type: updatedLead.project_type,
-      quantity: updatedLead.quantity,
-      email: contact.includes("@") ? contact : null,
-      whatsapp: contact.includes("@") ? null : contact,
-      message: `Contact: ${contact}`,
+      country: finalLead.country || null,
+      project_type: finalLead.project_type || null,
+      email: isEmail(contact) ? contact : null,
+      whatsapp: isEmail(contact) ? null : contact,
+      message: finalLead.message || null,
+      file_urls: fileUrls,
       source: "website_chatbot",
       lead_score: "unrated"
     });
 
     if (error) {
       console.error(error);
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", text: "Sorry, something went wrong. Please contact us by WhatsApp or email." }
-      ]);
+      addMessage("bot", "Sorry, something went wrong. Please contact us by WhatsApp or email.");
       return;
     }
 
     await fetch("/api/lead-notify", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    country: updatedLead.country,
-    product: updatedLead.product,
-    project_type: updatedLead.project_type,
-    quantity: updatedLead.quantity,
-    contact: contact
-  })
-});
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        country: finalLead.country || "",
+        project_type: finalLead.project_type || "",
+        contact,
+        message: finalLead.message || "",
+        files
+      })
+    });
+
     setDone(true);
-    setMessages((prev) => [
-      ...prev,
-      { role: "bot", text: "Thank you! Our sales manager will review your project and contact you soon." }
-    ]);
+    addMessage("bot", "Thank you! Our sales manager will review your project and contact you soon.");
   }
 
   return (
@@ -120,7 +207,7 @@ export default function LeadChatBot() {
             bottom: "170px",
             width: "360px",
             maxWidth: "calc(100vw - 32px)",
-            height: "460px",
+            height: "500px",
             zIndex: 9999,
             background: "white",
             borderRadius: "18px",
@@ -131,37 +218,37 @@ export default function LeadChatBot() {
           }}
         >
           <div
-  style={{
-    padding: "16px",
-    background: "#111827",
-    color: "white",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start"
-  }}
->
-  <div>
-    <strong>Project Assistant</strong>
-    <div style={{ fontSize: "12px", opacity: 0.8 }}>
-      Tell us about your project
-    </div>
-  </div>
+            style={{
+              padding: "16px",
+              background: "#111827",
+              color: "white",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start"
+            }}
+          >
+            <div>
+              <strong>Project Assistant</strong>
+              <div style={{ fontSize: "12px", opacity: 0.8 }}>
+                Tell us about your project
+              </div>
+            </div>
 
-  <button
-    onClick={() => setOpen(false)}
-    style={{
-      border: "none",
-      background: "transparent",
-      color: "white",
-      fontSize: "22px",
-      cursor: "pointer",
-      lineHeight: 1
-    }}
-    aria-label="Close chat"
-  >
-    ×
-  </button>
-</div>
+            <button
+              onClick={() => setOpen(false)}
+              style={{
+                border: "none",
+                background: "transparent",
+                color: "white",
+                fontSize: "22px",
+                cursor: "pointer",
+                lineHeight: 1
+              }}
+              aria-label="Close chat"
+            >
+              ×
+            </button>
+          </div>
 
           <div style={{ flex: 1, padding: "14px", overflowY: "auto" }}>
             {messages.map((m, index) => (
@@ -188,14 +275,74 @@ export default function LeadChatBot() {
                 </span>
               </div>
             ))}
+
+            {step === -1 && !done && (
+              <div style={{ display: "grid", gap: "8px", marginTop: "8px" }}>
+                {PROJECT_TYPES.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => handleProjectType(type)}
+                    style={{
+                      border: "1px solid #d1d5db",
+                      borderRadius: "999px",
+                      padding: "9px 12px",
+                      background: "white",
+                      color: "#111827",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      fontSize: "14px"
+                    }}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          {!done && (
-            <form onSubmit={handleSubmit} style={{ display: "flex", gap: "8px", padding: "12px", borderTop: "1px solid #e5e7eb" }}>
+          {!done && step >= 0 && (
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                gap: "8px",
+                padding: "12px",
+                borderTop: "1px solid #e5e7eb"
+              }}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept="image/jpeg,image/png,image/webp,application/pdf"
+                onChange={(e) => uploadFiles(e.target.files)}
+                style={{ display: "none" }}
+              />
+
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "999px",
+                  width: "40px",
+                  height: "40px",
+                  background: "white",
+                  color: "#111827",
+                  cursor: uploading ? "not-allowed" : "pointer",
+                  fontSize: "22px",
+                  lineHeight: 1
+                }}
+                title="Upload photos, drawings or PDFs"
+              >
+                +
+              </button>
+
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Type here..."
+                placeholder={step === 2 ? "Optional project details..." : "Type here..."}
                 style={{
                   flex: 1,
                   border: "1px solid #d1d5db",
@@ -204,6 +351,7 @@ export default function LeadChatBot() {
                   fontSize: "14px"
                 }}
               />
+
               <button
                 type="submit"
                 style={{
@@ -215,7 +363,7 @@ export default function LeadChatBot() {
                   cursor: "pointer"
                 }}
               >
-                Send
+                {step === 2 ? "Submit" : "Send"}
               </button>
             </form>
           )}
