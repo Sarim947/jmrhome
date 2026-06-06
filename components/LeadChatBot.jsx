@@ -13,6 +13,7 @@ const PROJECT_TYPES = [
   "I have a contractor project",
   "I am a dealer",
   "I am an architect / designer"
+  "I am not sure yet, just exploring"
 ];
 
 const questions = [
