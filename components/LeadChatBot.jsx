@@ -3,10 +3,14 @@
 import { useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key) return null;
+
+  return createClient(url, key);
+}
 
 const PROJECT_TYPES = [
   "For my personal home",
@@ -58,6 +62,13 @@ export default function LeadChatBot() {
 
   async function uploadFiles(selectedFiles) {
     if (!selectedFiles?.length) return;
+
+    const supabase = getSupabase();
+
+    if (!supabase) {
+      addMessage("bot", "File upload is not configured yet. Please describe your project or contact us by WhatsApp.");
+      return;
+    }
 
     setUploading(true);
 
@@ -146,24 +157,27 @@ export default function LeadChatBot() {
   }
 
   async function submitLead(finalLead) {
+    const supabase = getSupabase();
     const contact = finalLead.contact || "";
     const fileUrls = files.map((file) => file.url);
 
-    const { error } = await supabase.from("leads").insert({
-      country: finalLead.country || null,
-      project_type: finalLead.project_type || null,
-      email: isEmail(contact) ? contact : null,
-      whatsapp: isEmail(contact) ? null : contact,
-      message: finalLead.message || null,
-      file_urls: fileUrls,
-      source: "website_chatbot",
-      lead_score: "unrated"
-    });
+    if (supabase) {
+      const { error } = await supabase.from("leads").insert({
+        country: finalLead.country || null,
+        project_type: finalLead.project_type || null,
+        email: isEmail(contact) ? contact : null,
+        whatsapp: isEmail(contact) ? null : contact,
+        message: finalLead.message || null,
+        file_urls: fileUrls,
+        source: "website_chatbot",
+        lead_score: "unrated"
+      });
 
-    if (error) {
-      console.error(error);
-      addMessage("bot", "Sorry, something went wrong. Please contact us by WhatsApp or email.");
-      return;
+      if (error) {
+        console.error(error);
+        addMessage("bot", "Sorry, something went wrong. Please contact us by WhatsApp or email.");
+        return;
+      }
     }
 
     await fetch("/api/lead-notify", {
