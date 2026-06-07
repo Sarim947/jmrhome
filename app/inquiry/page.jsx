@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import InquiryContactActions from "./InquiryContactActions";
 import InquiryForm from "./InquiryForm";
 
 export const metadata = {
@@ -106,14 +107,7 @@ export default function InquiryPage() {
                 <strong>Need a fast reply?</strong>
                 <span>Send drawings, references, or rough dimensions directly to our team.</span>
               </div>
-              <div className="inquiry-actions">
-                <a className="submit-btn inquiry-whatsapp" href="https://wa.me/8618767505685?text=Hello%20JMRHOME%20-%20I%20want%20to%20start%20a%20custom%20entrance%20door%20project" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-whatsapp" /> WhatsApp
-                </a>
-                <a className="back-link" href="mailto:huan@jmrhome.life">
-                  <i className="fas fa-envelope" /> Email us
-                </a>
-              </div>
+              <InquiryContactActions />
             </div>
           </div>
         </section>

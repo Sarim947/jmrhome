@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeadChatBot from "@/components/LeadChatBot";
 const navItems = [
   { href: "/", label: "Home" },
@@ -22,6 +22,13 @@ export default function SiteShell({ children }) {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
+
+  useEffect(() => {
+    const openContact = () => setContactOpen(true);
+
+    window.addEventListener("jmrhome:open-contact", openContact);
+    return () => window.removeEventListener("jmrhome:open-contact", openContact);
+  }, []);
 
   return (
     <>

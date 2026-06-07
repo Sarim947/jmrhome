@@ -546,6 +546,7 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
 .submit-btn.inquiry-whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; color: #111827; border: none; padding: 0.75rem 1.3rem; border-radius: 40px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background-color 0.2s, transform 0.1s; }
 .submit-btn.inquiry-whatsapp:hover { background: #f3f4f6; color: #111827; }
 .inquiry-contact-band .back-link { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
+.inquiry-email-btn { font-family: inherit; cursor: pointer; }
 
 /* ===== Read More ===== */
 .read-more { display: inline-block; margin-top: 0.5rem; color: #6b7280; text-decoration: none; border-bottom: 1px solid #d1d5db; font-size: 0.875rem; min-height: 1.2em; }
