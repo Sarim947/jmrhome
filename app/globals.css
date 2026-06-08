@@ -484,13 +484,11 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
 
 .project-case-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
-  justify-content: space-between;
 }
 
 .project-case-card {
-  width: 400px;
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 16px;
@@ -504,8 +502,8 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
 }
 
 .project-case-card img {
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
   display: block;
 }
@@ -765,16 +763,10 @@ img { content-visibility: auto; }
     }
     .project-case-grid {
         grid-template-columns: 1fr;
-        justify-content: stretch;
         gap: 1rem;
     }
-    .project-case-card {
-        width: 100%;
-    }
     .project-case-card img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 2;
     }
     .project-case-card p {
         min-height: auto;

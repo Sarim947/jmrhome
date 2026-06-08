@@ -20,7 +20,7 @@ export default function CookieBanner() {
       style={{
         position: "fixed",
         bottom: "30px",
-        right: "30px",
+        left: "30px",
         width: "420px",
         maxWidth: "calc(100vw - 40px)",
         background: "#ffffff",
