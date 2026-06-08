@@ -7,7 +7,8 @@ import Modal from "@/components/Modal";
 import { DailyModalContent, ProductSummary } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
 import CustomerReviews from "@/components/CustomerReviews";
-import { blogPosts, dailyWorks, featuredProducts } from "@/lib/data";
+import ProjectCases from "@/components/ProjectCases";
+import { blogPosts, dailyWorks, featuredProducts, projectCases } from "@/lib/data";
 
 export default function HomePage() {
   const [modal, setModal] = useState(null);
@@ -49,7 +50,9 @@ export default function HomePage() {
               <i className="fas fa-arrow-right" /> View All Daily Works
             </Link>
           </div>
-            <CustomerReviews />
+          <CustomerReviews />
+          <ProjectCases cases={projectCases} />
+
           <div className="container" style={{ marginTop: "3rem" }}>
             <h2>From Our Blog</h2>
             <div className="grid">
