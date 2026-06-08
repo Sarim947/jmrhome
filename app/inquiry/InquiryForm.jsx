@@ -5,6 +5,15 @@ import { createClient } from "@supabase/supabase-js";
 
 const doorTypes = ["Pivot Door", "Armored Door", "Steel Door", "Glass / Sidelite Door", "Apartment Door", "Other"];
 const customNeeds = ["Custom Size", "Custom Finish", "Smart Lock", "OEM / ODM", "Logo / Brand", "Full Project Solution"];
+const customerTypes = [
+  "Homeowner / Own Home",
+  "Real Estate Developer",
+  "Dealer / Agent",
+  "Architect / Designer",
+  "Contractor / Builder",
+  "Company / B2B Buyer",
+  "Other"
+];
 const materialOptions = ["Steel", "Aluminum", "Steel + Aluminum", "Thermal Break Aluminum", "Glass Combination", "Not Sure Yet"];
 const quantityOptions = ["1 Set", "2-10 Sets", "11-50 Sets", "50+ Sets", "Project To Be Confirmed"];
 const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
@@ -105,6 +114,7 @@ export default function InquiryForm() {
       const message = [
         `Name: ${form.get("name") || "Not provided"}`,
         `Email: ${email || "Not provided"}`,
+        `I am a/an: ${form.get("customerType") || "Not provided"}`,
         `Door type: ${getCheckedValues(form, "doorType")}`,
         `Customization needed: ${getCheckedValues(form, "customNeed")}`,
         `Size requirement: ${form.get("sizeRequirement") || "Not provided"}`,
@@ -186,7 +196,7 @@ export default function InquiryForm() {
       </div>
 
       <div className="form-group inquiry-wide">
-        <label>Door Type <span>*</span></label>
+        <label>Door Type</label>
         <div className="inquiry-check-grid">
           {doorTypes.map((type) => (
             <label className="inquiry-check" key={type}>
@@ -198,7 +208,7 @@ export default function InquiryForm() {
       </div>
 
       <div className="form-group inquiry-wide">
-        <label>Customization Needed <span>*</span></label>
+        <label>Customization Needed</label>
         <div className="inquiry-check-grid two-col">
           {customNeeds.map((need) => (
             <label className="inquiry-check" key={need}>
@@ -211,15 +221,24 @@ export default function InquiryForm() {
 
       <div className="inquiry-form-row">
         <div className="form-group">
-          <label>Size Requirement <span>*</span></label>
-          <input name="sizeRequirement" type="text" placeholder="Width x height, or opening size" required />
+          <label>Size Requirement</label>
+          <input name="sizeRequirement" type="text" placeholder="Width x height, or opening size" />
         </div>
         <div className="form-group">
-          <label>Material Preference <span>*</span></label>
-          <select name="materialPreference" defaultValue="" required>
+          <label>Material Preference</label>
+          <select name="materialPreference" defaultValue="">
             <option value="" disabled>Select material</option>
             {materialOptions.map((material) => (
               <option key={material} value={material}>{material}</option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Order Quantity</label>
+          <select name="orderQuantity" defaultValue="">
+            <option value="" disabled>Select quantity range</option>
+            {quantityOptions.map((quantity) => (
+              <option key={quantity} value={quantity}>{quantity}</option>
             ))}
           </select>
         </div>
@@ -227,11 +246,11 @@ export default function InquiryForm() {
 
       <div className="inquiry-form-row">
         <div className="form-group">
-          <label>Order Quantity <span>*</span></label>
-          <select name="orderQuantity" defaultValue="" required>
-            <option value="" disabled>Select quantity range</option>
-            {quantityOptions.map((quantity) => (
-              <option key={quantity} value={quantity}>{quantity}</option>
+          <label>I am a / an <span>*</span></label>
+          <select name="customerType" defaultValue="" required>
+            <option value="" disabled>Select your identity</option>
+            {customerTypes.map((type) => (
+              <option key={type} value={type}>{type}</option>
             ))}
           </select>
         </div>
@@ -239,20 +258,17 @@ export default function InquiryForm() {
           <label>Country / Market <span>*</span></label>
           <input name="country" type="text" placeholder="Country / market" required />
         </div>
-      </div>
-
-      <div className="inquiry-form-row">
         <div className="form-group">
           <label>Name <span>*</span></label>
           <input name="name" type="text" placeholder="Your name" required />
         </div>
-        <div className="form-group">
-          <label>WhatsApp</label>
-          <input name="whatsapp" type="text" placeholder="e.g. +86 187 6750 5685" />
-        </div>
       </div>
 
       <div className="inquiry-form-row">
+        <div className="form-group">
+          <label>WhatsApp <span>*</span></label>
+          <input name="whatsapp" type="text" placeholder="e.g. +86 / +1 / +971 ..." required />
+        </div>
         <div className="form-group">
           <label>Email <span>*</span></label>
           <input name="email" type="email" placeholder="name@company.com" required />
@@ -275,13 +291,12 @@ export default function InquiryForm() {
       </div>
 
       <div className="form-group inquiry-wide">
-        <label>Project Details / Message <span>*</span></label>
+        <label>Project Details / Message</label>
         <textarea
           name="message"
           maxLength={1000}
           onChange={(event) => setMessageLength(event.target.value.length)}
           placeholder="Please describe your project, design idea, special requirements, target delivery date, or budget range."
-          required
         />
         <small className="inquiry-counter">{messageLength} / 1000</small>
       </div>

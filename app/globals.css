@@ -704,7 +704,7 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
 .inquiry-form h2 { border-left: none; padding-left: 0; margin: 0 0 0.25rem; font-size: 1.25rem; color: #111827; }
 .inquiry-form-heading p { color: #6b7280; font-size: 0.85rem; }
 .inquiry-form label span { color: #b91c1c; }
-.inquiry-form-row { display: contents; }
+.inquiry-form-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.5rem; }
 .inquiry-wide { grid-column: 1 / -1; }
 .inquiry-check-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
 .inquiry-check-grid.two-col { grid-template-columns: repeat(3, 1fr); }
@@ -887,6 +887,11 @@ img { content-visibility: auto; }
         min-height: 36px;
         padding: 0.5rem;
         font-size: 0.72rem !important;
+    }
+    .inquiry-form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
     }
     .inquiry-trust-strip {
         grid-template-columns: repeat(4, 1fr);
