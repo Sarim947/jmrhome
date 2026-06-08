@@ -14,31 +14,25 @@ function getSupabase() {
 
 const PROJECT_TYPES = [
   "For my personal home",
-  "I have a contractor project",
-  "I am a dealer",
+  "I am a real estate developer",
+  "I am a dealer / agent",
   "I am an architect / designer",
-  "I am not sure yet, just exploring"
-];
-
-const questions = [
-  { key: "country", text: "Which country is your project located in?" },
-  { key: "contact", text: "Please leave your email or WhatsApp. This is required so we can contact you." },
-  { key: "message", text: "Any project details? You may also upload photos, drawings or PDFs using the + button. This step is optional." }
+  "I am a contractor / builder",
+  "I am a company / B2B buyer"
 ];
 
 export default function LeadChatBot() {
   const fileInputRef = useRef(null);
 
   const [open, setOpen] = useState(false);
-  const [step, setStep] = useState(-1);
-  const [lead, setLead] = useState({});
   const [input, setInput] = useState("");
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [thinking, setThinking] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Hi! Tell us about your project. What type of project is this?"
+      text: "Hi! I can help with your entrance door project. Are you a homeowner, designer, dealer, developer, contractor, or B2B buyer?"
     }
   ]);
   const [done, setDone] = useState(false);
@@ -47,17 +41,52 @@ export default function LeadChatBot() {
     setMessages((prev) => [...prev, { role, text }]);
   }
 
-  function handleProjectType(type) {
-    const updatedLead = { ...lead, project_type: type };
-    setLead(updatedLead);
-    setStep(0);
-
-    addMessage("user", type);
-    addMessage("bot", questions[0].text);
+  function getTranscript(chatMessages = messages) {
+    return chatMessages
+      .map((message) => `${message.role === "user" ? "Customer" : "Assistant"}: ${message.text}`)
+      .join("\n");
   }
 
-  function isEmail(value) {
-    return /\S+@\S+\.\S+/.test(value);
+  function getContactFromTranscript(transcript) {
+    const email = transcript.match(/\S+@\S+\.\S+/)?.[0] || "";
+    const phone = transcript.match(/(?:\+\d{1,4}[\s-]?)?(?:\d[\s-]?){7,15}/)?.[0]?.trim() || "";
+
+    return { email, phone };
+  }
+
+  async function askAssistant(userText) {
+    if (!userText || thinking || done) return;
+
+    const nextMessages = [...messages, { role: "user", text: userText }];
+    setMessages(nextMessages);
+    setThinking(true);
+
+    try {
+      const response = await fetch("/api/ai-chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: nextMessages,
+          files
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        addMessage("bot", data?.error || "The AI assistant is not available yet. You can still send your inquiry with the Submit button.");
+        return;
+      }
+
+      addMessage("bot", data.reply);
+    } catch (error) {
+      console.error(error);
+      addMessage("bot", "The AI assistant is temporarily unavailable. You can still upload files and submit your inquiry.");
+    } finally {
+      setThinking(false);
+    }
   }
 
   async function uploadFiles(selectedFiles) {
@@ -113,6 +142,7 @@ export default function LeadChatBot() {
 
       setFiles((prev) => [...prev, uploadedFile]);
       addMessage("user", `📎 ${file.name}`);
+      addMessage("bot", "File received. You can add project details here, then click Submit when ready.");
     }
 
     setUploading(false);
@@ -123,51 +153,24 @@ export default function LeadChatBot() {
     if (done) return;
 
     const currentInput = input.trim();
-
-    if (step === 2 && !currentInput) {
-      await submitLead({ ...lead, message: "" });
-      return;
-    }
-
     if (!currentInput) return;
-
-    const current = questions[step];
-    const updatedLead = { ...lead, [current.key]: currentInput };
-
-    addMessage("user", currentInput);
-    setLead(updatedLead);
     setInput("");
-
-    if (current.key === "contact") {
-      if (!currentInput) {
-        addMessage("bot", "Please leave your email or WhatsApp so we can contact you.");
-        return;
-      }
-    }
-
-    const nextStep = step + 1;
-
-    if (nextStep < questions.length) {
-      setStep(nextStep);
-      addMessage("bot", questions[nextStep].text);
-      return;
-    }
-
-    await submitLead(updatedLead);
+    await askAssistant(currentInput);
   }
 
-  async function submitLead(finalLead) {
+  async function submitLead() {
     const supabase = getSupabase();
-    const contact = finalLead.contact || "";
+    const transcript = getTranscript();
+    const contact = getContactFromTranscript(transcript);
     const fileUrls = files.map((file) => file.url);
 
     if (supabase) {
       const { error } = await supabase.from("leads").insert({
-        country: finalLead.country || null,
-        project_type: finalLead.project_type || null,
-        email: isEmail(contact) ? contact : null,
-        whatsapp: isEmail(contact) ? null : contact,
-        message: finalLead.message || null,
+        country: null,
+        project_type: "AI chatbot inquiry",
+        email: contact.email || null,
+        whatsapp: contact.email ? contact.phone || null : contact.phone || null,
+        message: transcript || null,
         file_urls: fileUrls,
         source: "website_chatbot",
         lead_score: "unrated"
@@ -186,10 +189,10 @@ export default function LeadChatBot() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        country: finalLead.country || "",
-        project_type: finalLead.project_type || "",
-        contact,
-        message: finalLead.message || "",
+        country: "",
+        project_type: "AI chatbot inquiry",
+        contact: contact.email || contact.phone || "",
+        message: transcript || "",
         files
       })
     });
@@ -250,7 +253,7 @@ export default function LeadChatBot() {
             <div>
               <strong>Project Assistant</strong>
               <div style={{ fontSize: "12px", opacity: 0.8 }}>
-                Tell us about your project
+                AI project assistant
               </div>
             </div>
 
@@ -296,12 +299,12 @@ export default function LeadChatBot() {
               </div>
             ))}
 
-            {step === -1 && !done && (
+            {!done && messages.length === 1 && (
               <div style={{ display: "grid", gap: "8px", marginTop: "8px" }}>
                 {PROJECT_TYPES.map((type) => (
                   <button
                     key={type}
-                    onClick={() => handleProjectType(type)}
+                    onClick={() => askAssistant(type)}
                     style={{
                       border: "1px solid #d1d5db",
                       borderRadius: "999px",
@@ -318,9 +321,15 @@ export default function LeadChatBot() {
                 ))}
               </div>
             )}
+
+            {thinking && (
+              <div style={{ color: "#6b7280", fontSize: "13px", marginTop: "4px" }}>
+                Assistant is typing...
+              </div>
+            )}
           </div>
 
-          {!done && step >= 0 && (
+          {!done && (
             <form
               onSubmit={handleSubmit}
               style={{
@@ -362,7 +371,7 @@ export default function LeadChatBot() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={step === 2 ? "Optional project details..." : "Type here..."}
+                placeholder="Type your project details..."
                 style={{
                   flex: 1,
                   border: "1px solid #d1d5db",
@@ -374,16 +383,33 @@ export default function LeadChatBot() {
 
               <button
                 type="submit"
+                disabled={thinking}
                 style={{
                   border: "none",
                   borderRadius: "999px",
                   padding: "10px 14px",
                   background: "#111827",
                   color: "white",
-                  cursor: "pointer"
+                  cursor: thinking ? "not-allowed" : "pointer"
                 }}
               >
-                {step === 2 ? "Submit" : "Send"}
+                Send
+              </button>
+
+              <button
+                type="button"
+                onClick={submitLead}
+                disabled={thinking || messages.length === 1}
+                style={{
+                  border: "1px solid #111827",
+                  borderRadius: "999px",
+                  padding: "10px 12px",
+                  background: "white",
+                  color: "#111827",
+                  cursor: thinking || messages.length === 1 ? "not-allowed" : "pointer"
+                }}
+              >
+                Submit
               </button>
             </form>
           )}
