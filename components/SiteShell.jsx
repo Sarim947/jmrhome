@@ -17,6 +17,7 @@ export default function SiteShell({ children }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
@@ -29,6 +30,21 @@ export default function SiteShell({ children }) {
     window.addEventListener("jmrhome:open-contact", openContact);
     return () => window.removeEventListener("jmrhome:open-contact", openContact);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setShowBackToTop(window.scrollY > 500);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
 
   return (
     <>
@@ -91,8 +107,17 @@ export default function SiteShell({ children }) {
         <i className="fab fa-whatsapp" />
       </a>
 
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? "show" : ""}`}
+        onClick={scrollToTop}
+        aria-label="Back to top"
+      >
+        <i className="fas fa-arrow-up" />
+      </button>
+
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
-<LeadChatBot />
+      <LeadChatBot />
     </>
   );
 }
