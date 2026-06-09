@@ -29,6 +29,7 @@ export default function LeadChatBot() {
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [thinking, setThinking] = useState(false);
+  const [confirmingSubmit, setConfirmingSubmit] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "bot",
@@ -54,12 +55,18 @@ export default function LeadChatBot() {
     return { email, phone };
   }
 
-  async function askAssistant(userText) {
+  async function askAssistant(userText, options = {}) {
     if (!userText || thinking || done) return;
 
-    const nextMessages = [...messages, { role: "user", text: userText }];
+    const visibleText = options.visibleText || userText;
+    const nextMessages = [...messages, { role: "user", text: visibleText }];
+    const aiMessages = options.aiText
+      ? [...nextMessages, { role: "user", text: options.aiText }]
+      : nextMessages;
+
     setMessages(nextMessages);
     setThinking(true);
+    setConfirmingSubmit(false);
 
     try {
       const response = await fetch("/api/ai-chat", {
@@ -68,8 +75,8 @@ export default function LeadChatBot() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          messages: nextMessages,
-          files
+          messages: aiMessages,
+          files: options.filesOverride || files
         })
       });
 
@@ -100,6 +107,7 @@ export default function LeadChatBot() {
     }
 
     setUploading(true);
+    const uploadedFiles = [];
 
     for (const file of selectedFiles) {
       if (file.size > 25 * 1024 * 1024) {
@@ -140,9 +148,24 @@ export default function LeadChatBot() {
         url: data.publicUrl
       };
 
-      setFiles((prev) => [...prev, uploadedFile]);
-      addMessage("user", `📎 ${file.name}`);
-      addMessage("bot", "File received. You can add project details here, then click Submit when ready.");
+      uploadedFiles.push(uploadedFile);
+    }
+
+    if (uploadedFiles.length) {
+      const nextFiles = [...files, ...uploadedFiles];
+      const fileNames = uploadedFiles.map((file) => file.name).join(", ");
+
+      setFiles(nextFiles);
+      await askAssistant(`I uploaded reference file(s): ${fileNames}`, {
+        visibleText: `📎 ${fileNames}`,
+        aiText: [
+          `The customer uploaded reference file(s): ${fileNames}.`,
+          "DeepSeek chat cannot directly inspect image contents.",
+          "Acknowledge the upload, then ask the customer to describe the key visual details you need, such as door style, color, material, size/opening, quantity, location, or what they want to copy from the image.",
+          "Continue the sales conversation instead of ending the lead."
+        ].join(" "),
+        filesOverride: nextFiles
+      });
     }
 
     setUploading(false);
@@ -155,10 +178,17 @@ export default function LeadChatBot() {
     const currentInput = input.trim();
     if (!currentInput) return;
     setInput("");
+    setConfirmingSubmit(false);
     await askAssistant(currentInput);
   }
 
   async function submitLead() {
+    if (!confirmingSubmit) {
+      setConfirmingSubmit(true);
+      addMessage("bot", "Please click Confirm Submit when you are ready for our sales team to contact you.");
+      return;
+    }
+
     const supabase = getSupabase();
     const transcript = getTranscript();
     const contact = getContactFromTranscript(transcript);
@@ -198,6 +228,7 @@ export default function LeadChatBot() {
     });
 
     setDone(true);
+    setConfirmingSubmit(false);
     addMessage("bot", "Thank you! Our sales manager will review your project and contact you soon.");
   }
 
@@ -351,7 +382,7 @@ export default function LeadChatBot() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
+                disabled={uploading || thinking}
                 style={{
                   border: "1px solid #d1d5db",
                   borderRadius: "999px",
@@ -359,7 +390,7 @@ export default function LeadChatBot() {
                   height: "40px",
                   background: "white",
                   color: "#111827",
-                  cursor: uploading ? "not-allowed" : "pointer",
+                  cursor: uploading || thinking ? "not-allowed" : "pointer",
                   fontSize: "22px",
                   lineHeight: 1
                 }}
@@ -409,7 +440,7 @@ export default function LeadChatBot() {
                   cursor: thinking || messages.length === 1 ? "not-allowed" : "pointer"
                 }}
               >
-                Submit
+                {confirmingSubmit ? "Confirm" : "Submit"}
               </button>
             </form>
           )}
