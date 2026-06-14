@@ -572,6 +572,125 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
   text-align: right;
 }
 
+/* ===== Inspiration ===== */
+.inspiration-page {
+  background: #f7f7f5;
+}
+
+.inspiration-section {
+  border-bottom: none;
+}
+
+.inspiration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.inspiration-header span {
+  display: inline-block;
+  color: #8a8f98;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.55rem;
+  text-transform: uppercase;
+}
+
+.inspiration-header h1 {
+  color: #111827;
+  font-size: 3rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.inspiration-header p {
+  max-width: 430px;
+  color: #5f6671;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.inspiration-collage {
+  display: grid;
+  align-items: start;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.inspiration-piece {
+  grid-column: span var(--piece-span);
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: transform 0.2s;
+}
+
+.inspiration-piece:hover {
+  transform: translateY(-3px);
+}
+
+.inspiration-piece figure {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.inspiration-piece img {
+  width: auto;
+  max-width: 100%;
+  max-height: 360px;
+  height: auto;
+  display: block;
+}
+
+.inspiration-piece-hero img {
+  max-height: 460px;
+}
+
+.inspiration-piece-wide img {
+  max-height: 340px;
+}
+
+.inspiration-piece-square img {
+  max-height: 300px;
+}
+
+.inspiration-piece-normal img {
+  max-height: 320px;
+}
+
+.inspiration-piece figcaption {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  transform: translateY(8px);
+  opacity: 0;
+  min-width: 104px;
+  background: #050505;
+  color: #fff;
+  padding: 0.48rem 0.75rem;
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.inspiration-piece:hover figcaption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
 /* ===== Modal ===== */
 /* ===== Modal ===== */
 .modal { 
@@ -807,6 +926,30 @@ img { content-visibility: auto; }
     }
     .project-case-card p {
         min-height: auto;
+    }
+    .inspiration-header {
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+    .inspiration-header h1 {
+        font-size: 2rem;
+    }
+    .inspiration-header p {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    .inspiration-collage {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    .inspiration-piece {
+        grid-column: auto;
+    }
+    .inspiration-piece figcaption {
+        right: 0.55rem;
+        bottom: 0.55rem;
+        opacity: 1;
+        transform: none;
     }
     .product-detail {
         grid-template-columns: 1fr;
