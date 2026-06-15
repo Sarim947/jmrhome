@@ -175,6 +175,7 @@
 
 .storyText p,
 .processText p,
+.steps p,
 .reason p,
 .visionText p,
 .ctaInner p,
@@ -200,17 +201,25 @@
 }
 
 .productItem {
-  padding-top: 1.2rem;
-  border-top: 1px solid #d8dde3;
+  display: grid;
+  gap: 0.95rem;
 }
 
 .productItem h3,
 .reason h3 {
-  margin-bottom: 0.85rem;
+  margin: 0;
   color: #111827;
   font-size: 1.08rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.productItem img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
 
 .productItem p {
@@ -261,10 +270,16 @@
 }
 
 .steps strong {
+  display: block;
   color: #111827;
   font-size: 1.18rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+}
+
+.steps p {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
 }
 
 .trustGrid {

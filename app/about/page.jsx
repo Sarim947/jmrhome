@@ -4,6 +4,8 @@ import { createPageMetadata } from "@/lib/metadata";
 import styles from "./about.module.css";
 
 const heroImage = "/assets/images/about/architectural-habitat-entrance.png";
+const beliefImage = "/assets/images/daily/Walnut Accent Elite render.jpg";
+const visionImage = "/assets/images/inspiration/20260613_10_final.webp";
 
 export const metadata = createPageMetadata({
   title: "About JMR Habitat | Architectural Door & Living Systems",
@@ -18,28 +20,51 @@ export const metadata = createPageMetadata({
 const buildCategories = [
   {
     title: "Architectural Doors",
-    text: "Entry doors, pivot doors and courtyard doors configured around the facade, opening size and daily use of the project."
+    image: "/assets/images/products/Pivot Prime door.jpg",
+    alt: "Architectural pivot entrance door",
+    text: "Entry doors, pivot doors and courtyard doors configured around the facade and opening size."
   },
   {
     title: "Specialty Door Systems",
-    text: "Fire-rated doors, passive-house concepts and other door systems where structure, sealing and hardware matter."
+    image: "/assets/images/blog/pivot-sealing-system.jpg",
+    alt: "Performance door sealing system detail",
+    text: "Fire-rated doors, passive-house concepts and systems where sealing and hardware matter."
   },
   {
     title: "Windows & Railings",
-    text: "Window systems and aluminum railings developed to sit naturally beside the entrance, not as unrelated add-ons."
+    image: "/assets/images/inspiration/20260613_4_final.webp",
+    alt: "Architectural glazing and railing concept",
+    text: "Window systems and aluminum railings designed to sit naturally beside the entrance."
   },
   {
     title: "Outdoor Living",
-    text: "Garden and outdoor products for projects where the threshold continues into courtyards, terraces and landscape."
+    image: "/assets/images/inspiration/20260613_8_final.webp",
+    alt: "Outdoor architectural living concept",
+    text: "Garden and outdoor products where the threshold continues into terraces and landscape."
   }
 ];
 
 const processSteps = [
-  "Understand the Project",
-  "Configure the Right Solution",
-  "Develop the Design",
-  "Manufacture with Control",
-  "Support Global Delivery"
+  {
+    title: "Understand the Project",
+    text: "Every project begins with architecture, not products."
+  },
+  {
+    title: "Configure the Right Solution",
+    text: "Products are configured instead of selected from a fixed catalog."
+  },
+  {
+    title: "Develop the Design",
+    text: "Proportions, finishes and hardware are refined before production."
+  },
+  {
+    title: "Manufacture with Control",
+    text: "Production follows the approved configuration, not guesswork."
+  },
+  {
+    title: "Support Global Delivery",
+    text: "Export details are coordinated around project timing and destination."
+  }
 ];
 
 const reasons = [
@@ -52,8 +77,8 @@ const reasons = [
     text: "A door is judged by how it looks, opens, seals, locks and ages. We consider those decisions together before production starts."
   },
   {
-    title: "Manufacturing Base in China",
-    text: "Our production base in China gives partners room to customize while keeping pricing, sampling and export coordination under control."
+    title: "Engineering Confidence",
+    text: "Our China-based production base helps turn custom engineering decisions into controlled sampling, pricing and export coordination."
   }
 ];
 
@@ -67,7 +92,7 @@ export default function AboutPage() {
               <span className={styles.eyebrow}>JMR Habitat</span>
               <h1>We Engineer First Impressions.</h1>
               <p>
-                JMR Habitat works with architects, designers, builders and distributors on architectural entrances and the products that shape the spaces around them.
+                We create architectural entrance and living systems that combine engineering, customization and timeless design—helping architects, designers and builders transform ideas into buildings people remember.
               </p>
             </div>
           </div>
@@ -96,13 +121,14 @@ export default function AboutPage() {
         <section className={`${styles.storySection} ${styles.warmSection}`}>
           <div className={`container ${styles.storyGrid}`}>
             <div className={styles.storyImage} aria-hidden="true">
-              <img src={heroImage} alt="" />
+              <img src={beliefImage} alt="" />
             </div>
             <div className={styles.storyText}>
               <span className={styles.eyebrow}>Why We Exist</span>
               <h2>What We Believe</h2>
-              <p>A door should not be treated as a panel with a handle attached.</p>
-              <p>It has to answer the architecture: the height of the facade, the light at the entry, the way people arrive, and the level of protection the project needs.</p>
+              <p>We don't believe every project should begin with a catalog.</p>
+              <p>Architecture deserves more freedom than standard sizes and repetitive solutions.</p>
+              <p>Every entrance should respond to its architecture, environment and the people who live behind it.</p>
               <p>JMR Habitat exists to make that response easier to specify, configure and produce.</p>
             </div>
           </div>
@@ -117,6 +143,7 @@ export default function AboutPage() {
             <div className={styles.productGrid}>
               {buildCategories.map((item) => (
                 <article className={styles.productItem} key={item.title}>
+                  <img src={item.image} alt={item.alt} />
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
                 </article>
@@ -136,9 +163,12 @@ export default function AboutPage() {
             </div>
             <ol className={styles.steps}>
               {processSteps.map((step, index) => (
-                <li key={step}>
+                <li key={step.title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{step}</strong>
+                  <div>
+                    <strong>{step.title}</strong>
+                    <p>{step.text}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -164,7 +194,7 @@ export default function AboutPage() {
 
         <section className={styles.visionSection}>
           <figure className={styles.visionImage}>
-            <img src={heroImage} alt="Architectural habitat concept with entrance, glazing and outdoor landscape" />
+            <img src={visionImage} alt="Future architectural living concept with facade, outdoor space and landscape" />
           </figure>
           <div className={`container ${styles.visionText}`}>
             <span className={styles.eyebrow}>Where We Are Going</span>
