@@ -1,6 +1,7 @@
 import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
+import GoogleAnalytics from "../components/GoogleAnalytics";
 
 export const metadata = {
   title: {
@@ -38,19 +39,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <CookieBanner />
-        <Script
-    src="https://www.googletagmanager.com/gtag/js?id=G-GWP2L2DV7T"
-    strategy="afterInteractive"
-  />
-
-  <Script id="ga" strategy="afterInteractive">
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GWP2L2DV7T');
-    `}
-  </Script>
+        <GoogleAnalytics />
       </body>
     </html>
   );
