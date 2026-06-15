@@ -2,14 +2,21 @@ import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
 import GoogleAnalytics from "../components/GoogleAnalytics";
+import { absoluteUrl, siteUrl } from "../lib/metadata";
 
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Entrance Architecture | Custom High-End Doors",
     template: "%s | Entrance Architecture"
   },
   description:
-    "Custom high-end entrance doors blending intelligent design, security, and artistic expression."
+    "Custom high-end entrance doors blending intelligent design, security, and artistic expression.",
+  openGraph: {
+    siteName: "Entrance Architecture",
+    url: absoluteUrl("/"),
+    type: "website"
+  }
 };
 
 export default function RootLayout({ children }) {

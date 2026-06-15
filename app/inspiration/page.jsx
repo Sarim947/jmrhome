@@ -1,11 +1,13 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { inspirationImages } from "@/lib/data";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Inspiration",
-  description: "Curated entrance door inspiration in an editorial Bento gallery."
-};
+  description: "Curated entrance door inspiration in an editorial Bento gallery.",
+  path: "/inspiration"
+});
 
 export default function InspirationPage() {
   return (

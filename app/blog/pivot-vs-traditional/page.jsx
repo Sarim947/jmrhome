@@ -1,11 +1,16 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Pivot Door vs Traditional Front Door",
   description:
-    "Comparing pivot doors and traditional hinged front doors from design and engineering perspectives."
-};
+    "Comparing pivot doors and traditional hinged front doors from design and engineering perspectives.",
+  path: "/blog/pivot-vs-traditional",
+  openGraph: {
+    type: "article"
+  }
+});
 
 export default function PivotArticlePage() {
   return (

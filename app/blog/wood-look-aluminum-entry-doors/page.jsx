@@ -1,11 +1,16 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Why Architects Are Choosing Wood-Look Aluminum Entry Doors Instead of Solid Wood",
   description:
-    "Why architects prefer wood-look aluminum entry doors for luxury homes, oversized entrances, and modern architectural projects."
-};
+    "Why architects prefer wood-look aluminum entry doors for luxury homes, oversized entrances, and modern architectural projects.",
+  path: "/blog/wood-look-aluminum-entry-doors",
+  openGraph: {
+    type: "article"
+  }
+});
 
 export default function WoodLookAluminumArticle() {
   return (

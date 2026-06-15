@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ProductCard } from "@/components/Cards";
 import SiteShell from "@/components/SiteShell";
 import { productCollections } from "@/lib/data";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Products",
-  description: "Explore our collection of custom high-end entrance doors."
-};
+  description: "Explore our collection of custom high-end entrance doors.",
+  path: "/products"
+});
 
 export default function ProductsPage() {
   return (

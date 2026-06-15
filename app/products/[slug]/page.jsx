@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { productCollections } from "@/lib/data";
+import { createPageMetadata } from "@/lib/metadata";
 import ProductCollectionClient from "./ProductCollectionClient";
 
 export function generateStaticParams() {
@@ -9,10 +10,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const collection = productCollections.find((item) => item.slug === slug);
-  return {
+  return createPageMetadata({
     title: collection?.title ?? "Products",
-    description: collection?.shortDesc ?? "Custom high-end entrance door collection."
-  };
+    description: collection?.shortDesc ?? "Custom high-end entrance door collection.",
+    path: `/products/${slug}`
+  });
 }
 
 export default async function ProductCollectionPage({ params }) {

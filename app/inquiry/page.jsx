@@ -1,12 +1,14 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import { createPageMetadata } from "@/lib/metadata";
 import InquiryContactActions from "./InquiryContactActions";
 import InquiryForm from "./InquiryForm";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "Project Inquiry",
-  description: "Start a custom entrance door project with JMRHOME.LIFE."
-};
+  description: "Start a custom entrance door project with JMRHOME.LIFE.",
+  path: "/inquiry"
+});
 
 const capabilities = [
   {
