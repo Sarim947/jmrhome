@@ -29,3 +29,7 @@ Then open `http://localhost:3000`.
 ## Notes
 
 The old PHP contact form was converted to a frontend mail client flow with `mailto:`. If you want server-side email delivery in Next.js, connect an email service in an API route.
+
+## Google Tag Manager
+
+Set `NEXT_PUBLIC_GTM_ID` in Vercel to the new Google Tag Manager container ID for the production domain, for example `GTM-XXXXXXX`.

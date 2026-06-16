@@ -1,7 +1,7 @@
 import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
-import GoogleAnalytics from "../components/GoogleAnalytics";
+import GoogleTagManager from "../components/GoogleTagManager";
 import { absoluteUrl, siteUrl } from "../lib/metadata";
 
 export const metadata = {
@@ -34,19 +34,19 @@ export default function RootLayout({ children }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
         <Script id="consent-default" strategy="beforeInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      analytics_storage: 'denied'
-    });
-  `}
-</Script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              analytics_storage: 'denied'
+            });
+          `}
+        </Script>
       </head>
       <body>
         {children}
         <CookieBanner />
-        <GoogleAnalytics />
+        <GoogleTagManager />
       </body>
     </html>
   );
