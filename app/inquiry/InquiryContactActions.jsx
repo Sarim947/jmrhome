@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
+
 export default function InquiryContactActions() {
   function openContactForm() {
     window.dispatchEvent(new Event("jmrhome:open-contact"));
@@ -12,6 +14,12 @@ export default function InquiryContactActions() {
         href="https://wa.me/8618767505685?text=Hello%20JMRHOME%20-%20I%20want%20to%20start%20a%20custom%20entrance%20door%20project"
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            event_category: "contact",
+            event_label: "inquiry_page_whatsapp"
+          })
+        }
       >
         <i className="fab fa-whatsapp" /> WhatsApp
       </a>

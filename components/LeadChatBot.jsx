@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { trackEvent } from "@/lib/analytics";
 
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -229,6 +230,10 @@ export default function LeadChatBot() {
 
     setDone(true);
     setConfirmingSubmit(false);
+    trackEvent("generate_lead", {
+      event_category: "inquiry",
+      event_label: "chatbot_inquiry"
+    });
     addMessage("bot", "Thank you! Our sales manager will review your project and contact you soon.");
   }
 

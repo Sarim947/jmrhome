@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeadChatBot from "@/components/LeadChatBot";
+import { trackEvent } from "@/lib/analytics";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -104,6 +105,12 @@ export default function SiteShell({ children }) {
         className="whatsapp-float"
         rel="noopener noreferrer"
         aria-label="Contact on WhatsApp"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            event_category: "contact",
+            event_label: "floating_whatsapp"
+          })
+        }
       >
         <i className="fab fa-whatsapp" />
       </a>
@@ -150,7 +157,7 @@ function ContactModal({ open, onClose }) {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        window.gtag?.("event", "generate_lead", {
+        trackEvent("generate_lead", {
           event_category: "contact",
           event_label: "contact_form"
         });

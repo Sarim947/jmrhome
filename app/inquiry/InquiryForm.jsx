@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { trackEvent } from "@/lib/analytics";
 
 const doorTypes = ["Pivot Door", "Armored Door", "Steel Door", "Glass / Sidelite Door", "Apartment Door", "Other"];
 const customNeeds = ["Custom Size", "Custom Finish", "Smart Lock", "OEM / ODM", "Logo / Brand", "Full Project Solution"];
@@ -164,7 +165,7 @@ export default function InquiryForm() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        window.gtag?.("event", "generate_lead", {
+        trackEvent("generate_lead", {
           event_category: "inquiry",
           event_label: "project_inquiry_form"
         });
