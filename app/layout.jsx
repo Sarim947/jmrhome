@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
 import GoogleTagManager from "../components/GoogleTagManager";
+import MetaPixel from "../components/MetaPixel";
 import { absoluteUrl, siteUrl } from "../lib/metadata";
 
 export const metadata = {
@@ -46,6 +48,9 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <CookieBanner />
+        <Suspense fallback={null}>
+          <MetaPixel />
+        </Suspense>
         <GoogleTagManager />
       </body>
     </html>

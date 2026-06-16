@@ -33,3 +33,7 @@ The old PHP contact form was converted to a frontend mail client flow with `mail
 ## Google Tag Manager
 
 Set `NEXT_PUBLIC_GTM_ID` in Vercel to the new Google Tag Manager container ID for the production domain, for example `GTM-XXXXXXX`.
+
+## Meta Pixel
+
+Set `NEXT_PUBLIC_META_PIXEL_ID` in Vercel to the Meta Pixel ID for the production domain. Leave it empty locally if you do not want Meta Pixel to load during development.
