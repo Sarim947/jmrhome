@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeadChatBot from "@/components/LeadChatBot";
 import { trackEvent } from "@/lib/analytics";
+import { productCollections } from "@/lib/data";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -18,12 +19,18 @@ const navItems = [
 export default function SiteShell({ children }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
+  };
+
+  const closeNavigation = () => {
+    setMenuOpen(false);
+    setProductsOpen(false);
   };
 
   useEffect(() => {
@@ -41,6 +48,23 @@ export default function SiteShell({ children }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+    setProductsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -55,21 +79,58 @@ export default function SiteShell({ children }) {
           <Link href="/" className="logo">
             JMRHOME<span style={{ fontWeight: 300 }}>.LIFE</span>
           </Link>
-          <button className="menu-btn" onClick={() => setMenuOpen((value) => !value)} aria-label="Open menu">
+          <button
+            className="menu-btn"
+            onClick={() => {
+              setMenuOpen((value) => !value);
+              setProductsOpen(false);
+            }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
             <i className="fas fa-bars" />
           </button>
           <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={isActive(item.href) ? "active" : ""}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              if (item.href === "/products") {
+                return (
+                  <li className={`nav-dropdown ${productsOpen ? "open" : ""}`} key={item.href}>
+                    <button
+                      type="button"
+                      className={`nav-dropdown-toggle ${isActive(item.href) ? "active" : ""}`}
+                      onClick={() => setProductsOpen((value) => !value)}
+                      aria-expanded={productsOpen}
+                    >
+                      {item.label}
+                      <i className="fas fa-chevron-down" />
+                    </button>
+                    <div className="nav-dropdown-menu">
+                      <Link href="/products" className={pathname === "/products" ? "active" : ""} onClick={closeNavigation}>
+                        All Products
+                      </Link>
+                      {productCollections.map((collection) => (
+                        <Link
+                          href={`/products/${collection.slug}`}
+                          className={pathname === `/products/${collection.slug}` ? "active" : ""}
+                          key={collection.slug}
+                          onClick={closeNavigation}
+                        >
+                          {collection.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.href}>
+                  <Link href={item.href} className={isActive(item.href) ? "active" : ""} onClick={closeNavigation}>
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>

@@ -1,11 +1,13 @@
 import Link from "next/link";
 
 export function ProductCard({ product, href, onClick }) {
+  const title = product.name ?? product.title;
+
   const content = (
     <>
-      <img className="card-img" src={product.img} alt={product.name} loading="lazy" />
+      <img className="card-img" src={product.img} alt={title} loading="lazy" />
       <div className="card-content">
-        <h3>{product.name}</h3>
+        <h3>{title}</h3>
         <p>{product.shortDesc}</p>
       </div>
     </>
