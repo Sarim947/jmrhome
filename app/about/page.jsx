@@ -82,6 +82,39 @@ const reasons = [
   }
 ];
 
+const factoryScenes = [
+  {
+    title: "Workshop Production",
+    image: "/assets/images/about/factory/workshop1.webp",
+    alt: "JMR Habitat workshop production floor"
+  },
+  {
+    title: "Precision Cutting",
+    image: "/assets/images/about/factory/laser-cutting-scaled.webp",
+    alt: "Laser cutting equipment preparing aluminum door components"
+  },
+  {
+    title: "Frame Welding",
+    image: "/assets/images/about/factory/worker-welding.webp",
+    alt: "Worker welding metal frame components"
+  },
+  {
+    title: "Door Assembly",
+    image: "/assets/images/about/factory/worker-assembling.webp",
+    alt: "Worker assembling custom door components"
+  },
+  {
+    title: "Quality Inspection",
+    image: "/assets/images/about/factory/worker-processing-check.webp",
+    alt: "Worker inspecting processed metal components"
+  },
+  {
+    title: "Wood Crate Packing",
+    image: "/assets/images/about/factory/door-wood-crate.webp",
+    alt: "Finished door products packed in export wood crates"
+  }
+];
+
 export default function AboutPage() {
   return (
     <SiteShell>
@@ -172,6 +205,28 @@ export default function AboutPage() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        <section className={styles.factorySection}>
+          <div className="container">
+            <div className={styles.factoryHeader}>
+              <div>
+                <span className={styles.eyebrow}>Production & Quality Control</span>
+                <h2>Built with visible control.</h2>
+              </div>
+              <p>
+                Real workshop scenes behind our custom architectural door and living systems, from material processing to assembly, inspection and export wood crate packing.
+              </p>
+            </div>
+            <div className={styles.factoryGrid}>
+              {factoryScenes.map((item) => (
+                <figure className={styles.factoryItem} key={item.title}>
+                  <img src={item.image} alt={item.alt} />
+                  <figcaption>{item.title}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 

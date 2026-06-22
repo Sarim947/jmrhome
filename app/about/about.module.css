@@ -27,6 +27,7 @@
 .storyText h2,
 .sectionHeader h2,
 .processText h2,
+.factoryHeader h2,
 .trustGrid h2,
 .visionText h2,
 .ctaInner h2 {
@@ -132,6 +133,7 @@
 .storySection,
 .productSection,
 .processSection,
+.factorySection,
 .trustSection,
 .visionSection,
 .finalCta {
@@ -167,6 +169,7 @@
 .storyText h2,
 .sectionHeader h2,
 .processText h2,
+.factoryHeader h2,
 .trustGrid h2,
 .visionText h2 {
   font-size: clamp(2.25rem, 5vw, 4.6rem);
@@ -175,6 +178,7 @@
 
 .storyText p,
 .processText p,
+.factoryHeader p,
 .steps p,
 .reason p,
 .visionText p,
@@ -282,6 +286,62 @@
   font-size: 0.95rem;
 }
 
+.factorySection {
+  background: #fff;
+}
+
+.factoryHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 3.5rem;
+}
+
+.factoryHeader p {
+  margin: 0 0 0.15rem;
+  font-size: 1.04rem;
+}
+
+.factoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.factoryItem {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eef0f2;
+}
+
+.factoryItem img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.factoryItem figcaption {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  max-width: calc(100% - 2rem);
+  padding: 0.58rem 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #111827;
+  font-size: 0.85rem;
+  font-weight: 650;
+  line-height: 1.2;
+  box-shadow: 0 10px 26px rgba(17, 24, 39, 0.14);
+  backdrop-filter: blur(10px);
+}
+
 .trustGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
@@ -359,6 +419,7 @@
 
   .storyGrid,
   .processGrid,
+  .factoryHeader,
   .trustGrid,
   .visionSection {
     grid-template-columns: 1fr;
@@ -372,6 +433,10 @@
     min-height: 460px;
   }
 
+  .factoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .visionText {
     padding: 5rem 24px;
   }
@@ -382,6 +447,7 @@
   .storySection,
   .productSection,
   .processSection,
+  .factorySection,
   .trustSection,
   .finalCta {
     padding: 4rem 0;
@@ -425,6 +491,11 @@
     margin-bottom: 2.5rem;
   }
 
+  .factoryHeader {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
   .productGrid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -433,6 +504,17 @@
   .steps li {
     grid-template-columns: 48px 1fr;
     min-height: 82px;
+  }
+
+  .factoryGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .factoryItem figcaption {
+    left: 0.8rem;
+    bottom: 0.8rem;
+    max-width: calc(100% - 1.6rem);
   }
 
   .visionImage {
