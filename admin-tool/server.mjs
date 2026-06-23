@@ -161,6 +161,69 @@ function insertProductIntoCollection(text, slug, entry) {
   return `${text.slice(0, closeIndex)}${prefix}${entry}${suffix}${text.slice(closeIndex)}`;
 }
 
+function findCollectionObjectRange(text, slug) {
+  const slugIndex = text.indexOf(`slug: ${jsString(slug)}`);
+  if (slugIndex === -1) throw new Error(`Could not find product collection ${slug}`);
+
+  let start = slugIndex;
+  while (start >= 0 && text[start] !== "{") start -= 1;
+  if (start < 0) throw new Error(`Could not find start of product collection ${slug}`);
+
+  let depth = 0;
+  let inString = false;
+  let quote = "";
+  let escaped = false;
+
+  for (let i = start; i < text.length; i += 1) {
+    const char = text[i];
+
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        inString = false;
+      }
+      continue;
+    }
+
+    if (char === '"' || char === "'") {
+      inString = true;
+      quote = char;
+      continue;
+    }
+
+    if (char === "{") depth += 1;
+    if (char === "}") {
+      depth -= 1;
+      if (depth === 0) return { start, end: i + 1 };
+    }
+  }
+
+  throw new Error(`Could not find end of product collection ${slug}`);
+}
+
+function replaceObjectStringProperty(objectText, key, value) {
+  const pattern = new RegExp(`(${key}:\\s*)(["'])(?:\\\\.|(?!\\2).)*\\2`);
+  if (pattern.test(objectText)) {
+    return objectText.replace(pattern, `$1${jsString(value)}`);
+  }
+
+  return objectText.replace(/\{\n/, `{\n    ${key}: ${jsString(value)},\n`);
+}
+
+function updateCollectionInText(text, slug, fields) {
+  const range = findCollectionObjectRange(text, slug);
+  let objectText = text.slice(range.start, range.end);
+
+  if (fields.title !== undefined) objectText = replaceObjectStringProperty(objectText, "title", fields.title);
+  if (fields.shortDesc !== undefined) objectText = replaceObjectStringProperty(objectText, "shortDesc", fields.shortDesc);
+  if (fields.img !== undefined) objectText = replaceObjectStringProperty(objectText, "img", fields.img);
+
+  return `${text.slice(0, range.start)}${objectText}${text.slice(range.end)}`;
+}
+
 function productEntry(fields, imagePath) {
   const name = fields.name;
   return `      {
@@ -183,7 +246,12 @@ function productEntry(fields, imagePath) {
 app.get("/api/state", async (request, response) => {
   const data = await getDataModule();
   response.json({
-    collections: data.productCollections.map((item) => ({ slug: item.slug, title: item.title })),
+    collections: data.productCollections.map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      shortDesc: item.shortDesc,
+      img: item.img
+    })),
     dailyCount: data.dailyWorks.length,
     inspirationCount: data.inspirationImages.length,
     blogCount: data.blogPosts.length
@@ -230,6 +298,37 @@ app.post(
 
       await writeDataFile(insertAfterArrayStart(await readDataFile(), "dailyWorks", entry));
       response.json({ ok: true, message: "Daily Works item saved." });
+    } catch (error) {
+      response.status(500).json({ ok: false, error: error.message });
+    }
+  }
+);
+
+app.post(
+  "/api/collection",
+  upload.fields([{ name: "collectionImage", maxCount: 1 }]),
+  async (request, response) => {
+    try {
+      const fields = request.body;
+      requireText(fields, ["collectionSlug", "collectionTitle"]);
+      const data = await getDataModule();
+      const existingCollection = data.productCollections.find((item) => item.slug === fields.collectionSlug);
+      if (!existingCollection) throw new Error(`Could not find product collection ${fields.collectionSlug}`);
+      const imageDir = path.join(publicImagesDir, "products", fields.collectionSlug);
+      const imagePath = await saveWebp(request.files.collectionImage?.[0], imageDir, `${fields.collectionTitle}-cover`, {
+        width: 1200,
+        height: 900,
+        crop: { x: fields.collectionImageCropX, y: fields.collectionImageCropY, zoom: fields.collectionImageCropZoom }
+      });
+
+      const nextText = updateCollectionInText(await readDataFile(), fields.collectionSlug, {
+        title: fields.collectionTitle,
+        shortDesc: fields.collectionShortDesc || existingCollection.shortDesc || "",
+        ...(imagePath ? { img: imagePath } : {})
+      });
+
+      await writeDataFile(nextText);
+      response.json({ ok: true, message: "Collection card updated." });
     } catch (error) {
       response.status(500).json({ ok: false, error: error.message });
     }

@@ -50,6 +50,23 @@
       </section>
 
       <section class="panel" id="panel-products">
+        <form id="collection-form" class="card form-grid">
+          <div class="form-header">
+            <h2>Edit Collection Card</h2>
+            <p>Update the product-series card title, short description, and optional cover image. The URL slug stays unchanged.</p>
+          </div>
+
+          <label>Choose collection<select name="collectionSlug" id="edit-collection-list"></select></label>
+          <label>Collection title<input name="collectionTitle" id="edit-collection-title" required placeholder="Pivot Prime #5893" /></label>
+          <label class="span-2">Collection short description<textarea name="collectionShortDesc" id="edit-collection-desc" rows="2"></textarea></label>
+          <label class="span-2 image-field" data-ratio="1.333">Replace cover image (optional, 1200×900 min, 4:3 card crop)
+            <input name="collectionImage" type="file" accept="image/*" data-preview="edit-collection-cover-preview" />
+            <div class="image-preview" id="edit-collection-cover-preview"></div>
+          </label>
+
+          <button class="primary span-2" type="submit">Update Collection Card</button>
+        </form>
+
         <form id="product-form" class="card form-grid">
           <div class="form-header">
             <h2>Add Product</h2>

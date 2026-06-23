@@ -1,7 +1,9 @@
 const statusEl = document.querySelector("#status");
 const toastEl = document.querySelector("#toast");
 const collectionList = document.querySelector("#collection-list");
+const editCollectionList = document.querySelector("#edit-collection-list");
 const collectionMode = document.querySelector("#collection-mode");
+let currentState = { collections: [] };
 
 function showToast(message, isError = false) {
   toastEl.textContent = message;
@@ -13,10 +15,14 @@ function showToast(message, isError = false) {
 async function loadState() {
   const response = await fetch("/api/state");
   const state = await response.json();
+  currentState = state;
   statusEl.textContent = `${state.collections.length} collections · ${state.dailyCount} daily · ${state.inspirationCount} inspiration`;
-  collectionList.innerHTML = state.collections
+  const options = state.collections
     .map((item) => `<option value="${item.slug}">${item.title}</option>`)
     .join("");
+  collectionList.innerHTML = options;
+  editCollectionList.innerHTML = options;
+  updateCollectionEditor();
 }
 
 function setBusy(form, busy) {
@@ -34,7 +40,13 @@ async function submitForm(form, endpoint) {
       method: "POST",
       body
     });
-    const result = await response.json();
+    const text = await response.text();
+    let result;
+    try {
+      result = JSON.parse(text);
+    } catch {
+      throw new Error("Admin server is using an old route. Stop it and run npm run admin again.");
+    }
     if (!response.ok || !result.ok) throw new Error(result.error || "Save failed.");
     showToast(result.message || "Saved.");
     form.reset();
@@ -47,6 +59,16 @@ async function submitForm(form, endpoint) {
     showToast(error.message, true);
   } finally {
     setBusy(form, false);
+  }
+}
+
+function updateCollectionEditor() {
+  const collection = currentState.collections.find((item) => item.slug === editCollectionList.value);
+  if (!collection) return;
+
+  document.querySelector("#edit-collection-title").value = collection.title || "";
+  if (collection.shortDesc !== undefined) {
+    document.querySelector("#edit-collection-desc").value = collection.shortDesc || "";
   }
 }
 
@@ -174,9 +196,14 @@ document.querySelectorAll('input[type="file"][data-preview]').forEach((input) =>
 });
 
 collectionMode.addEventListener("change", updateCollectionMode);
+editCollectionList.addEventListener("change", updateCollectionEditor);
 document.querySelector("#daily-form").addEventListener("submit", (event) => {
   event.preventDefault();
   submitForm(event.currentTarget, "/api/daily");
+});
+document.querySelector("#collection-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  submitForm(event.currentTarget, "/api/collection");
 });
 document.querySelector("#product-form").addEventListener("submit", (event) => {
   event.preventDefault();
