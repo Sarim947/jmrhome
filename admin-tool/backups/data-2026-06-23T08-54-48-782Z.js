@@ -109,22 +109,7 @@ export const productCollections = [
       productItem("J-2006", "/assets/images/products/steel/Steel2006.jpg", "Vertical fluted textures, brushed gold handle.", "A premium steel entrance door with full-surface vertical fluted textures and a striking brushed gold handle."),
       productItem("J-2007", "/assets/images/products/steel/Steel2007.jpg", "Sandalwood wood grain.", "A premium steel entrance door distinguished by its rich sandalwood wood grain finish."),
       productItem("J-2015", "/assets/images/products/steel/Steel2015.jpg", "Pressed pattern, timeless design.", "A versatile steel entrance door featuring a subtle pressed pattern for a clean, timeless design.")
-    ,
-      {
-        id: "jt-02",
-        name: "JT-02",
-        shortDesc: " Scandinavian Wood Grain Finish",
-        img: "/assets/images/products/essentials/jt-02-mqqerx58.webp",
-        altText: "Modern Entry Door with Sidelight & Wood Grain Finish",
-        params: {
-          style: "Minimalist Modern",
-          material: "Aluminum",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 2180x3000"
-        },
-        description: "The main panel features a large area of warm wood grain finish. Its delicate and inviting horizontal textures break the icy coldness of traditional steel or iron doors. The surface is partitioned by evenly parallel, micro-grooved horizontal lines, visually expanding the door's width and giving the entire facade a more solid, grounded, and dignified presence."
-      }]
+    ]
   },
   {
     slug: "classic-3670",

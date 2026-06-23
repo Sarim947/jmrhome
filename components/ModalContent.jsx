@@ -3,18 +3,56 @@
 import { useEffect, useState } from "react";
 
 export function ProductDetail({ product }) {
+  const [lightbox, setLightbox] = useState(null);
+
+  useEffect(() => {
+    if (!lightbox) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setLightbox(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightbox]);
+
   return (
-    <div className="product-detail">
-      <div className="product-detail-image">
-        {product.img ? <img src={product.img} alt={product.altText ?? product.name} /> : null}
+    <>
+      <div className="product-detail">
+        <div className="product-detail-image">
+          {product.img ? (
+            <button
+              type="button"
+              className="product-image-zoom-trigger"
+              onClick={() => setLightbox({ src: product.img, alt: product.altText ?? product.name, label: product.name })}
+              aria-label={`View larger image of ${product.name}`}
+            >
+              <img src={product.img} alt={product.altText ?? product.name} />
+              <span className="zoom-hint">
+                <i className="fas fa-search-plus" />
+              </span>
+            </button>
+          ) : null}
+        </div>
+        <div className="product-detail-info">
+          <h1>{product.name}</h1>
+          <p className="product-description">{product.description}</p>
+          <h2>Technical Specifications</h2>
+          <ParamsTable params={product.params} />
+        </div>
       </div>
-      <div className="product-detail-info">
-        <h1>{product.name}</h1>
-        <p className="product-description">{product.description}</p>
-        <h2>Technical Specifications</h2>
-        <ParamsTable params={product.params} />
-      </div>
-    </div>
+      {lightbox ? (
+        <div className="image-lightbox" onClick={() => setLightbox(null)}>
+          <div className="image-lightbox-inner" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
+              ×
+            </button>
+            <img src={lightbox.src} alt={lightbox.alt} />
+            <p>{lightbox.label}</p>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
 

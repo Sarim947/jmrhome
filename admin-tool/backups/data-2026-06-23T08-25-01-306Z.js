@@ -109,22 +109,7 @@ export const productCollections = [
       productItem("J-2006", "/assets/images/products/steel/Steel2006.jpg", "Vertical fluted textures, brushed gold handle.", "A premium steel entrance door with full-surface vertical fluted textures and a striking brushed gold handle."),
       productItem("J-2007", "/assets/images/products/steel/Steel2007.jpg", "Sandalwood wood grain.", "A premium steel entrance door distinguished by its rich sandalwood wood grain finish."),
       productItem("J-2015", "/assets/images/products/steel/Steel2015.jpg", "Pressed pattern, timeless design.", "A versatile steel entrance door featuring a subtle pressed pattern for a clean, timeless design.")
-    ,
-      {
-        id: "jt-02",
-        name: "JT-02",
-        shortDesc: " Scandinavian Wood Grain Finish",
-        img: "/assets/images/products/essentials/jt-02-mqqerx58.webp",
-        altText: "Modern Entry Door with Sidelight & Wood Grain Finish",
-        params: {
-          style: "Minimalist Modern",
-          material: "Aluminum",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 2180x3000"
-        },
-        description: "The main panel features a large area of warm wood grain finish. Its delicate and inviting horizontal textures break the icy coldness of traditional steel or iron doors. The surface is partitioned by evenly parallel, micro-grooved horizontal lines, visually expanding the door's width and giving the entire facade a more solid, grounded, and dignified presence."
-      }]
+    ]
   },
   {
     slug: "classic-3670",
@@ -182,36 +167,6 @@ export const productCollections = [
           size: "Up to 2280x3000"
         },
         description: "Dominated by a matte anthracite gray or charcoal finish, the main body is complemented by a long, vertical brushed champagne gold/brass handle at its center. This bold contrast between minimalist dark shades and radiant metal serves as a defining statement of modern luxury design."
-      },
-      {
-        id: "j-0226",
-        name: "J-0226",
-        shortDesc: "German Modern Entry Door with Vertical Glass Cutout",
-        img: "/assets/images/products/fusion-5843/j-0226-mqqdplxd.webp",
-        altText: "Entry Door with Vertical Glass Cutout",
-        params: {
-          style: "German Modern",
-          material: "Aluminum ",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 1180x3000"
-        },
-        description: "Premier choice for German Bauhaus architecture, perfectly matching contemporary homes with a strict minimalist aesthetic. The square handle echo the round lock cylinder, highlighting the mechanical beauty of the hardware."
-      },
-      {
-        id: "j-5496",
-        name: "J-5496",
-        shortDesc: "Italian Modern Luxury Pivot Entry Door with Rust Look Finish",
-        img: "/assets/images/products/fusion-5843/j-5496-mqqec8xv.webp",
-        altText: "faux-oxidized metal finish 3D printing",
-        params: {
-          style: "Italian Modern",
-          material: "Aluminum",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 1180x3000"
-        },
-        description: "The main panel features an artistic, mottled faux-oxidized metal finish achieved through 3D printing, revealing a premium texture where raw nature meets high design. Clean horizontal lines evenly divide the surface, breaking the monotony of a single slab while adding layered depth and a sense of architectural order. A bold, vertical black handlebar seamlessly blends with the dark, rusted texture."
       }]
   },
   {
