@@ -127,9 +127,9 @@ export const productCollections = [
   },
   {
     slug: "pivot-prime-5893",
-    title: "Oversized Pivot",
+    title: "Pivot Prime #5893",
     shortDesc: "Offset pivot, minimalist lines, grand entrance.",
-    img: "/assets/images/products/pivot-prime-5893/oversized-pivot-cover-mqqb8sao.webp",
+    img: "/assets/images/products/Pivot Prime door.jpg",
     items: [featuredProducts[2]]
   },
   {

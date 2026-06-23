@@ -31,8 +31,23 @@ function setBusy(form, busy) {
   });
 }
 
+function validateRequiredFields(form) {
+  const fields = Array.from(form.querySelectorAll("[required]")).filter((field) => !field.disabled);
+  const missing = fields.find((field) => {
+    if (field.type === "file") return !field.files?.length;
+    return !String(field.value || "").trim();
+  });
+
+  if (!missing) return true;
+
+  const label = missing.closest("label")?.childNodes?.[0]?.textContent?.trim() || missing.name || "Required field";
+  showToast(`${label} is required.`, true);
+  missing.focus?.();
+  return false;
+}
+
 async function submitForm(form, endpoint) {
-  if (!form.reportValidity()) return;
+  if (!validateRequiredFields(form)) return;
   const body = new FormData(form);
   setBusy(form, true);
   try {
