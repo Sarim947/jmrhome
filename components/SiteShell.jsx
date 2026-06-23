@@ -143,10 +143,10 @@ export default function SiteShell({ children }) {
             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-instagram" />
             </a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/profile.php?id=61589389575097" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-facebook-f" />
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/huansteels" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-linkedin-in" />
             </a>
           </div>
