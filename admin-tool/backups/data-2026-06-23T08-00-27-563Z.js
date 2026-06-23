@@ -152,21 +152,6 @@ export const productCollections = [
           size: "Up to 2180x3000mm"
         },
         description: "Featuring a matte black aluminum frame complemented by tempered patterned glass—including water wave, rain, or frosted textures—this design ensures homeowner privacy while maintaining a high-end aesthetic appeal."
-      },
-      {
-        id: "j-0555",
-        name: "J-0555",
-        shortDesc: "Modern Minimalist",
-        img: "/assets/images/products/fusion-5843/j-0555-mqqcu0ru.webp",
-        altText: "J-0555",
-        params: {
-          style: "Modern Minimalist",
-          material: "Aluminum",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 2280x3000"
-        },
-        description: "Dominated by a matte anthracite gray or charcoal finish, the main body is complemented by a long, vertical brushed champagne gold/brass handle at its center. This bold contrast between minimalist dark shades and radiant metal serves as a defining statement of modern luxury design."
       }]
   },
   {

@@ -137,37 +137,7 @@ export const productCollections = [
     title: "Doors with lites",
     shortDesc: "Glass integration, natural light.",
     img: "/assets/images/products/Luminous Fusion door.jpg",
-    items: [featuredProducts[3],
-      {
-        id: "j-4244",
-        name: "J-4244",
-        shortDesc: "French Classical",
-        img: "/assets/images/products/fusion-5843/j-4244-mqqco64v.webp",
-        altText: "J-4244 arch customized door",
-        params: {
-          style: "Minimalist Modern",
-          material: "Aluminum",
-          configuration: "Single or Double ",
-          smartLock: "Optional",
-          size: "Up to 2180x3000mm"
-        },
-        description: "Featuring a matte black aluminum frame complemented by tempered patterned glass—including water wave, rain, or frosted textures—this design ensures homeowner privacy while maintaining a high-end aesthetic appeal."
-      },
-      {
-        id: "j-0555",
-        name: "J-0555",
-        shortDesc: "Modern Minimalist",
-        img: "/assets/images/products/fusion-5843/j-0555-mqqcu0ru.webp",
-        altText: "J-0555",
-        params: {
-          style: "Modern Minimalist",
-          material: "Aluminum",
-          configuration: "Single or Double",
-          smartLock: "Optional",
-          size: "Up to 2280x3000"
-        },
-        description: "Dominated by a matte anthracite gray or charcoal finish, the main body is complemented by a long, vertical brushed champagne gold/brass handle at its center. This bold contrast between minimalist dark shades and radiant metal serves as a defining statement of modern luxury design."
-      }]
+    items: [featuredProducts[3]]
   },
   {
     slug: "neoclassical-2250",
