@@ -134,8 +134,8 @@ export const productCollections = [
   },
   {
     slug: "fusion-5843",
-    title: "Doors with lites",
-    shortDesc: "Glass integration, natural light.",
+    title: "Fusion #5843",
+    shortDesc: "Thermal break system, glass integration, natural light.",
     img: "/assets/images/products/Luminous Fusion door.jpg",
     items: [featuredProducts[3]]
   },
