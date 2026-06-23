@@ -10,6 +10,18 @@ import CustomerReviews from "@/components/CustomerReviews";
 import ProjectCases from "@/components/ProjectCases";
 import { blogPosts, dailyWorks, featuredProducts, projectCases } from "@/lib/data";
 
+function getDailyWorkTime(work) {
+  const [year, month, day] = String(work.date)
+    .split("-")
+    .map((part) => Number.parseInt(part, 10));
+
+  return new Date(year || 0, (month || 1) - 1, day || 1).getTime();
+}
+
+const latestDailyWorks = [...dailyWorks]
+  .sort((current, next) => getDailyWorkTime(next) - getDailyWorkTime(current))
+  .slice(0, 4);
+
 export default function HomePageClient() {
   const [modal, setModal] = useState(null);
 
@@ -42,7 +54,7 @@ export default function HomePageClient() {
           <div className="container" style={{ marginTop: "3rem" }}>
             <h2>Latest from Daily Works</h2>
             <div className="daily-grid">
-              {dailyWorks.slice(0, 4).map((work) => (
+              {latestDailyWorks.map((work) => (
                 <DailyCard key={work.id} work={work} onClick={() => setModal({ type: "daily", item: work })} />
               ))}
             </div>

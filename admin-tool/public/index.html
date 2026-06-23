@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JMR Content Manager</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Local Admin Tool</p>
+          <h1>JMR Content Manager</h1>
+        </div>
+        <div class="status" id="status">Loading...</div>
+      </header>
+
+      <nav class="tabs" aria-label="Content types">
+        <button class="tab active" data-tab="daily">Daily Works</button>
+        <button class="tab" data-tab="products">Products</button>
+        <button class="tab" data-tab="inspiration">Inspiration</button>
+      </nav>
+
+      <section class="panel active" id="panel-daily">
+        <form id="daily-form" class="card form-grid">
+          <div class="form-header">
+            <h2>Add Daily Works</h2>
+            <p>Use dates like 2026-06-22. Homepage will automatically show the newest four items.</p>
+          </div>
+
+          <label>Name<input name="name" required placeholder="Walnut Accent Elite" /></label>
+          <label>Date<input name="date" type="date" required /></label>
+          <label class="span-2">Short description<textarea name="description" required rows="3"></textarea></label>
+          <label class="span-2">Alt text<input name="altText" placeholder="Walnut accent custom entrance door for a private residence" /></label>
+          <label class="span-2">Design philosophy<textarea name="designPhilosophy" rows="3"></textarea></label>
+          <label>Structure<input name="structure" placeholder="Steel Core Armored" /></label>
+          <label>Surface finish<input name="surfaceFinish" placeholder="Walnut wood grain with matte carbon grey" /></label>
+          <label class="image-field" data-ratio="1">Render image (1200×1200 min, 1:1 card crop)
+            <input name="renderImage" type="file" accept="image/*" required data-preview="daily-render-preview" />
+            <div class="image-preview" id="daily-render-preview"></div>
+          </label>
+          <label class="image-field" data-ratio="1">Real image (1200×1200 min, 1:1 card crop)
+            <input name="realImage" type="file" accept="image/*" data-preview="daily-real-preview" />
+            <div class="image-preview" id="daily-real-preview"></div>
+          </label>
+
+          <button class="primary span-2" type="submit">Save Daily Works</button>
+        </form>
+      </section>
+
+      <section class="panel" id="panel-products">
+        <form id="product-form" class="card form-grid">
+          <div class="form-header">
+            <h2>Add Product</h2>
+            <p>Add to an existing collection or create a new collection. Images are converted to webp.</p>
+          </div>
+
+          <label>Collection mode
+            <select name="collectionMode" id="collection-mode">
+              <option value="existing">Existing collection</option>
+              <option value="new">New collection</option>
+            </select>
+          </label>
+          <label class="existing-only">Existing collection<select name="collectionSlug" id="collection-list"></select></label>
+
+          <label class="new-only hidden">New collection title<input name="collectionTitle" placeholder="Villa Pivot Collection" /></label>
+          <label class="new-only hidden">Collection short description<input name="collectionShortDesc" placeholder="Oversized pivot systems for villas." /></label>
+          <label class="new-only hidden span-2 image-field" data-ratio="1.333">Collection cover image (1200×900 min, 4:3 card crop)
+            <input name="collectionImage" type="file" accept="image/*" data-preview="collection-cover-preview" />
+            <div class="image-preview" id="collection-cover-preview"></div>
+          </label>
+
+          <label>Product name<input name="name" required placeholder="J-3001" /></label>
+          <label class="image-field" data-ratio="1.333">Product image (1200×900 min, 4:3 card crop)
+            <input name="productImage" type="file" accept="image/*" required data-preview="product-image-preview" />
+            <div class="image-preview" id="product-image-preview"></div>
+          </label>
+          <label class="span-2">Short description<textarea name="shortDesc" required rows="2"></textarea></label>
+          <label class="span-2">Long description<textarea name="description" rows="3"></textarea></label>
+          <label class="span-2">Alt text<input name="altText" placeholder="J-3001 custom aluminum entrance door" /></label>
+
+          <label>Style<input name="style" placeholder="Minimalist Modern" /></label>
+          <label>Material<input name="material" placeholder="Steel + Aluminum" /></label>
+          <label>Configuration<input name="configuration" placeholder="Single or double" /></label>
+          <label>Smart lock<input name="smartLock" placeholder="Optional" /></label>
+          <label>Size<input name="size" placeholder="Up to 1980x2500mm" /></label>
+
+          <button class="primary span-2" type="submit">Save Product</button>
+        </form>
+      </section>
+
+      <section class="panel" id="panel-inspiration">
+        <form id="inspiration-form" class="card form-grid">
+          <div class="form-header">
+            <h2>Add Inspiration Images</h2>
+            <p>Fast upload for visual inspiration. You can upload several images at once.</p>
+          </div>
+
+          <label class="image-field" data-ratio="1.333">Images (1600px+ recommended, preview shows 4:3 crop)
+            <input name="images" type="file" accept="image/*" multiple required data-preview="inspiration-images-preview" />
+            <div class="image-preview image-preview-list" id="inspiration-images-preview"></div>
+          </label>
+          <label>Title<input name="title" placeholder="Entry Study" /></label>
+          <label>Door type<input name="doorType" placeholder="Pivot Door" /></label>
+          <label>Project<input name="project" placeholder="Inspiration" /></label>
+          <label>Hover text<input name="hoverText" placeholder="Pivot Door" /></label>
+          <label>Layout
+            <select name="layout">
+              <option value="normal">normal</option>
+              <option value="wide">wide</option>
+              <option value="square">square</option>
+              <option value="hero">hero</option>
+              <option value="tall">tall</option>
+            </select>
+          </label>
+          <label>Span<input name="span" type="number" min="3" max="7" value="4" /></label>
+          <label class="span-2">Alt text<input name="altText" placeholder="Modern pivot door inspiration for a luxury villa entrance" /></label>
+
+          <button class="primary span-2" type="submit">Save Inspiration</button>
+        </form>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

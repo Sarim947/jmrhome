@@ -166,30 +166,6 @@ export const productCollections = [
 
 export const dailyWorks = [
   {
-    id: 107,
-    name: "Ocean Wave Smart LED",
-    date: "2026-06-10",
-    description: "An ultra-modern dual-panel-crafted ocean wave metal relief. Equipped with horizontal handles integrated with ambient blue LED illumination.",
-    realImg: "/assets/images/daily/2026-06-10-ocean-wave-smart-led-real-mqpywamj.webp",
-    renderImg: "/assets/images/daily/2026-06-10-ocean-wave-smart-led-render-mqpywajs.webp",
-    altText: "Modern Ocean Wave Texture Armored Entrance Door with LED Handle",
-    designPhilosophy: "\"Rhythm of Water\" - Inspired by the natural flow of ocean waves. The fluid textures symbolize wealth and flexibility, while the embedded blue light ray provides a guiding beacon of home and advanced security.",
-    structure: "Steel Core Armored",
-    surfaceFinish: "Metallic Painting"
-  },
-  {
-    id: 106,
-    name: "Diamond Armor Elite",
-    date: "2026-06-23",
-    description: "Armored entrance door featuring a stunning, precision-cut diamond geometric pattern on bronze relief. ",
-    realImg: "/assets/images/daily/2026-06-23-diamond-armor-elite-real-mqpxnkgj.webp",
-    renderImg: "/assets/images/daily/2026-06-23-diamond-armor-elite-render-mqpxnkdz.webp",
-    altText: "Luxury Diamond Pattern Armored Entrance Door",
-    designPhilosophy: "\"Eternal Brilliance\" - Inspired by the architectural brilliance of diamond cutting. The geometric facets catch light from every angle, symbolizing unyielding security and timeless luxury.",
-    structure: "Full Aluminum Profile",
-    surfaceFinish: "Brushed champagne gold by metallic painting"
-  },
-  {
     id: 101,
     name: "Anthracite Tech Dual",
     date: "2026-04-1",

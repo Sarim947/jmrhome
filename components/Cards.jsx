@@ -2,10 +2,11 @@ import Link from "next/link";
 
 export function ProductCard({ product, href, onClick }) {
   const title = product.name ?? product.title;
+  const image = product.img || null;
 
   const content = (
     <>
-      <img className="card-img" src={product.img} alt={title} loading="lazy" />
+      {image ? <img className="card-img" src={image} alt={product.altText ?? title} loading="lazy" /> : null}
       <div className="card-content">
         <h3>{title}</h3>
         <p>{product.shortDesc}</p>
@@ -29,9 +30,11 @@ export function ProductCard({ product, href, onClick }) {
 }
 
 export function DailyCard({ work, onClick }) {
+  const image = work.renderImg || work.realImg || null;
+
   return (
     <button className="daily-item as-card-button" onClick={onClick}>
-      <img src={work.renderImg} alt={work.name} loading="lazy" />
+      {image ? <img src={image} alt={work.altText ?? work.name} loading="lazy" /> : null}
       <div className="daily-info">
         <strong>{work.name}</strong>
         <br />

@@ -166,18 +166,6 @@ export const productCollections = [
 
 export const dailyWorks = [
   {
-    id: 107,
-    name: "Ocean Wave Smart LED",
-    date: "2026-06-10",
-    description: "An ultra-modern dual-panel-crafted ocean wave metal relief. Equipped with horizontal handles integrated with ambient blue LED illumination.",
-    realImg: "/assets/images/daily/2026-06-10-ocean-wave-smart-led-real-mqpywamj.webp",
-    renderImg: "/assets/images/daily/2026-06-10-ocean-wave-smart-led-render-mqpywajs.webp",
-    altText: "Modern Ocean Wave Texture Armored Entrance Door with LED Handle",
-    designPhilosophy: "\"Rhythm of Water\" - Inspired by the natural flow of ocean waves. The fluid textures symbolize wealth and flexibility, while the embedded blue light ray provides a guiding beacon of home and advanced security.",
-    structure: "Steel Core Armored",
-    surfaceFinish: "Metallic Painting"
-  },
-  {
     id: 106,
     name: "Diamond Armor Elite",
     date: "2026-06-23",

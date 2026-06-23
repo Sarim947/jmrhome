@@ -355,8 +355,19 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
     min-width: 240px;
 }
 
+.image-zoom-trigger {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+    display: block;
+}
+
 .image-column img {
     width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     border-radius: 16px;
     display: block;
 }
@@ -906,8 +917,63 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
 
 .image-comparison { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
 .image-column { flex: 1; }
-.image-column img { width: 100%; border-radius: 12px; margin-bottom: 0.5rem; }
+.image-zoom-trigger { width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; display: block; }
+.image-column img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; margin-bottom: 0.5rem; display: block; }
 .image-label { text-align: center; font-size: 0.875rem; color: #6b7280; }
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(17, 24, 39, 0.86);
+}
+
+.image-lightbox-inner {
+    position: relative;
+    width: min(94vw, 1180px);
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.image-lightbox-inner img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(92vh - 64px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: #111827;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.image-lightbox-inner p {
+    color: #f9fafb;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.image-lightbox-close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: #111827;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
 
 .modal-params { background: #f9fafb; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; }
 .modal-params h3 { font-size: 1rem; margin-bottom: 0.75rem; color: #374151; }
@@ -950,6 +1016,10 @@ img { content-visibility: auto; }
     .hero { padding: 2rem 0; }
     .hero h1 { font-size: 1.75rem; margin-bottom: 0.75rem; }
     .hero p { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .image-lightbox { padding: 1rem; }
+    .image-lightbox-inner { width: 100%; max-height: 90vh; }
+    .image-lightbox-inner img { max-height: calc(90vh - 62px); }
+    .image-lightbox-close { top: 8px; right: 8px; }
     .whatsapp-float { width: 48px; height: 48px; font-size: 24px; bottom: 16px; right: 16px; }
     .back-to-top {
         width: 48px;

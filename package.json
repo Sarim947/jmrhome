@@ -4,16 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "admin": "node admin-tool/server.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resend": "^6.12.4"
+    "resend": "^6.12.4",
+    "sharp": "^0.35.2"
   },
   "devDependencies": {
     "@types/node": "20.17.6",
