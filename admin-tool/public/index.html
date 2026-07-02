@@ -67,6 +67,35 @@
           <button class="primary span-2" type="submit">Update Collection Card</button>
         </form>
 
+        <form id="manage-product-form" class="card form-grid" novalidate>
+          <div class="form-header">
+            <h2>Manage Existing Product</h2>
+            <p>Edit product fields, technical parameters, optional image, or delete the product from its collection.</p>
+          </div>
+
+          <label>Collection<select name="collectionSlug" id="manage-product-collection"></select></label>
+          <label>Product<select name="productId" id="manage-product-list"></select></label>
+          <label>Product name<input name="name" id="manage-product-name" required /></label>
+          <label class="image-field" data-ratio="1.333">Replace product image (optional, 1200×900, 4:3 card crop)
+            <input name="productImage" type="file" accept="image/*" data-preview="manage-product-image-preview" />
+            <div class="image-preview" id="manage-product-image-preview"></div>
+          </label>
+          <label class="span-2">Short description<textarea name="shortDesc" id="manage-product-short" required rows="2"></textarea></label>
+          <label class="span-2">Long description<textarea name="description" id="manage-product-description" rows="3"></textarea></label>
+          <label class="span-2">Alt text<input name="altText" id="manage-product-alt" /></label>
+
+          <label>Style<input name="style" id="manage-product-style" /></label>
+          <label>Material<input name="material" id="manage-product-material" /></label>
+          <label>Configuration<input name="configuration" id="manage-product-configuration" /></label>
+          <label>Smart lock<input name="smartLock" id="manage-product-smart-lock" /></label>
+          <label>Size<input name="size" id="manage-product-size" /></label>
+
+          <div class="button-row span-2">
+            <button class="primary" type="submit">Update Product</button>
+            <button class="danger" type="button" id="delete-product-btn">Delete Product</button>
+          </div>
+        </form>
+
         <form id="product-form" class="card form-grid" novalidate>
           <div class="form-header">
             <h2>Add Product</h2>
@@ -114,7 +143,7 @@
             <p>Fast upload for visual inspiration. You can upload several images at once.</p>
           </div>
 
-          <label class="image-field" data-ratio="1.333">Images (1600px+ recommended, preview shows 4:3 crop)
+          <label class="image-field" data-ratio="1">Images (choose square cover area)
             <input name="images" type="file" accept="image/*" multiple required data-preview="inspiration-images-preview" />
             <div class="image-preview image-preview-list" id="inspiration-images-preview"></div>
           </label>
@@ -122,16 +151,8 @@
           <label>Door type<input name="doorType" placeholder="Pivot Door" /></label>
           <label>Project<input name="project" placeholder="Inspiration" /></label>
           <label>Hover text<input name="hoverText" placeholder="Pivot Door" /></label>
-          <label>Layout
-            <select name="layout">
-              <option value="normal">normal</option>
-              <option value="wide">wide</option>
-              <option value="square">square</option>
-              <option value="hero">hero</option>
-              <option value="tall">tall</option>
-            </select>
-          </label>
-          <label>Span<input name="span" type="number" min="3" max="7" value="4" /></label>
+          <input name="layout" type="hidden" value="normal" />
+          <input name="span" type="hidden" value="4" />
           <label class="span-2">Alt text<input name="altText" placeholder="Modern pivot door inspiration for a luxury villa entrance" /></label>
 
           <button class="primary span-2" type="submit">Save Inspiration</button>

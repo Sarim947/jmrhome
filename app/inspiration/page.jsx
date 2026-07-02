@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import InspirationGalleryClient from "@/components/InspirationGalleryClient";
 import { inspirationImages } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -30,20 +31,7 @@ export default function InspirationPage() {
             </p>
           </div>
 
-          <div className="inspiration-collage">
-            {inspirationImages.map((item, index) => (
-              <article
-                className={`inspiration-piece inspiration-piece-${item.layout}`}
-                key={item.id}
-                style={{ "--piece-span": item.span || 4 }}
-              >
-                <figure>
-                  <img src={item.src} alt={item.altText || item.title} loading={index < 4 ? "eager" : "lazy"} />
-                  <figcaption>{item.hoverText || item.doorType}</figcaption>
-                </figure>
-              </article>
-            ))}
-          </div>
+          <InspirationGalleryClient images={inspirationImages} />
         </div>
       </main>
     </SiteShell>

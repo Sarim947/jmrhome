@@ -3,6 +3,8 @@ const toastEl = document.querySelector("#toast");
 const collectionList = document.querySelector("#collection-list");
 const editCollectionList = document.querySelector("#edit-collection-list");
 const collectionMode = document.querySelector("#collection-mode");
+const manageProductCollection = document.querySelector("#manage-product-collection");
+const manageProductList = document.querySelector("#manage-product-list");
 let currentState = { collections: [] };
 
 function showToast(message, isError = false) {
@@ -22,7 +24,9 @@ async function loadState() {
     .join("");
   collectionList.innerHTML = options;
   editCollectionList.innerHTML = options;
+  manageProductCollection.innerHTML = options;
   updateCollectionEditor();
+  updateProductManager();
 }
 
 function setBusy(form, busy) {
@@ -91,6 +95,68 @@ function updateCollectionMode() {
   const isNew = collectionMode.value === "new";
   document.querySelectorAll(".new-only").forEach((element) => element.classList.toggle("hidden", !isNew));
   document.querySelectorAll(".existing-only").forEach((element) => element.classList.toggle("hidden", isNew));
+}
+
+function selectedManagedCollection() {
+  return currentState.collections.find((item) => item.slug === manageProductCollection.value);
+}
+
+function selectedManagedProduct() {
+  const collection = selectedManagedCollection();
+  return collection?.items?.find((item) => String(item.id) === String(manageProductList.value));
+}
+
+function updateProductManager() {
+  const collection = selectedManagedCollection();
+  const products = collection?.items || [];
+  manageProductList.innerHTML = products
+    .map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)}</option>`)
+    .join("");
+  fillProductManager();
+}
+
+function fillProductManager() {
+  const product = selectedManagedProduct();
+  const setValue = (selector, value) => {
+    const element = document.querySelector(selector);
+    if (element) element.value = value || "";
+  };
+
+  setValue("#manage-product-name", product?.name);
+  setValue("#manage-product-short", product?.shortDesc);
+  setValue("#manage-product-description", product?.description);
+  setValue("#manage-product-alt", product?.altText);
+  setValue("#manage-product-style", product?.params?.style);
+  setValue("#manage-product-material", product?.params?.material);
+  setValue("#manage-product-configuration", product?.params?.configuration);
+  setValue("#manage-product-smart-lock", product?.params?.smartLock);
+  setValue("#manage-product-size", product?.params?.size);
+  document.querySelector("#manage-product-image-preview").innerHTML = "";
+}
+
+async function deleteManagedProduct() {
+  const product = selectedManagedProduct();
+  const collection = selectedManagedCollection();
+  if (!product || !collection) {
+    showToast("Choose a product first.", true);
+    return;
+  }
+
+  if (!window.confirm(`Delete "${product.name}" from "${collection.title}"?`)) return;
+
+  try {
+    const response = await fetch("/api/product-item/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ collectionSlug: collection.slug, productId: product.id })
+    });
+    const result = await response.json();
+    if (!response.ok || !result.ok) throw new Error(result.error || "Delete failed.");
+    showToast(result.message || "Deleted.");
+    await loadState();
+  } catch (error) {
+    showToast(error.message, true);
+  }
 }
 
 function gcd(a, b) {
@@ -212,6 +278,9 @@ document.querySelectorAll('input[type="file"][data-preview]').forEach((input) =>
 
 collectionMode.addEventListener("change", updateCollectionMode);
 editCollectionList.addEventListener("change", updateCollectionEditor);
+manageProductCollection.addEventListener("change", updateProductManager);
+manageProductList.addEventListener("change", fillProductManager);
+document.querySelector("#delete-product-btn").addEventListener("click", deleteManagedProduct);
 document.querySelector("#daily-form").addEventListener("submit", (event) => {
   event.preventDefault();
   submitForm(event.currentTarget, "/api/daily");
@@ -219,6 +288,10 @@ document.querySelector("#daily-form").addEventListener("submit", (event) => {
 document.querySelector("#collection-form").addEventListener("submit", (event) => {
   event.preventDefault();
   submitForm(event.currentTarget, "/api/collection");
+});
+document.querySelector("#manage-product-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  submitForm(event.currentTarget, "/api/product-item");
 });
 document.querySelector("#product-form").addEventListener("submit", (event) => {
   event.preventDefault();

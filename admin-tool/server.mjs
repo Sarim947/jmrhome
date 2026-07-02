@@ -48,6 +48,11 @@ function requireText(fields, keys) {
   }
 }
 
+function fieldAt(value, index, fallback = undefined) {
+  if (Array.isArray(value)) return value[index] ?? fallback;
+  return value ?? fallback;
+}
+
 async function getDataModule() {
   return import(`${pathToFileURL(dataPath).href}?t=${Date.now()}`);
 }
@@ -167,6 +172,91 @@ function insertProductIntoCollection(text, slug, entry) {
   return `${text.slice(0, closeIndex)}${prefix}${entry}${suffix}${text.slice(closeIndex)}`;
 }
 
+function findCollectionItemsRange(text, slug) {
+  const slugIndex = text.indexOf(`slug: ${jsString(slug)}`);
+  if (slugIndex === -1) throw new Error(`Could not find product collection ${slug}`);
+  const itemsIndex = text.indexOf("items:", slugIndex);
+  if (itemsIndex === -1) throw new Error(`Could not find items for product collection ${slug}`);
+  const openIndex = text.indexOf("[", itemsIndex);
+  const closeIndex = findClosingBracket(text, openIndex);
+  return { openIndex, closeIndex };
+}
+
+function splitTopLevelItems(text, openIndex, closeIndex) {
+  const ranges = [];
+  let depth = 0;
+  let inString = false;
+  let quote = "";
+  let escaped = false;
+  let start = openIndex + 1;
+
+  for (let i = openIndex + 1; i <= closeIndex; i += 1) {
+    const char = text[i];
+
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        inString = false;
+      }
+      continue;
+    }
+
+    if (char === '"' || char === "'" || char === "`") {
+      inString = true;
+      quote = char;
+      continue;
+    }
+
+    if (char === "{" || char === "[" || char === "(") depth += 1;
+    if (char === "}" || char === "]" || char === ")") depth -= 1;
+
+    if ((char === "," && depth === 0) || i === closeIndex) {
+      let itemStart = start;
+      let itemEnd = i === closeIndex ? i : i;
+      while (itemStart < itemEnd && /\s/.test(text[itemStart])) itemStart += 1;
+      while (itemEnd > itemStart && /\s/.test(text[itemEnd - 1])) itemEnd -= 1;
+      if (itemStart < itemEnd) ranges.push({ start: itemStart, end: itemEnd });
+      start = i + 1;
+    }
+  }
+
+  return ranges;
+}
+
+function findProductItemRange(text, data, collectionSlug, productId) {
+  const collection = data.productCollections.find((item) => item.slug === collectionSlug);
+  if (!collection) throw new Error(`Could not find product collection ${collectionSlug}`);
+  const productIndex = collection.items.findIndex((item) => String(item.id) === String(productId));
+  if (productIndex === -1) throw new Error(`Could not find product ${productId}`);
+  const { openIndex, closeIndex } = findCollectionItemsRange(text, collectionSlug);
+  const ranges = splitTopLevelItems(text, openIndex, closeIndex);
+  const range = ranges[productIndex];
+  if (!range) throw new Error(`Could not locate product ${productId} in data file`);
+  return range;
+}
+
+function replaceProductInText(text, data, collectionSlug, productId, entry) {
+  const range = findProductItemRange(text, data, collectionSlug, productId);
+  return `${text.slice(0, range.start)}${entry}${text.slice(range.end)}`;
+}
+
+function deleteProductFromText(text, data, collectionSlug, productId) {
+  const range = findProductItemRange(text, data, collectionSlug, productId);
+  let start = range.start;
+  let end = range.end;
+  while (end < text.length && /\s/.test(text[end])) end += 1;
+  if (text[end] === ",") {
+    end += 1;
+  } else {
+    while (start > 0 && /\s/.test(text[start - 1])) start -= 1;
+    if (text[start - 1] === ",") start -= 1;
+  }
+  return `${text.slice(0, start)}${text.slice(end)}`;
+}
+
 function findCollectionObjectRange(text, slug) {
   const slugIndex = text.indexOf(`slug: ${jsString(slug)}`);
   if (slugIndex === -1) throw new Error(`Could not find product collection ${slug}`);
@@ -230,10 +320,10 @@ function updateCollectionInText(text, slug, fields) {
   return `${text.slice(0, range.start)}${objectText}${text.slice(range.end)}`;
 }
 
-function productEntry(fields, imagePath) {
+function productEntry(fields, imagePath, productId = slugify(fields.name)) {
   const name = fields.name;
   return `      {
-        id: ${jsString(slugify(name))},
+        id: ${jsString(productId)},
         name: ${jsString(name)},
         shortDesc: ${jsString(fields.shortDesc)},
         img: ${jsString(imagePath)},
@@ -256,7 +346,16 @@ app.get("/api/state", async (request, response) => {
       slug: item.slug,
       title: item.title,
       shortDesc: item.shortDesc,
-      img: item.img
+      img: item.img,
+      items: item.items.map((product) => ({
+        id: product.id,
+        name: product.name,
+        shortDesc: product.shortDesc,
+        img: product.img,
+        altText: product.altText,
+        params: product.params,
+        description: product.description
+      }))
     })),
     dailyCount: data.dailyWorks.length,
     inspirationCount: data.inspirationImages.length,
@@ -342,6 +441,65 @@ app.post(
 );
 
 app.post(
+  "/api/product-item",
+  upload.fields([{ name: "productImage", maxCount: 1 }]),
+  async (request, response) => {
+    try {
+      const fields = request.body;
+      requireText(fields, ["collectionSlug", "productId", "name", "shortDesc"]);
+      const data = await getDataModule();
+      const collection = data.productCollections.find((item) => item.slug === fields.collectionSlug);
+      if (!collection) throw new Error(`Could not find product collection ${fields.collectionSlug}`);
+      const existingProduct = collection.items.find((item) => String(item.id) === String(fields.productId));
+      if (!existingProduct) throw new Error(`Could not find product ${fields.productId}`);
+
+      const imageDir = path.join(publicImagesDir, "products", fields.collectionSlug);
+      const productImageOptions = { width: 1200, height: 900 };
+      const nextImage = await saveWebp(request.files.productImage?.[0], imageDir, fields.name, {
+        ...productImageOptions,
+        crop: { x: fields.productImageCropX, y: fields.productImageCropY, zoom: fields.productImageCropZoom }
+      });
+      const entry = productEntry(
+        {
+          ...fields,
+          description: fields.description || existingProduct.description || "",
+          altText: fields.altText || existingProduct.altText || "",
+          style: fields.style || existingProduct.params?.style || "",
+          material: fields.material || existingProduct.params?.material || "",
+          configuration: fields.configuration || existingProduct.params?.configuration || "",
+          smartLock: fields.smartLock || existingProduct.params?.smartLock || "",
+          size: fields.size || existingProduct.params?.size || ""
+        },
+        nextImage || existingProduct.img,
+        fields.productId
+      );
+      const text = await readDataFile();
+      const nextText = replaceProductInText(text, data, fields.collectionSlug, fields.productId, entry);
+
+      await writeDataFile(nextText);
+      response.json({ ok: true, message: "Product updated." });
+    } catch (error) {
+      response.status(500).json({ ok: false, error: error.message });
+    }
+  }
+);
+
+app.post("/api/product-item/delete", async (request, response) => {
+  try {
+    const fields = request.body;
+    requireText(fields, ["collectionSlug", "productId"]);
+    const data = await getDataModule();
+    const text = await readDataFile();
+    const nextText = deleteProductFromText(text, data, fields.collectionSlug, fields.productId);
+
+    await writeDataFile(nextText);
+    response.json({ ok: true, message: "Product deleted." });
+  } catch (error) {
+    response.status(500).json({ ok: false, error: error.message });
+  }
+});
+
+app.post(
   "/api/product",
   upload.fields([
     { name: "productImage", maxCount: 1 },
@@ -402,10 +560,21 @@ app.post("/api/inspiration", upload.array("images", 24), async (request, respons
 
     for (const [index, file] of (request.files || []).entries()) {
       const title = fields.title || `Entry Study ${String(start + index).padStart(2, "0")}`;
-      const src = await saveWebp(file, path.join(publicImagesDir, "inspiration"), `${title}-${index + 1}`);
+      const base = `${title}-${index + 1}`;
+      const src = await saveWebp(file, path.join(publicImagesDir, "inspiration"), base, { width: 1800 });
+      const thumb = await saveWebp(file, path.join(publicImagesDir, "inspiration"), `${base}-thumb`, {
+        width: 1000,
+        height: 1000,
+        crop: {
+          x: fieldAt(fields.imagesCropX, index, 50),
+          y: fieldAt(fields.imagesCropY, index, 50),
+          zoom: fieldAt(fields.imagesCropZoom, index, 1)
+        }
+      });
       entries.push(`  {
     id: ${jsString(`inspiration-${Date.now().toString(36)}-${index + 1}`)},
     src: ${jsString(src)},
+    thumb: ${jsString(thumb || src)},
     title: ${jsString(index === 0 ? title : `${title} ${index + 1}`)},
     doorType: ${jsString(fields.doorType || "Entrance Door")},
     project: ${jsString(fields.project || "Inspiration")},

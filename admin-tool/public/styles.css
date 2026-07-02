@@ -202,6 +202,26 @@ input[type="file"] { padding: 8px; }
 }
 .primary:disabled { cursor: wait; opacity: 0.58; }
 
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.danger {
+  min-height: 48px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fff1f2;
+  color: #991b1b;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 750;
+  padding: 0 18px;
+}
+.danger:hover { background: #fee2e2; }
+
 .toast {
   position: fixed;
   right: 24px;
@@ -227,4 +247,5 @@ input[type="file"] { padding: 8px; }
   .span-2 { grid-column: auto; }
   .image-preview-list { grid-template-columns: 1fr; }
   .crop-controls { grid-template-columns: 1fr; }
+  .button-row { grid-template-columns: 1fr; }
 }

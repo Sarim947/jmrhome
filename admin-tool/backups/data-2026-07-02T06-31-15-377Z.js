@@ -608,17 +608,6 @@ export const inspirationImages = [
     altText: "Modern Red Ultra High Door",
     layout: "normal",
     span: 6
-  },
-  {
-    id: "inspiration-mr34lz1t-1",
-    src: "/assets/images/inspiration/classic-door-1-mr34lyxp.webp",
-    title: "Classic Door ",
-    doorType: "Pair Door",
-    project: "Inspiration",
-    hoverText: "Glassed Door",
-    altText: "Classic Door with Lites",
-    layout: "square",
-    span: 4
   }];
 
 function productItem(name, img, shortDesc, description) {

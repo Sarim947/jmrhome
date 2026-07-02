@@ -597,29 +597,7 @@ export const inspirationImages = [
     layout: "wide",
     span: 7
   }
-,
-  {
-    id: "inspiration-mr34b99g-1",
-    src: "/assets/images/inspiration/ultra-high-door-1-mr34b929.webp",
-    title: "Ultra High Door",
-    doorType: "Aluminum Profile Door",
-    project: "Inspiration",
-    hoverText: "Ultra High Door",
-    altText: "Modern Red Ultra High Door",
-    layout: "normal",
-    span: 6
-  },
-  {
-    id: "inspiration-mr34lz1t-1",
-    src: "/assets/images/inspiration/classic-door-1-mr34lyxp.webp",
-    title: "Classic Door ",
-    doorType: "Pair Door",
-    project: "Inspiration",
-    hoverText: "Glassed Door",
-    altText: "Classic Door with Lites",
-    layout: "square",
-    span: 4
-  }];
+];
 
 function productItem(name, img, shortDesc, description) {
   return {
