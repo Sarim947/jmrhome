@@ -26,9 +26,6 @@ export default function InspirationPage() {
               <span>Curated Gallery</span>
               <h1>Inspiration</h1>
             </div>
-            <p>
-              A composed visual archive of entrance designs, arranged by editorial rhythm instead of random masonry.
-            </p>
           </div>
 
           <InspirationGalleryClient images={inspirationImages} />

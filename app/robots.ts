@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/"
     },
-    sitemap: "https://jmrhabitat.com/sitemap.xml"
+    sitemap: "https://www.jmrhabitat.com/sitemap.xml"
   };
 }
