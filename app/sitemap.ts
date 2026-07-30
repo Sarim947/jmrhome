@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts, productCollections } from "../lib/data";
 
-const siteUrl = "https://www.jmrhabitat.com";
+const siteUrl = "https://jmrhabitat.com";
 
 const lastModified = new Date();
 

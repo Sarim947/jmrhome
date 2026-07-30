@@ -56,7 +56,7 @@
   width: min(1440px, calc(100% - 48px));
   margin: 0 auto;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 24px;
 }
 
 .heroImage img,
@@ -154,7 +154,7 @@
 .storyImage {
   min-height: 540px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 24px;
 }
 
 .storyImage img {
@@ -222,7 +222,7 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 24px;
   display: block;
 }
 
@@ -314,7 +314,7 @@
   min-width: 0;
   margin: 0;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 24px;
   background: #eef0f2;
 }
 

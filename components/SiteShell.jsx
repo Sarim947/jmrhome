@@ -156,7 +156,7 @@ export default function SiteShell({ children }) {
             </span>
             <button onClick={() => setContactOpen(true)}>Send message</button>
           </div>
-          <p>&copy; 2025 Entrance Architecture</p>
+          <p>&copy; 2026 Entrance Architecture</p>
         </div>
       </footer>
 
