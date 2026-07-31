@@ -79,10 +79,10 @@ export default function SmartEntryDoorFuturePage() {
               <p><strong>Password - Fingerprint - Face Recognition - Finger and Palm Vein</strong></p>
               <p>Each step attempts to answer the same question: "Can we be more certain this is the right person?"</p>
 
-              <PlaceholderFigure
-                source="Image: Schlage / Allegion"
-                alt="Schlage fingerprint smart lock product image for residential entry access"
-                label="Schlage fingerprint lock image slot"
+              <ArticleFigure
+                src={`${imageBase}/aqara-fingerprint-smart-lock.webp`}
+                source="Image: Aqara"
+                alt="Aqara smart lock product image for residential fingerprint entry access"
               />
 
               <p>
@@ -95,7 +95,7 @@ export default function SmartEntryDoorFuturePage() {
               <ArticleFigure
                 src={`${imageBase}/securam-finger-vein-lock.webp`}
                 alt="SECURAM finger vein recognition smart lock showing vascular biometric authentication"
-                source="Image: SECURAM / 东屋世安"
+                source="Image: SECURAM"
               />
 
               <p>
@@ -136,17 +136,18 @@ export default function SmartEntryDoorFuturePage() {
               <ArticleFigure
                 src={`${imageBase}/matter-smart-home-ecosystem.webp`}
                 alt="Matter smart home ecosystem compatibility diagram for connected entry access"
-                source="Image: Connectivity Standards Alliance"
+                source="Image: Matter / Connectivity Standards Alliance"
               />
 
               <p>
                 Ecosystem compatibility often matters more than any single technology. In one luxury home project, the father used an iPhone, his wife an Android phone, and the children wore Apple Watches. The solution was a TTLock-based system compatible with all three, because a door that only recognizes one ecosystem ends up locking out part of the family.
               </p>
 
-              <PlaceholderFigure
+              <ArticleFigure
+                className="article-figure-narrow"
+                src="https://ttlock.app/wp-content/uploads/2024/09/image-1-473x1024.png"
                 source="Image: TTLock"
                 alt="TTLock smart lock app interface for multi-device digital key access"
-                label="TTLock digital access image slot"
               />
 
               <p>The goal: reduce the friction between people and buildings.</p>
@@ -235,9 +236,9 @@ export default function SmartEntryDoorFuturePage() {
   );
 }
 
-function ArticleFigure({ src, alt, source }) {
+function ArticleFigure({ src, alt, source, className = "" }) {
   return (
-    <figure className="article-figure">
+    <figure className={`article-figure ${className}`.trim()}>
       <img src={src} alt={alt} loading="lazy" />
       {source ? <figcaption>{source}</figcaption> : null}
     </figure>

@@ -518,6 +518,11 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
     height: auto;
 }
 
+.article-figure-narrow img {
+    width: min(100%, 420px);
+    margin: 0 auto;
+}
+
 .article-image-placeholder {
     min-height: 360px;
     border: 1px dashed #cbd5e1;
