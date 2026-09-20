@@ -1,0 +1,158 @@
+/* "Pivot Doors" category page — page-specific styles.
+   Shared section / eyebrow / heading / button styles come from ../products.module.css. */
+
+.heroTitle {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  color: #111827;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heroAux {
+  margin-top: 1.25rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+/* Three-column title + text blocks (configurations) */
+.trioGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.trioItem {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.trioItem h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.trioItem p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Designs — bare image + name + description */
+.designGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.designImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+  background: #f3f4f6;
+}
+
+.designName {
+  margin: 1rem 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.designDesc {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* FAQ */
+.faqList {
+  margin-top: 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.faqItem {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faqQuestion {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.faqAnswer {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Compressed section spacing */
+.sectionTight {
+  padding: 2rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.sectionCompact {
+  padding: 3.75rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.compactFeatureList {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.compactFeatureList li {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) 1fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.compactFeatureList strong {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.compactFeatureList span {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .trioGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .designGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .compactFeatureList li {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}

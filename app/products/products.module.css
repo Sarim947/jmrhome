@@ -1,0 +1,206 @@
+/* Products page — scoped sections below the category grid.
+   Follows the editorial / architectural language used on the About page. */
+
+.sectionBlock {
+  padding: 5rem 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.sectionBlockFirst {
+  border-top: none;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #858b93;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heading {
+  margin: 0;
+  padding: 0;
+  border-left: 0;
+  color: #111827;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.lead {
+  margin: 1.25rem 0 0;
+  max-width: 640px;
+  color: #4b5563;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+/* ===== Section 1 — Custom Entrance Doors ===== */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.splitImage {
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.splitImage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.featureList {
+  list-style: none;
+  margin: 2rem 0;
+  padding: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.featureList li {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.featureList strong {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.featureList span {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ===== Buttons ===== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.94rem;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.buttonPrimary {
+  border-color: #111827;
+  background: #111827;
+  color: #fff;
+}
+
+.buttonPrimary:hover {
+  background: #374151;
+  border-color: #374151;
+  color: #fff;
+}
+
+.buttonOutline {
+  border-color: #c9ced6;
+  background: transparent;
+  color: #111827;
+}
+
+/* ===== Section 2 — Capabilities ===== */
+.capabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.capability {
+  border-top: 1px solid #111827;
+  padding-top: 1.5rem;
+}
+
+.capabilityNumber {
+  display: block;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+.capability h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.capability p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ===== Section 3 — CTA ===== */
+.ctaActions {
+  margin-top: 2rem;
+}
+
+.helper {
+  margin: 0.9rem 0 0;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+/* Inline text link inside section copy */
+.inlineLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.inlineLink:hover {
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .sectionBlock {
+    padding: 3.5rem 0;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .splitImage img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .featureList li {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .capabilityGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

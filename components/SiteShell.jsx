@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LeadChatBot from "@/components/LeadChatBot";
 import { trackEvent } from "@/lib/analytics";
-import { productCollections } from "@/lib/data";
+import { productCategories } from "@/lib/data";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -108,16 +108,18 @@ export default function SiteShell({ children }) {
                       <Link href="/products" className={pathname === "/products" ? "active" : ""} onClick={closeNavigation}>
                         All Products
                       </Link>
-                      {productCollections.map((collection) => (
-                        <Link
-                          href={`/products/${collection.slug}`}
-                          className={pathname === `/products/${collection.slug}` ? "active" : ""}
-                          key={collection.slug}
-                          onClick={closeNavigation}
-                        >
-                          {collection.title}
-                        </Link>
-                      ))}
+                      {productCategories
+                        .filter((category) => category.href)
+                        .map((category) => (
+                          <Link
+                            href={category.href}
+                            className={pathname === category.href ? "active" : ""}
+                            key={category.slug}
+                            onClick={closeNavigation}
+                          >
+                            {category.title}
+                          </Link>
+                        ))}
                     </div>
                   </li>
                 );
