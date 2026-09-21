@@ -96,6 +96,14 @@ export default function InquiryForm() {
 
     const formElement = event.currentTarget;
     const form = new FormData(formElement);
+    const email = String(form.get("email") || "").trim();
+    const whatsapp = String(form.get("whatsapp") || "").trim();
+
+    if (!email && !whatsapp) {
+      setStatus("error");
+      setFeedback("Please provide an email address or WhatsApp number.");
+      return;
+    }
 
     setStatus("sending");
     setFeedback("");
@@ -105,8 +113,6 @@ export default function InquiryForm() {
       const fileLinks = uploadedFiles.length
         ? uploadedFiles.map((file) => `${file.name}: ${file.url}`).join("\n")
         : "Not uploaded";
-      const email = form.get("email") || "";
-      const whatsapp = form.get("whatsapp") || "";
       const contact = whatsapp || email;
       const message = [
         `Name: ${form.get("name") || "Not provided"}`,
@@ -246,12 +252,12 @@ export default function InquiryForm() {
 
       <div className="inquiry-form-row">
         <div className="form-group">
-          <label>WhatsApp <span>*</span></label>
-          <input name="whatsapp" type="text" placeholder="e.g. +86 / +1 / +971 ..." required />
+          <label>WhatsApp</label>
+          <input name="whatsapp" type="text" placeholder="e.g. +86 / +1 / +971 ..." />
         </div>
         <div className="form-group">
-          <label>Email <span>*</span></label>
-          <input name="email" type="email" placeholder="name@company.com" required />
+          <label>Email</label>
+          <input name="email" type="email" placeholder="name@company.com" />
         </div>
         <div className="form-group">
           <label>Upload Drawing or Reference Image</label>

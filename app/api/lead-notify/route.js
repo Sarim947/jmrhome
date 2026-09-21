@@ -10,12 +10,6 @@ export async function POST(request) {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-    console.log("lead-notify env check", {
-      SUPABASE_URL: Boolean(process.env.SUPABASE_URL),
-      SUPABASE_ANON_KEY: Boolean(process.env.SUPABASE_ANON_KEY),
-      RESEND_API_KEY: Boolean(process.env.RESEND_API_KEY)
-    });
-
     if (!supabaseUrl || !supabaseAnonKey) {
       return Response.json(
         {
@@ -42,6 +36,18 @@ export async function POST(request) {
     const source = allowedSources.includes(lead.source) ? lead.source : "website_inquiry_form";
 
     const email = lead.email ? String(lead.email).trim() : "";
+    const whatsapp = lead.whatsapp ? String(lead.whatsapp).trim() : "";
+
+    if (!isEmail(email) && !whatsapp) {
+      return Response.json(
+        {
+          success: false,
+          error: "Please provide a valid email address or WhatsApp number."
+        },
+        { status: 400 }
+      );
+    }
+
     const fileUrls = Array.isArray(lead.files)
       ? lead.files.map((file) => file.url).filter(Boolean)
       : [];
@@ -52,7 +58,7 @@ export async function POST(request) {
       country: lead.country || null,
       project_type: lead.project_type || null,
       email: isEmail(email) ? email : null,
-      whatsapp: lead.whatsapp || null,
+      whatsapp: whatsapp || null,
       message: lead.message || null,
       file_urls: fileUrls,
       source,
@@ -87,6 +93,12 @@ export async function POST(request) {
         `
         : "<p>No files uploaded</p>";
 
+    const sourceLabels = {
+      website_contact_form: "Website Contact Form",
+      website_inquiry_form: "Website Inquiry Form",
+      website_chatbot: "Website Chatbot"
+    };
+
     const result = await resend.emails.send({
       from: "JMRHOME Lead <onboarding@resend.dev>",
       to: "740351598liu@gmail.com",
@@ -113,7 +125,7 @@ export async function POST(request) {
 
         <hr />
 
-        <p><strong>Source:</strong> Website Inquiry Form</p>
+        <p><strong>Source:</strong> ${sourceLabels[source]}</p>
         <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
       `
     });

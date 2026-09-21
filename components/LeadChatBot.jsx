@@ -24,12 +24,14 @@ const PROJECT_TYPES = [
 
 export default function LeadChatBot() {
   const fileInputRef = useRef(null);
+  const submittingLeadRef = useRef(false);
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [thinking, setThinking] = useState(false);
+  const [submittingLead, setSubmittingLead] = useState(false);
   const [confirmingSubmit, setConfirmingSubmit] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -184,6 +186,8 @@ export default function LeadChatBot() {
   }
 
   async function submitLead() {
+    if (submittingLeadRef.current) return;
+
     if (!confirmingSubmit) {
       setConfirmingSubmit(true);
       addMessage("bot", "Please click Confirm Submit when you are ready for our sales team to contact you.");
@@ -193,30 +197,48 @@ export default function LeadChatBot() {
     const transcript = getTranscript();
     const contact = getContactFromTranscript(transcript);
 
-    await fetch("/api/lead-notify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: contact.email || "",
-        whatsapp: contact.phone || "",
-        contact: contact.email || contact.phone || "",
-        country: "",
-        project_type: "AI chatbot inquiry",
-        message: transcript || "",
-        files,
-        source: "website_chatbot"
-      })
-    });
+    submittingLeadRef.current = true;
+    setSubmittingLead(true);
 
-    setDone(true);
-    setConfirmingSubmit(false);
-    trackEvent("generate_lead", {
-      event_category: "inquiry",
-      event_label: "chatbot_inquiry"
-    });
-    addMessage("bot", "Thank you! Our sales manager will review your project and contact you soon.");
+    try {
+      const response = await fetch("/api/lead-notify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: contact.email || "",
+          whatsapp: contact.phone || "",
+          contact: contact.email || contact.phone || "",
+          country: "",
+          project_type: "AI chatbot inquiry",
+          message: transcript || "",
+          files,
+          source: "website_chatbot"
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        addMessage("bot", result.error || "We could not send your inquiry. Please try again or contact us by WhatsApp.");
+        return;
+      }
+
+      setDone(true);
+      setConfirmingSubmit(false);
+      trackEvent("generate_lead", {
+        event_category: "inquiry",
+        event_label: "chatbot_inquiry"
+      });
+      addMessage("bot", "Thank you! Our sales manager will review your project and contact you soon.");
+    } catch (error) {
+      console.error(error);
+      addMessage("bot", "We could not send your inquiry. Please try again or contact us by WhatsApp.");
+    } finally {
+      submittingLeadRef.current = false;
+      setSubmittingLead(false);
+    }
   }
 
   return (
@@ -417,17 +439,17 @@ export default function LeadChatBot() {
               <button
                 type="button"
                 onClick={submitLead}
-                disabled={thinking || messages.length === 1}
+                disabled={thinking || submittingLead || messages.length === 1}
                 style={{
                   border: "1px solid #111827",
                   borderRadius: "999px",
                   padding: "10px 12px",
                   background: "white",
                   color: "#111827",
-                  cursor: thinking || messages.length === 1 ? "not-allowed" : "pointer"
+                  cursor: thinking || submittingLead || messages.length === 1 ? "not-allowed" : "pointer"
                 }}
               >
-                {confirmingSubmit ? "Confirm" : "Submit"}
+                {submittingLead ? "Sending..." : confirmingSubmit ? "Confirm" : "Submit"}
               </button>
             </form>
           )}
