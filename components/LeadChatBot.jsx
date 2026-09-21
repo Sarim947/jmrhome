@@ -190,29 +190,8 @@ export default function LeadChatBot() {
       return;
     }
 
-    const supabase = getSupabase();
     const transcript = getTranscript();
     const contact = getContactFromTranscript(transcript);
-    const fileUrls = files.map((file) => file.url);
-
-    if (supabase) {
-      const { error } = await supabase.from("leads").insert({
-        country: null,
-        project_type: "AI chatbot inquiry",
-        email: contact.email || null,
-        whatsapp: contact.email ? contact.phone || null : contact.phone || null,
-        message: transcript || null,
-        file_urls: fileUrls,
-        source: "website_chatbot",
-        lead_score: "unrated"
-      });
-
-      if (error) {
-        console.error(error);
-        addMessage("bot", "Sorry, something went wrong. Please contact us by WhatsApp or email.");
-        return;
-      }
-    }
 
     await fetch("/api/lead-notify", {
       method: "POST",
@@ -220,11 +199,14 @@ export default function LeadChatBot() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        email: contact.email || "",
+        whatsapp: contact.phone || "",
+        contact: contact.email || contact.phone || "",
         country: "",
         project_type: "AI chatbot inquiry",
-        contact: contact.email || contact.phone || "",
         message: transcript || "",
-        files
+        files,
+        source: "website_chatbot"
       })
     });
 

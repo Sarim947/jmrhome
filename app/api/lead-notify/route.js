@@ -1,13 +1,71 @@
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
+
+function isEmail(value) {
+  return /\S+@\S+\.\S+/.test(value);
+}
 
 export async function POST(request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      throw new Error("Missing RESEND_API_KEY");
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return Response.json(
+        {
+          success: false,
+          error: "Inquiry system is not configured. Please contact us by WhatsApp or email."
+        },
+        { status: 500 }
+      );
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    if (!process.env.RESEND_API_KEY) {
+      return Response.json(
+        {
+          success: false,
+          error: "Inquiry system is not configured. Please contact us by WhatsApp or email."
+        },
+        { status: 500 }
+      );
+    }
+
     const lead = await request.json();
+
+    const allowedSources = ["website_inquiry_form", "website_chatbot"];
+    const source = allowedSources.includes(lead.source) ? lead.source : "website_inquiry_form";
+
+    const email = lead.email ? String(lead.email).trim() : "";
+    const fileUrls = Array.isArray(lead.files)
+      ? lead.files.map((file) => file.url).filter(Boolean)
+      : [];
+
+    // 1) Persist the lead to Supabase before sending any email.
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const { error: insertError } = await supabase.from("leads").insert({
+      country: lead.country || null,
+      project_type: lead.project_type || null,
+      email: isEmail(email) ? email : null,
+      whatsapp: lead.whatsapp || null,
+      message: lead.message || null,
+      file_urls: fileUrls,
+      source,
+      lead_score: "unrated"
+    });
+
+    if (insertError) {
+      console.error("Supabase insert error:", insertError);
+      return Response.json(
+        {
+          success: false,
+          error: "Failed to save inquiry. Please try again or contact us by WhatsApp."
+        },
+        { status: 500 }
+      );
+    }
+
+    // 2) Send the notification email.
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const fileList =
       lead.files && lead.files.length
@@ -49,10 +107,20 @@ export async function POST(request) {
 
         <hr />
 
-        <p><strong>Source:</strong> Website Chatbot</p>
+        <p><strong>Source:</strong> Website Inquiry Form</p>
         <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
       `
     });
+
+    if (result.error) {
+      return Response.json(
+        {
+          success: false,
+          error: result.error.message || "Failed to send email."
+        },
+        { status: 500 }
+      );
+    }
 
     return Response.json({
       success: true,

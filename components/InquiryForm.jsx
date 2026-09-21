@@ -106,37 +106,20 @@ if (!form.email && !form.whatsapp) {
 
 setLoading(true);
 
-const fileUrls = files.map((file) => file.url);
-
-const { error } = await supabase.from("leads").insert({
-  country: form.country || null,
-  project_type: form.project_type || null,
-  email: form.email || null,
-  whatsapp: form.whatsapp || null,
-  message: form.message || null,
-  file_urls: fileUrls,
-  source: "website_inquiry_form",
-  lead_score: "unrated"
-});
-
-if (error) {
-  console.error(error);
-  alert("Submission failed.");
-  setLoading(false);
-  return;
-}
-
 await fetch("/api/lead-notify", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
+    email: form.email,
+    whatsapp: form.whatsapp,
+    contact: form.email || form.whatsapp,
     country: form.country,
     project_type: form.project_type,
-    contact: form.email || form.whatsapp,
     message: form.message,
-    files
+    files,
+    source: "website_inquiry_form"
   })
 });
 

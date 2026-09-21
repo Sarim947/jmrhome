@@ -32,10 +32,6 @@ function getCheckedValues(form, name) {
   return form.getAll(name).join(", ") || "Not provided";
 }
 
-function isEmail(value) {
-  return /\S+@\S+\.\S+/.test(value);
-}
-
 function getSafeFileName(fileName) {
   return fileName
     .normalize("NFD")
@@ -128,37 +124,20 @@ export default function InquiryForm() {
         form.get("message")
       ].join("\n");
 
-      const supabase = getSupabase();
-
-      if (supabase) {
-        const { error } = await supabase.from("leads").insert({
-          country: form.get("country") || null,
-          project_type: getCheckedValues(form, "doorType"),
-          email: isEmail(email) ? email : null,
-          whatsapp: whatsapp || null,
-          message,
-          file_urls: uploadedFiles.map((file) => file.url),
-          source: "website_inquiry_form",
-          lead_score: "unrated"
-        });
-
-        if (error) {
-          console.error(error);
-          throw new Error("Failed to save inquiry. Please try again or contact us by WhatsApp.");
-        }
-      }
-
       const response = await fetch("/api/lead-notify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          email,
+          whatsapp,
+          contact,
           country: form.get("country") || "",
           project_type: getCheckedValues(form, "doorType"),
-          contact,
           message,
-          files: uploadedFiles
+          files: uploadedFiles,
+          source: "website_inquiry_form"
         })
       });
 
