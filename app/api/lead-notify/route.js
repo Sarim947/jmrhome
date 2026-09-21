@@ -101,7 +101,7 @@ export async function POST(request) {
 
     const result = await resend.emails.send({
       from: "JMRHOME Lead <onboarding@resend.dev>",
-      to: "740351598liu@gmail.com",
+      to: "luuhuan018@gmail.com",
 
       subject: `New Project Inquiry - ${lead.project_type || "Website Lead"}`,
 
