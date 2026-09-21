@@ -7,8 +7,8 @@ function isEmail(value) {
 
 export async function POST(request) {
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
     if (!supabaseUrl || !supabaseAnonKey) {
       return Response.json(
@@ -32,7 +32,7 @@ export async function POST(request) {
 
     const lead = await request.json();
 
-    const allowedSources = ["website_inquiry_form", "website_chatbot"];
+    const allowedSources = ["website_inquiry_form", "website_chatbot", "website_contact_form"];
     const source = allowedSources.includes(lead.source) ? lead.source : "website_inquiry_form";
 
     const email = lead.email ? String(lead.email).trim() : "";

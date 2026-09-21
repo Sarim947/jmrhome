@@ -205,15 +205,19 @@ function ContactModal({ open, onClose }) {
     setSending(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const name = form.get("name") || "";
+      const rawMessage = form.get("message") || "";
+      const message = name ? `Name: ${name}\n\n${rawMessage}` : rawMessage;
+
+      const response = await fetch("/api/lead-notify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          name: form.get("name"),
-          email: form.get("email"),
-          message: form.get("message")
+          email: form.get("email") || "",
+          message,
+          source: "website_contact_form"
         })
       });
 
