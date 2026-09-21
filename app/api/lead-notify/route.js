@@ -10,6 +10,12 @@ export async function POST(request) {
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
+    console.log("lead-notify env check", {
+      SUPABASE_URL: Boolean(process.env.SUPABASE_URL),
+      SUPABASE_ANON_KEY: Boolean(process.env.SUPABASE_ANON_KEY),
+      RESEND_API_KEY: Boolean(process.env.RESEND_API_KEY)
+    });
+
     if (!supabaseUrl || !supabaseAnonKey) {
       return Response.json(
         {
