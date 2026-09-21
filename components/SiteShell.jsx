@@ -205,9 +205,16 @@ function ContactModal({ open, onClose }) {
     setSending(true);
 
     try {
-      const name = form.get("name") || "";
+      const name = String(form.get("name") || "").trim();
+      const email = String(form.get("email") || "").trim();
       const rawMessage = form.get("message") || "";
-      const message = name ? `Name: ${name}\n\n${rawMessage}` : rawMessage;
+      const message = [
+        name ? `Name: ${name}` : "",
+        email ? `Email: ${email}` : "",
+        rawMessage
+      ]
+        .filter(Boolean)
+        .join("\n\n");
 
       const response = await fetch("/api/lead-notify", {
         method: "POST",
@@ -215,7 +222,8 @@ function ContactModal({ open, onClose }) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          email: form.get("email") || "",
+          email,
+          contact: email,
           message,
           source: "website_contact_form"
         })
