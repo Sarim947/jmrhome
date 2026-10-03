@@ -22,6 +22,18 @@ const latestDailyWorks = [...dailyWorks]
   .sort((current, next) => getDailyWorkTime(next) - getDailyWorkTime(current))
   .slice(0, 4);
 
+function getBlogPostTime(post) {
+  const [year, month, day] = String(post.date)
+    .split("-")
+    .map((part) => Number.parseInt(part, 10));
+
+  return new Date(year || 0, (month || 1) - 1, day || 1).getTime();
+}
+
+const latestBlogPosts = [...blogPosts]
+  .sort((current, next) => getBlogPostTime(next) - getBlogPostTime(current))
+  .slice(0, 3);
+
 export default function HomePageClient() {
   const [modal, setModal] = useState(null);
 
@@ -68,7 +80,7 @@ export default function HomePageClient() {
           <div className="container" style={{ marginTop: "3rem" }}>
             <h2>From Our Blog</h2>
             <div className="grid">
-              {blogPosts.map((post) => (
+              {latestBlogPosts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
