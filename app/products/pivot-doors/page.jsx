@@ -5,62 +5,75 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Pivot Doors | Custom & Oversized Pivot Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Pivot Doors | Custom & Oversized Pivot Doors | JMR HABITAT" },
+  title: "Custom Pivot Doors | Oversized Aluminum Pivot Doors | JMR HABITAT",
+  metadataTitle: { absolute: "Custom Pivot Doors | Oversized Aluminum Pivot Doors | JMR HABITAT" },
   description:
-    "Custom pivot doors built to project dimensions. Explore modern and oversized pivot entrance doors with aluminum systems, glass options and custom finishes.",
+    "Custom aluminum pivot doors from 48 × 80 in to 96 × 138 in. Compare Olang PL-01 and optional FritsJurgens hardware, glass and panel options.",
   path: "/products/pivot-doors"
 });
 
 const configurations = [
-  { title: "Modern Pivot Doors", text: "Clean architectural pivot doors built around project dimensions and contemporary finishes." },
-  { title: "Oversized Pivot Doors", text: "Large-format pivot entrance doors designed around wider and taller architectural openings." },
-  { title: "Aluminum Pivot Doors", text: "Pivot entrance doors built with aluminum systems and custom finishes.", href: "/products/aluminum-entry-doors" }
+  { title: "Modern Pivot Entry Doors", text: "Custom aluminum pivot entry doors for contemporary homes, villas and architectural entrances." },
+  { title: "Oversized Pivot Doors", text: "Large-format pivot doors available up to 96 × 138 in (approximately 2440 × 3505 mm), subject to project review." },
+  { title: "Aluminum Pivot Doors", text: "Non-thermally broken aluminum door and frame systems with custom panel and finish options.", href: "/products/aluminum-entry-doors" }
 ];
 
-const customizations = [
-  { label: "Size", text: "Custom-built to your opening dimensions." },
-  { label: "Pivot Position", text: "Centered or offset pivot configurations." },
-  { label: "Material", text: "Aluminum systems." },
-  { label: "Finish", text: "Wood-look, powder-coated and custom colors." },
-  { label: "Configuration", text: "Single pivot, oversized or project-specific entrance layouts." }
+const specifications = [
+  { label: "Minimum Size", text: "48 × 80 in (approximately 1220 × 2030 mm)." },
+  { label: "Typical Size", text: "72 × 96 in (approximately 1830 × 2440 mm)." },
+  { label: "Maximum Size", text: "96 × 138 in / 8 ft × 11 ft 6 in (approximately 2440 × 3505 mm), subject to engineering review." },
+  { label: "Door Leaf", text: "3-3/4 in (95 mm) thick aluminum door leaf; non-thermally broken construction." },
+  { label: "Aluminum Frame", text: "3-3/4 in (95 mm) deep aluminum profile with 0.080 in (2.0 mm) wall thickness; non-thermally broken construction." },
+  { label: "Door Weight", text: "Approximately 660–1,100 lb (300–500 kg), depending on door dimensions, construction and selected pivot hardware." },
+  { label: "Pivot Hardware", text: "Olang PL-01 offset pivot system; optional FritsJurgens System M+ selected according to door size and weight." },
+  { label: "Panel Materials", text: "Aluminum panel or sintered stone panel; a concealed ballistic steel plate can be incorporated when specified." },
+  { label: "Glass Options", text: "Tempered, Low-E, frosted, ice-patterned, laminated or insulated glass. Thickness and configuration are engineered for the project." },
+  { label: "Pivot Adjustment", text: "The pivot axis can be positioned for the design. The detachable mechanism permits fine vertical and horizontal adjustment after installation." }
 ];
 
 const designs = [
   {
     name: "Pivot Prime #5893",
     img: "/assets/images/products/Pivot Prime door.jpg",
-    alt: "Custom aluminum pivot door",
-    desc: "Offset pivot door with clean horizontal lines for high-end residential entries."
+    alt: "Custom oversized aluminum pivot entry door",
+    desc: "Offset aluminum pivot door with clean horizontal lines for high-end residential entrances."
   },
   {
     name: "J-5496",
     img: "/assets/images/products/fusion-5843/j-5496-mqqec8xv.webp",
-    alt: "Modern pivot door with faux-oxidized metal finish",
+    alt: "Modern custom pivot door with faux-oxidized metal finish",
     desc: "Modern pivot entry door with a faux-oxidized metal finish."
   }
 ];
 
 const faqs = [
   {
-    question: "Can pivot doors be custom sized?",
-    answer: "Yes. Each pivot door is built to your opening dimensions."
+    question: "What sizes are available for custom pivot doors?",
+    answer: "Our custom pivot doors start at approximately 48 × 80 in, with 72 × 96 in as a typical project size. Oversized doors can reach approximately 96 × 138 in, subject to engineering review. Metric equivalents are provided in the specification table."
   },
   {
-    question: "Can pivot doors be made for oversized openings?",
-    answer: "Yes. Pivot doors can be configured for larger and taller architectural openings."
+    question: "How much weight can the pivot hardware support?",
+    answer: "The door system can be configured for door leaves of approximately 660–1,100 lb (300–500 kg). The final capacity depends on the door width, height, construction and selected pivot hardware."
   },
   {
-    question: "What materials are available for pivot doors?",
-    answer: "Pivot doors are available with aluminum systems and custom finishes."
+    question: "Which pivot hardware systems are available?",
+    answer: "Olang PL-01 offset pivot hardware is available as the standard option. FritsJurgens System M+ can be specified as an upgrade and is selected according to the finished door dimensions and weight."
   },
   {
-    question: "Can pivot doors include glass?",
-    answer: "Glass can be integrated into a pivot door depending on the project design and requirements."
+    question: "Can the pivot position be adjusted?",
+    answer: "Yes. The pivot axis position can be configured for the door design. After installation, the detachable pivot mechanism allows fine vertical and horizontal adjustment to align the door for smooth opening and closing."
   },
   {
-    question: "Can the pivot position be customized?",
-    answer: "Yes. The pivot can be positioned in the center or offset depending on the door proportions and design."
+    question: "What panel materials are available for pivot doors?",
+    answer: "Available door-panel materials include aluminum and sintered stone. A concealed ballistic steel plate can also be incorporated when required; the protection specification must be confirmed for each project."
+  },
+  {
+    question: "What glass options are available for pivot doors?",
+    answer: "Tempered, Low-E, frosted, ice-patterned, laminated and insulated glass options are available. Glass thickness and configuration are engineered according to the door size and project requirements."
+  },
+  {
+    question: "Are these pivot doors thermally broken?",
+    answer: "No. The current aluminum door leaf and frame system uses non-thermally broken profiles."
   }
 ];
 
@@ -68,17 +81,16 @@ export default function PivotDoorsPage() {
   return (
     <SiteShell>
       <main>
-        {/* SECTION 1 — Hero */}
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Pivot Doors</h1>
+                <h1 className={styles.heroTitle}>Custom Aluminum Pivot Doors</h1>
                 <p className={shared.lead}>
-                  Custom pivot doors built to project dimensions, from modern residential entrances to oversized
-                  architectural openings.
+                  Custom pivot entry doors engineered for residential and architectural openings, from 48 × 80 in to
+                  oversized 96 × 138 in configurations.
                 </p>
-                <p className={styles.heroAux}>Custom sizes · Aluminum systems · Oversized options · Custom finishes</p>
+                <p className={styles.heroAux}>Custom sizes · Aluminum systems · Olang or FritsJurgens hardware · Custom glass</p>
                 <div className={shared.ctaActions}>
                   <Link href="/inquiry" className={`${shared.button} ${shared.buttonPrimary}`}>
                     Send Your Dimensions
@@ -86,20 +98,16 @@ export default function PivotDoorsPage() {
                 </div>
               </div>
               <div className={shared.splitImage}>
-                <img
-                  src="/assets/images/products/Pivot Prime door.jpg"
-                  alt="Modern pivot door"
-                />
+                <img src="/assets/images/products/Pivot Prime door.jpg" alt="Oversized custom aluminum pivot entry door" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION 2 — Configurations */}
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
-            <h2 className={shared.heading}>Pivot Door Configurations</h2>
+            <h2 className={shared.heading}>Pivot Entry Door Configurations</h2>
             <div className={styles.trioGrid}>
               {configurations.map((item) => (
                 <div className={styles.trioItem} key={item.title}>
@@ -111,17 +119,16 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
-        {/* SECTION 3 — Customization */}
         <section className={styles.sectionCompact}>
           <div className="container">
-            <span className={shared.eyebrow}>Built to Your Project</span>
-            <h2 className={shared.heading}>Custom Pivot Doors</h2>
+            <span className={shared.eyebrow}>Technical Specifications</span>
+            <h2 className={shared.heading}>Custom Pivot Door Sizes and Specifications</h2>
             <p className={shared.lead} style={{ marginTop: "0.75rem" }}>
-              Send us your opening dimensions, drawings or reference images. We manufacture pivot entrance doors around
-              the dimensions, proportions and design requirements of your project.
+              The final door construction and hardware selection are reviewed against the opening dimensions, finished
+              door weight, panel material and glass configuration.
             </p>
             <ul className={styles.compactFeatureList}>
-              {customizations.map((item) => (
+              {specifications.map((item) => (
                 <li key={item.label}>
                   <strong>{item.label}</strong>
                   <span>{item.text}</span>
@@ -131,11 +138,10 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
-        {/* SECTION 4 — Designs */}
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Designs</span>
-            <h2 className={shared.heading}>Pivot Door Designs</h2>
+            <h2 className={shared.heading}>Modern Pivot Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
                 <div key={item.name}>
@@ -148,10 +154,9 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
-        {/* SECTION 5 — FAQ */}
         <section className={shared.sectionBlock}>
           <div className="container">
-            <h2 className={shared.heading}>Pivot Doors FAQ</h2>
+            <h2 className={shared.heading}>Custom Pivot Doors FAQ</h2>
             <div className={styles.faqList}>
               {faqs.map((item) => (
                 <div className={styles.faqItem} key={item.question}>
@@ -163,14 +168,13 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
-        {/* SECTION 6 — CTA */}
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Start Your Project</span>
-            <h2 className={shared.heading}>Have a Pivot Door Project?</h2>
+            <h2 className={shared.heading}>Planning a Custom Pivot Door Project?</h2>
             <p className={shared.lead}>
-              Send us your dimensions, drawing or reference image. We&apos;ll review the opening and recommend a suitable
-              pivot door configuration.
+              Send us the opening dimensions, drawings, panel preference and estimated quantity. We&apos;ll review the
+              project and recommend a suitable pivot door construction and hardware system.
             </p>
             <div className={shared.ctaActions}>
               <Link href="/inquiry" className={`${shared.button} ${shared.buttonPrimary}`}>
