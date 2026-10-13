@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 
@@ -40,12 +41,9 @@ const designs = [
     alt: "Modern aluminum entry door",
     desc: "Modern aluminum entry door with a satin metallic finish."
   },
-  {
-    name: "Fusion #5843",
-    img: "/assets/images/products/Luminous Fusion door.jpg",
-    alt: "Aluminum front door with glass",
-    desc: "Thermal break aluminum entry door with integrated glass."
-  },
+  ...doorDesigns
+    .filter((design) => design.collections.includes("aluminum-entry-doors"))
+    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug })),
   {
     name: "JT-02",
     img: "/assets/images/products/essentials/jt-02-mqqerx58.webp",
@@ -151,11 +149,19 @@ export default function AluminumEntryDoorsPage() {
             <h2 className={shared.heading}>Aluminum Entry Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
-                  <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                  <h3 className={styles.designName}>{item.name}</h3>
-                  <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                item.slug ? (
+                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </Link>
+                ) : (
+                  <div key={item.name}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </div>
+                )
               ))}
             </div>
           </div>

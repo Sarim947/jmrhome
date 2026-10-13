@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 
@@ -34,12 +35,9 @@ const designs = [
     alt: "Modern front door with sidelight",
     desc: "Modern entry door with sidelight and wood grain finish."
   },
-  {
-    name: "Fusion #5843",
-    img: "/assets/images/products/Luminous Fusion door.jpg",
-    alt: "Aluminum entry door with glass sidelight",
-    desc: "Thermal break aluminum system with glass and sidelite."
-  }
+  ...doorDesigns
+    .filter((design) => design.collections.includes("front-doors-with-sidelights"))
+    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }))
 ];
 
 const faqs = [
@@ -134,11 +132,19 @@ export default function SidelightDoorsPage() {
             <h2 className={shared.heading}>Sidelight Entrance Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
-                  <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                  <h3 className={styles.designName}>{item.name}</h3>
-                  <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                item.slug ? (
+                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </Link>
+                ) : (
+                  <div key={item.name}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </div>
+                )
               ))}
             </div>
           </div>

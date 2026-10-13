@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 
@@ -40,24 +41,9 @@ const designs = [
     alt: "Modern front door with mixed steel and aluminum finish",
     desc: "Multi-material modern entrance door with carved aluminum and steel."
   },
-  {
-    name: "Fusion #5843",
-    img: "/assets/images/products/Luminous Fusion door.jpg",
-    alt: "Modern front door with glass",
-    desc: "Thermal break aluminum entrance door with integrated glass."
-  },
-  {
-    name: "J-0226",
-    img: "/assets/images/products/fusion-5843/j-0226-mqqdplxd.webp",
-    alt: "Modern entry door with vertical glass cutout",
-    desc: "Modern entrance door with a vertical glass cutout."
-  },
-  {
-    name: "J-0555",
-    img: "/assets/images/products/fusion-5843/j-0555-mqqcu0ru.webp",
-    alt: "Modern front door with matte anthracite finish",
-    desc: "Minimalist modern entrance door with matte anthracite finish."
-  }
+  ...doorDesigns
+    .filter((design) => design.collections.includes("modern-front-doors"))
+    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }))
 ];
 
 const faqs = [
@@ -157,11 +143,19 @@ export default function ModernFrontDoorsPage() {
             <h2 className={shared.heading}>Modern Entrance Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
-                  <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                  <h3 className={styles.designName}>{item.name}</h3>
-                  <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                item.slug ? (
+                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </Link>
+                ) : (
+                  <div key={item.name}>
+                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <h3 className={styles.designName}>{item.name}</h3>
+                    <p className={styles.designDesc}>{item.desc}</p>
+                  </div>
+                )
               ))}
             </div>
           </div>

@@ -55,7 +55,12 @@ export default function HomePageClient() {
             <h2>Featured Collections</h2>
             <div className="grid">
               {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} onClick={() => setModal({ type: "product", item: product })} />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  href={product.slug ? `/door-designs/${product.slug}` : undefined}
+                  onClick={() => setModal({ type: "product", item: product })}
+                />
               ))}
             </div>
             <Link href="/products" className="back-link" style={{ marginTop: "1.5rem" }}>

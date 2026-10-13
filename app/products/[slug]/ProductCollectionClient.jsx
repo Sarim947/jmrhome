@@ -25,7 +25,12 @@ export default function ProductCollectionClient({ collection }) {
           <h2>{collection.title}</h2>
           <div className="grid">
             {collection.items.map((product) => (
-              <ProductCard key={product.id} product={product} onClick={() => setSelected(product)} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                href={product.slug ? `/door-designs/${product.slug}` : undefined}
+                onClick={() => setSelected(product)}
+              />
             ))}
           </div>
           <Link href="/products" className="back-link" style={{ marginTop: "3rem" }}>

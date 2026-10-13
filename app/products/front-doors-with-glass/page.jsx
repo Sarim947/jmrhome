@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 
@@ -27,26 +28,9 @@ const customizations = [
   { label: "Finish", text: "Wood-look, powder-coated and custom colors." }
 ];
 
-const designs = [
-  {
-    name: "Fusion #5843",
-    img: "/assets/images/products/Luminous Fusion door.jpg",
-    alt: "Aluminum entry door with glass",
-    desc: "Thermal break aluminum entrance door with integrated glass."
-  },
-  {
-    name: "J-0226",
-    img: "/assets/images/products/fusion-5843/j-0226-mqqdplxd.webp",
-    alt: "Front door with vertical glass panel",
-    desc: "Modern entry door with a vertical glass cutout."
-  },
-  {
-    name: "J-4244",
-    img: "/assets/images/products/fusion-5843/j-4244-mqqco64v.webp",
-    alt: "Custom entry door with integrated glass",
-    desc: "Entrance door with a matte black frame and patterned glass."
-  }
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("front-doors-with-glass"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -145,11 +129,11 @@ export default function GlassFrontDoorsPage() {
             <h2 className={shared.heading}>Front Door with Glass Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                   <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                   <h3 className={styles.designName}>{item.name}</h3>
                   <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { blogPosts, productCategories, productCollections } from "../lib/data";
+import { blogPosts, doorDesigns, productCategories, productCollections } from "../lib/data";
 
 const siteUrl = "https://jmrhabitat.com";
 
@@ -60,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7
   }));
 
+  const doorDesignRoutes: MetadataRoute.Sitemap = doorDesigns.map((design) => ({
+    url: absoluteUrl(`/door-designs/${design.slug}`),
+    changeFrequency: "monthly",
+    priority: 0.7
+  }));
+
   const blogRoutes: MetadataRoute.Sitemap = blogPosts
     .filter((post) => post.href)
     .map((post) => ({
@@ -69,5 +75,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6
     }));
 
-  return [...staticRoutes, ...productCategoryRoutes, ...productRoutes, ...blogRoutes];
+  return [...staticRoutes, ...productCategoryRoutes, ...productRoutes, ...doorDesignRoutes, ...blogRoutes];
 }

@@ -54,6 +54,15 @@
   margin-top: 3rem;
 }
 
+.designCard {
+  color: inherit;
+  text-decoration: none;
+}
+
+.designCard:hover .designName {
+  text-decoration: underline;
+}
+
 .designImage {
   width: 100%;
   aspect-ratio: 4 / 3;
