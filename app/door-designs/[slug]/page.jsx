@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
 import { doorDesigns, productCategories } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema, productSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 import styles from "./page.module.css";
 
 function categoryForSlug(slug) {
@@ -20,9 +22,9 @@ export async function generateMetadata({ params }) {
   if (!design) return {};
 
   return createPageMetadata({
-    title: `${design.name} | Custom Entrance Door Design | JMR HABITAT`,
-    metadataTitle: { absolute: `${design.name} | Custom Entrance Door Design | JMR HABITAT` },
-    description: `${design.name}: ${design.shortDesc} Custom-made to project dimensions, finishes and configuration.`,
+    title: `${design.altText}`,
+    absoluteTitle: true,
+    description: `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`,
     path: `/door-designs/${design.slug}`,
     openGraph: { images: [{ url: absoluteUrl(design.img), alt: design.altText }] }
   });
@@ -45,8 +47,27 @@ export default async function DoorDesignPage({ params }) {
     ["Smart lock", design.params.smartLock]
   ].filter(([, value]) => value);
 
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    ...(primaryCollection ? [{ name: primaryCollection.title, path: primaryCollection.href }] : []),
+    { name: design.name, path: `/door-designs/${design.slug}` }
+  ];
+
   return (
     <SiteShell>
+      <JsonLd
+        data={[
+          breadcrumbSchema(breadcrumbItems),
+          productSchema({
+            name: `${design.altText} (${design.name})`,
+            description: design.description,
+            image: design.img,
+            path: `/door-designs/${design.slug}`,
+            category: design.params.material
+          })
+        ]}
+      />
       <main>
         <section className={styles.hero}>
           <div className="container">
@@ -62,8 +83,8 @@ export default async function DoorDesignPage({ params }) {
 
             <div className={styles.heroGrid}>
               <div>
-                <p className={styles.eyebrow}>Door Design</p>
-                <h1>{design.name}</h1>
+                <p className={styles.eyebrow}>Door Design · {design.name}</p>
+                <h1>{design.altText}</h1>
                 <p className={styles.lead}>{design.description}</p>
                 <p className={styles.customNote}>
                   This custom door is made to project dimensions, finish selections and configuration requirements.
@@ -71,7 +92,7 @@ export default async function DoorDesignPage({ params }) {
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
               <figure className={styles.heroImage}>
-                <img src={design.img} alt={design.altText} />
+                <img src={design.img} alt={design.altText} loading="eager" fetchPriority="high" />
               </figure>
             </div>
           </div>

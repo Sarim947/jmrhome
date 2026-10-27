@@ -43,10 +43,15 @@ export default function HomePageClient() {
         <section className="section">
           <div className="hero">
             <div className="container">
-              <h1>Entrance Architecture</h1>
-              <p>Where intelligent design meets security and art. Each door is a bespoke architectural statement.</p>
+              <h1>Custom Entrance Doors for Modern Architecture</h1>
+              <p>JMR Habitat builds bespoke entrance doors where intelligent design meets security and art. Each door is made to your project dimensions, finish and hardware.</p>
               <div className="hero-img" style={{ height: 400 }}>
-                <img src="/assets/images/hero/hero-main.webp" alt="Signature Door" loading="eager" />
+                <img
+                  src="/assets/images/hero/hero-main.webp"
+                  alt="Custom pivot entrance door on a modern architectural villa"
+                  loading="eager"
+                  fetchPriority="high"
+                />
               </div>
             </div>
           </div>

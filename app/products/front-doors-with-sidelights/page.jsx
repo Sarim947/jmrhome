@@ -6,10 +6,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Front Doors with Sidelights | Custom Entry Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Front Doors with Sidelights | Custom Entry Doors | JMR HABITAT" },
+  title: "Front Doors with Sidelights | Entry Doors",
   description:
-    "Custom front doors with single or double sidelights, built to project dimensions. Aluminum and steel entrance systems with custom glass, finishes and configurations.",
+    "Custom front doors with single or double sidelights, built to project dimensions. Aluminum and steel entrance systems with custom glass and finishes.",
+  keywords: [
+    "front doors with sidelights",
+    "sidelight entry doors",
+    "custom entrance system",
+    "glass sidelight door",
+    "architectural front door"
+  ],
   path: "/products/front-doors-with-sidelights"
 });
 
@@ -82,7 +88,7 @@ export default function SidelightDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   src="/assets/images/products/essentials/jt-02-mqqerx58.webp"
-                  alt="Modern entry door with sidelight and wood grain finish"
+                  alt="Modern entry door with sidelight and wood grain finish" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>

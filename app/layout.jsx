@@ -3,21 +3,55 @@ import Script from "next/script";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
 import GoogleTagManager from "../components/GoogleTagManager";
+import JsonLd from "../components/JsonLd";
 import MetaPixel from "../components/MetaPixel";
-import { absoluteUrl, siteUrl } from "../lib/metadata";
+import {
+  absoluteUrl,
+  defaultDescription,
+  defaultOgImage,
+  defaultOgImageAlt,
+  siteKeywords,
+  siteName,
+  siteUrl
+} from "../lib/metadata";
+import { organizationSchema, webSiteSchema } from "../lib/schema";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Entrance Architecture | Custom High-End Doors",
-    template: "%s | Entrance Architecture"
+    default: "Custom Entrance Doors for Modern Architecture | JMR Habitat",
+    template: "%s | JMR Habitat"
   },
-  description:
-    "Custom high-end entrance doors blending intelligent design, security, and artistic expression.",
+  description: defaultDescription,
+  keywords: siteKeywords,
+  applicationName: siteName,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  alternates: {
+    canonical: absoluteUrl("/")
+  },
   openGraph: {
-    siteName: "Entrance Architecture",
+    title: "Custom Entrance Doors for Modern Architecture | JMR Habitat",
+    description: defaultDescription,
+    siteName,
     url: absoluteUrl("/"),
-    type: "website"
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: absoluteUrl(defaultOgImage),
+        width: 1200,
+        height: 630,
+        alt: defaultOgImageAlt
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Custom Entrance Doors for Modern Architecture | JMR Habitat",
+    description: defaultDescription,
+    images: [absoluteUrl(defaultOgImage)]
   }
 };
 
@@ -35,6 +69,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         />
+        <JsonLd data={[organizationSchema(), webSiteSchema()]} />
         <Script id="consent-default" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];

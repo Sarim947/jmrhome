@@ -6,10 +6,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Modern Front Doors | Custom Modern Entry Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Modern Front Doors | Custom Modern Entry Doors | JMR HABITAT" },
+  title: "Modern Front Doors | Custom Modern Entry Doors",
   description:
-    "Custom modern front doors and modern entry doors built to project dimensions. Aluminum and steel entrance systems with glass, custom finishes and configurations.",
+    "Custom modern front doors built to project dimensions. Aluminum and steel entrance systems with glass, custom finishes and architectural configurations.",
+  keywords: [
+    "modern front doors",
+    "modern entry doors",
+    "contemporary front door",
+    "minimalist entrance door",
+    "custom modern doors"
+  ],
   path: "/products/modern-front-doors"
 });
 
@@ -93,7 +99,7 @@ export default function ModernFrontDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   src="/assets/images/products/Modern Grey door.jpg"
-                  alt="Modern front door with satin metallic finish"
+                  alt="Modern front door with satin metallic finish" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>
@@ -133,6 +139,13 @@ export default function ModernFrontDoorsPage() {
                 </li>
               ))}
             </ul>
+            <p className={shared.helper}>
+              Specifying smart hardware? Read{" "}
+              <Link href="/blog/smart-entry-door-future" className={shared.inlineLink}>
+                the future of smart entry doors
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

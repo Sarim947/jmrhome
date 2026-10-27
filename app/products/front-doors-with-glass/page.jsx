@@ -6,10 +6,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Front Doors with Glass | Custom Glass Entry Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Front Doors with Glass | Custom Glass Entry Doors | JMR HABITAT" },
+  title: "Front Doors with Glass | Custom Glass Doors",
   description:
     "Custom front doors with glass built to project dimensions. Choose custom glass layouts, aluminum or steel systems, sidelights and architectural finishes.",
+  keywords: [
+    "front doors with glass",
+    "custom glass entry doors",
+    "glass entrance door",
+    "fluted glass front door",
+    "modern glass front door"
+  ],
   path: "/products/front-doors-with-glass"
 });
 
@@ -78,8 +84,8 @@ export default function GlassFrontDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/Luminous Fusion door.jpg"
-                  alt="Modern front door with glass"
+                  src="/assets/images/products/fusion-thermal-break-aluminum-entrance-door.jpg"
+                  alt="Modern front door with glass" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>

@@ -11,7 +11,7 @@ export default function InquiryContactActions() {
     <div className="inquiry-actions">
       <a
         className="submit-btn inquiry-whatsapp"
-        href="https://wa.me/8618767505685?text=Hello%20JMRHOME%20-%20I%20want%20to%20start%20a%20custom%20entrance%20door%20project"
+        href="https://wa.me/8618767505685?text=Hello%20JMR%20Habitat%20-%20I%20want%20to%20start%20a%20custom%20entrance%20door%20project"
         target="_blank"
         rel="noopener noreferrer"
         onClick={() =>

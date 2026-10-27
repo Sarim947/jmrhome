@@ -3,11 +3,22 @@ import { ProductCard } from "@/components/Cards";
 import SiteShell from "@/components/SiteShell";
 import { productCategories } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 import styles from "./products.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Products",
-  description: "Explore our collection of custom high-end entrance doors.",
+  title: "Custom Entrance Doors & Door Collections",
+  description:
+    "Explore JMR Habitat entrance door collections and categories: pivot, modern, glass, sidelight, double, aluminum and steel systems, all custom built to project size.",
+  keywords: [
+    "custom entrance doors",
+    "door collections",
+    "pivot doors",
+    "glass entry doors",
+    "aluminum entry doors",
+    "steel entry doors"
+  ],
   path: "/products"
 });
 
@@ -27,6 +38,12 @@ const capabilities = [
 export default function ProductsPage() {
   return (
     <SiteShell>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" }
+        ])}
+      />
       <main>
         <div className="container section">
           <nav className="breadcrumb">
@@ -34,7 +51,7 @@ export default function ProductsPage() {
             <span className="separator">/</span>
             <span className="active">Products</span>
           </nav>
-          <h2>Architectural Entrance Doors</h2>
+          <h1 className="page-heading">Custom Entrance Doors & Door Collections</h1>
           <p style={{ marginTop: "-1.25rem", marginBottom: "2rem", color: "#4b5563", fontSize: "1.0625rem", maxWidth: "40rem" }}>
             Custom-built entrance doors for residential and commercial projects.
           </p>
@@ -81,7 +98,7 @@ export default function ProductsPage() {
             <span className={styles.eyebrow}>Project Capabilities</span>
             <h2 className={styles.heading}>Built for Architectural Projects</h2>
             <p className={styles.lead}>
-              From single custom entrances to multi-door projects, JMR HABITAT manufactures entrance systems for
+              From single custom entrances to multi-door projects, JMR Habitat manufactures entrance systems for
               residential and commercial applications.
             </p>
             <div className={styles.capabilityGrid}>

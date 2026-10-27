@@ -27,7 +27,7 @@ export function ProductDetail({ product }) {
               onClick={() => setLightbox({ src: product.img, alt: product.altText ?? product.name, label: product.name })}
               aria-label={`View larger image of ${product.name}`}
             >
-              <img src={product.img} alt={product.altText ?? product.name} />
+              <img src={product.img} alt={product.altText ?? product.name} loading="lazy" />
               <span className="zoom-hint">
                 <i className="fas fa-search-plus" />
               </span>
@@ -35,7 +35,7 @@ export function ProductDetail({ product }) {
           ) : null}
         </div>
         <div className="product-detail-info">
-          <h1>{product.name}</h1>
+          <h2>{product.name}</h2>
           <p className="product-description">{product.description}</p>
           <h2>Technical Specifications</h2>
           <ParamsTable params={product.params} />
@@ -47,7 +47,7 @@ export function ProductDetail({ product }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} />
+            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>
@@ -65,6 +65,7 @@ export function ProductSummary({ product }) {
         <img
           src={product.img}
           alt={product.altText ?? product.name}
+          loading="lazy"
           style={{ width: "100%", maxWidth: 400, borderRadius: 16, margin: "0 auto 1.5rem", display: "block" }}
         />
       ) : null}
@@ -99,10 +100,14 @@ export function DailyModalContent({ work }) {
             <button
               type="button"
               className="image-zoom-trigger"
-              onClick={() => setLightbox({ src: work.realImg, alt: `${work.name} real photo`, label: "Real Photo - Actual Craftsmanship" })}
+              onClick={() => setLightbox({ src: work.realImg, alt: `${work.altText ?? work.name} - real photo`, label: "Real Photo - Actual Craftsmanship" })}
               aria-label={`View larger real photo of ${work.name}`}
             >
-              <img src={work.realImg} alt={`${work.name} real photo`} />
+              <img
+                src={work.realImg}
+                alt={`${work.altText ?? work.name} - real photo`}
+                loading="lazy"
+              />
             </button>
             <p className="image-label">Real Photo - Actual Craftsmanship</p>
           </div>
@@ -112,10 +117,14 @@ export function DailyModalContent({ work }) {
             <button
               type="button"
               className="image-zoom-trigger"
-              onClick={() => setLightbox({ src: work.renderImg, alt: `${work.name} render`, label: "Render - Design Technology" })}
+              onClick={() => setLightbox({ src: work.renderImg, alt: `${work.altText ?? work.name} - render`, label: "Render - Design Technology" })}
               aria-label={`View larger render of ${work.name}`}
             >
-              <img src={work.renderImg} alt={`${work.name} render`} />
+              <img
+                src={work.renderImg}
+                alt={`${work.altText ?? work.name} - render`}
+                loading="lazy"
+              />
             </button>
             <p className="image-label">Render - Design Technology</p>
           </div>
@@ -143,7 +152,7 @@ export function DailyModalContent({ work }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} />
+            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>

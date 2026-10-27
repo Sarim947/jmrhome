@@ -1,11 +1,20 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Pivot Door vs Traditional Front Door",
   description:
-    "Comparing pivot doors and traditional hinged front doors from design and engineering perspectives.",
+    "Compare pivot doors and traditional hinged front doors on swing clearance, sealing, hardware, structural support and cost before choosing an entrance.",
+  keywords: [
+    "pivot door vs traditional door",
+    "pivot front door",
+    "hinged front door",
+    "oversized entrance door",
+    "modern front door"
+  ],
   path: "/blog/pivot-vs-traditional",
   openGraph: {
     type: "article"
@@ -15,6 +24,24 @@ export const metadata = createPageMetadata({
 export default function PivotArticlePage() {
   return (
     <SiteShell>
+
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Journal", path: "/blog" },
+            { name: "Pivot vs Traditional Front Door", path: "/blog/pivot-vs-traditional" }
+          ]),
+          blogPostingSchema({
+            headline: "Pivot Door vs Traditional Front Door: Which Is Better for Modern Homes?",
+            description: "Comparing pivot doors and traditional hinged front doors from design and engineering perspectives to help you choose the right solution.",
+            image: "/assets/images/blog/pivot-hero.jpg",
+            path: "/blog/pivot-vs-traditional",
+            datePublished: "2026-04-01"
+          })
+        ]}
+      />
+
       <main>
         <div className="container section">
           <article className="blog-article">
@@ -38,7 +65,7 @@ export default function PivotArticlePage() {
               <hr />
 
               <h2>What Is a Pivot Door?</h2>
-              <p>Unlike a traditional hinged door that rotates on side hinges, a pivot door rotates on a pivot system installed at the top and bottom of the door panel.</p>
+              <p>Unlike a traditional hinged door that rotates on side hinges, a pivot door rotates on a pivot system installed at the top and bottom of the door panel. See the range of <Link href="/products/pivot-doors">large-format pivot entrance doors</Link>.</p>
               <p>This system shifts the weight differently and allows the door to support much larger and heavier panels than conventional hinges.</p>
               <p>Pivot doors are commonly used in modern luxury homes, large-scale residential entrances, contemporary villas, and custom architectural projects.</p>
               <p>Because the pivot point is offset from the edge, the door creates a dramatic floating effect when opened.</p>
@@ -61,18 +88,18 @@ export default function PivotArticlePage() {
               <ArticleImage src="/assets/images/blog/pivot-structure-detail.jpg" alt="Pivot door structural cross-section showing steel frame and reinforcement" />
 
               <h2>3. Insulation and Weather Performance</h2>
-              <p>A well-engineered pivot door can achieve excellent insulation performance when designed with multi-point sealing systems, high-quality gaskets, thermal break structures, and precision manufacturing.</p>
+              <p>A well-engineered pivot door can achieve excellent insulation performance when designed with multi-point sealing systems, high-quality gaskets, thermal break structures, and precision manufacturing. The same logic applies to <Link href="/products/steel-entry-doors">steel-core entrance doors</Link>.</p>
               <p>Weather performance depends heavily on manufacturing quality and installation accuracy. For coastal areas or extreme climates, proper engineering becomes especially important.</p>
               <ArticleImage src="/assets/images/blog/pivot-sealing-system.jpg" alt="Pivot door multi-point sealing system showing gasket and weather seal" />
 
               <h2>4. Size Capabilities</h2>
-              <p>Traditional hinged doors are usually limited by hinge load capacity and long-term structural stress. Pivot systems allow much larger panels, including extra tall doors, wide single panels, heavy bronze doors, and steel and glass combinations.</p>
+              <p>Traditional hinged doors are usually limited by hinge load capacity and long-term structural stress. Pivot systems allow much larger panels, including extra tall doors, wide single panels, heavy bronze doors, and steel and glass combinations. A <Link href="/door-designs/fusion-5843">thermal break door with integrated glass</Link> is one example at full scale.</p>
 
               <h2>5. Installation Complexity</h2>
-              <p>Pivot doors require more planning and precision during installation. Floor preparation, structural reinforcement, pivot placement, weight calculations, and alignment tolerance all affect final performance.</p>
+              <p>Pivot doors require more planning and precision during installation. Floor preparation, structural reinforcement, pivot placement, weight calculations, and alignment tolerance all affect final performance. Wider openings usually move to <Link href="/products/double-entry-doors">double entrance door configurations</Link>.</p>
 
               <h2>6. Cost Comparison</h2>
-              <p>Pivot doors are usually more expensive because they involve larger materials, heavier construction, specialized hardware, more engineering, and custom fabrication.</p>
+              <p>Pivot doors are usually more expensive because they involve larger materials, heavier construction, specialized hardware, more engineering, and custom fabrication. For a figure rather than a range, <Link href="/inquiry">get a project-specific quote</Link>.</p>
               <p>For luxury residential projects, the entrance door is often considered a signature architectural element rather than simply a functional component.</p>
               <hr />
 
@@ -80,7 +107,7 @@ export default function PivotArticlePage() {
               <p>Traditional hinged doors may be a better solution if the entry opening is small, the budget is limited, the project uses traditional architecture, or structural modifications are not possible.</p>
 
               <h2>Final Thoughts</h2>
-              <p>Both pivot doors and traditional front doors have their advantages. For modern luxury homes, oversized entrances, and architectural statement designs, pivot doors often provide superior visual impact and structural capability.</p>
+              <p>Both pivot doors and traditional front doors have their advantages. For modern luxury homes, oversized entrances, and architectural statement designs, pivot doors often provide superior visual impact and structural capability. The same shift is happening in hardware: <Link href="/blog/smart-entry-door-future">smart entry hardware and digital access</Link>.</p>
               <p>For more conventional residential applications, traditional hinged doors remain a practical and reliable choice.</p>
               <ArticleImage src="/assets/images/blog/factory.jpg" alt="Custom door manufacturing at factory" />
               <hr />
@@ -103,5 +130,5 @@ export default function PivotArticlePage() {
 }
 
 function ArticleImage({ src, alt }) {
-  return <img src={src} alt={alt} style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }} />;
+  return <img src={src} alt={alt} loading="lazy" style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }} />;
 }

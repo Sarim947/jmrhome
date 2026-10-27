@@ -77,7 +77,7 @@ export default function SiteShell({ children }) {
       <nav className="navbar">
         <div className="container nav-container">
           <Link href="/" className="logo">
-            JMRHOME<span style={{ fontWeight: 300 }}>.LIFE</span>
+            JMR <span style={{ fontWeight: 300 }}>Habitat</span>
           </Link>
           <button
             className="menu-btn"
@@ -158,12 +158,12 @@ export default function SiteShell({ children }) {
             </span>
             <button onClick={() => setContactOpen(true)}>Send message</button>
           </div>
-          <p>&copy; 2026 Entrance Architecture</p>
+          <p>&copy; 2026 JMR Habitat</p>
         </div>
       </footer>
 
       <a
-        href="https://wa.me/8618767505685?text=Hello%20Jmrhome%20Life%20-%20I%27m%20interested%20in%20your%20custom%20doors"
+        href="https://wa.me/8618767505685?text=Hello%20JMR%20Habitat%20-%20I%27m%20interested%20in%20your%20custom%20doors"
         target="_blank"
         className="whatsapp-float"
         rel="noopener noreferrer"

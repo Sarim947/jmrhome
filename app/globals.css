@@ -12,7 +12,7 @@ body {
 
 /* ===== Typography ===== */
 h1, h2, h3 { font-weight: 500; letter-spacing: -0.02em; }
-h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; padding-left: 1rem; }
+h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; padding-left: 1rem; }
 
 /* ===== Layout ===== */
 .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
@@ -75,7 +75,7 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
     transform: scale(1.06);
     background: rgba(17, 24, 39, 0.94);
 }
-.product-detail-info h1 {
+.product-detail-info :is(h1, h2) {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #1f2937;
@@ -274,7 +274,7 @@ h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid #9ca3af; paddi
         object-fit: contain;
     }
 
-    .product-detail-info h1 {
+    .product-detail-info :is(h1, h2) {
         font-size: 2.25rem;
     }
 }
@@ -1245,7 +1245,7 @@ img { content-visibility: auto; }
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    .product-detail-info h1 {
+    .product-detail-info :is(h1, h2) {
         font-size: 1.75rem;
     }
     .inquiry-landing {
@@ -1410,7 +1410,7 @@ img { content-visibility: auto; }
         object-fit: contain;
     }
 
-    .product-detail-info h1 {
+    .product-detail-info :is(h1, h2) {
         font-size: 2.25rem;
     }
 }

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 const imageBase = "/assets/images/blog/historic-front-doors-modern-performance";
 
@@ -13,9 +15,16 @@ const tags = [
 ];
 
 export const metadata = createPageMetadata({
-  title: "Historic Front Doors: Traditional Style, Modern Performance",
+  title: "Historic Front Door Replacement: What to Know",
   description:
     "Discover how historic front doors can retain traditional proportions, panels, glass and hardware while adding modern insulation, sealing and security.",
+  keywords: [
+    "historic front doors",
+    "front door replacement",
+    "traditional door design",
+    "thermal break doors",
+    "custom front doors"
+  ],
   path: "/blog/historic-front-doors-modern-performance",
   openGraph: {
     type: "article"
@@ -25,6 +34,24 @@ export const metadata = createPageMetadata({
 export default function HistoricFrontDoorsArticlePage() {
   return (
     <SiteShell>
+
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Journal", path: "/blog" },
+            { name: "Historic Front Door Replacement", path: "/blog/historic-front-doors-modern-performance" }
+          ]),
+          blogPostingSchema({
+            headline: "Historic Front Door Replacement: Keep the Original Look, Add Modern Performance",
+            description: "How historic front doors can retain traditional proportions, panels, glass and hardware while adding modern insulation, sealing and security.",
+            image: "${imageBase}/larimer-square-historic-district.webp",
+            path: "/blog/historic-front-doors-modern-performance",
+            datePublished: "2026-10-02"
+          })
+        ]}
+      />
+
       <main>
         <div className="container section">
           <article className="blog-article">
@@ -65,19 +92,19 @@ export default function HistoricFrontDoorsArticlePage() {
               <h2>What Must a Historic Front Door Replacement Match?</h2>
               <p>A replacement should relate to the complete façade rather than look like an isolated new product. Before quotation, we review the available photographs, measurements, drawings, samples and project requirements.</p>
               <h3>Proportions and Non-Standard Openings</h3>
-              <p>Historic front doors were rarely made to today&apos;s standard sizes. An opening may be unusually tall, narrow, wide or deep, and an older building may have moved over time. Accurate measurements of the opening, frame depth, threshold and surrounding construction are essential.</p>
+              <p>Historic front doors were rarely made to today&apos;s standard sizes. An opening may be unusually tall, narrow, wide or deep, and an older building may have moved over time. Accurate measurements of the opening, frame depth, threshold and surrounding construction are essential. See how we build <Link href="/products/arched-front-doors">arched front doors</Link> for curved and non-standard openings.</p>
               <ArticleFigure
                 src={`${imageBase}/arched-custom-front-door-opening.webp`}
                 alt="Custom black arched front doors fitted to non-standard masonry openings"
                 caption={<>Arched and other non-standard openings require project-specific dimensions, frame geometry and installation planning.</>}
               />
               <h3>Panel Layout and Traditional Details</h3>
-              <p>Two-panel, four-panel and six-panel doors create very different proportions. Changing the number, position or depth of the panels can make a replacement look unrelated to the building. Where required, we can reproduce an approved arrangement from drawings, photographs or physical samples.</p>
+              <p>Two-panel, four-panel and six-panel doors create very different proportions. Changing the number, position or depth of the panels can make a replacement look unrelated to the building. Where required, we can reproduce an approved arrangement from drawings, photographs or physical samples. <Link href="/products/steel-entry-doors">Steel entrance doors with classical panelling</Link> are built from the same panel logic.</p>
               <h3>Material, Colour and Finish</h3>
-              <p>Some projects require the original material; others may permit an alternative if the visible appearance remains appropriate. Depending on the approved specification, options may include painted timber, marine-grade plywood, aluminium, veneer or a wood-look finish.</p>
+              <p>Some projects require the original material; others may permit an alternative if the visible appearance remains appropriate. Depending on the approved specification, options may include painted timber, marine-grade plywood, aluminium, veneer or a wood-look finish. Where timber is not practical, <Link href="/blog/wood-look-aluminum-entry-doors">wood-look aluminium as a timber substitute</Link> keeps the original appearance.</p>
               <p>Gloss, satin and matt finishes reflect light differently, while smooth and textured surfaces can alter how the same colour appears. Samples should be approved before production.</p>
               <h3>Glass and Hardware</h3>
-              <p>Historic exterior doors may include divided glazing, sidelights or a transom. The required pattern, glass type, safety specification and thermal performance should be confirmed during design.</p>
+              <p>Historic exterior doors may include divided glazing, sidelights or a transom. The required pattern, glass type, safety specification and thermal performance should be confirmed during design. A <Link href="/door-designs/j-4244">patterned glass entrance door</Link> shows how a pattern reads at full size.</p>
               <p>Visible hardware matters too. Knobs, knockers, escutcheons, hinges and plates should suit the entrance. Modern locks and reinforced locking areas can be incorporated behind an approved traditional appearance.</p>
               <h2>One Historic Front Door Project in Canada</h2>
               <p>A Canadian homeowner approached us about replacing the front door of a historic property. According to the project requirements provided to us, the new door needed to retain the existing entrance&apos;s traditional proportions, cream colour and glazed section.</p>
@@ -130,6 +157,7 @@ export default function HistoricFrontDoorsArticlePage() {
                 <li>project quantity and destination;</li>
                 <li>any available drawings or approval documents.</li>
               </ul>
+              <p>If the opening is curved or unusually proportioned, say so before sending drawings; <Link href="/inquiry">send us your measured opening</Link> and we will confirm what else is needed.</p>
               <p>We will confirm which details can be manufactured and which items still require verification.</p>
               <h2>For Door Dealers and Installers</h2>
               <p>We work with dealers, installers, renovation contractors, architects and project buyers who need historic or traditional exterior doors made to confirmed requirements.</p>

@@ -5,10 +5,17 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Custom Pivot Doors | Oversized Aluminum Pivot Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Custom Pivot Doors | Oversized Aluminum Pivot Doors | JMR HABITAT" },
+  title: "Custom Pivot Doors | Oversized Pivot Doors",
   description:
-    "Custom aluminum pivot doors from 48 × 80 in to 96 × 138 in. Compare Olang PL-01 and optional FritsJurgens hardware, glass and panel options.",
+    "Custom aluminum pivot doors from 48 x 80 in to 96 x 138 in. Compare Olang PL-01 and optional FritsJurgens hardware, glass and panel options.",
+  keywords: [
+    "custom pivot doors",
+    "oversized pivot doors",
+    "aluminum pivot door",
+    "Olang PL-01",
+    "FritsJurgens hardware",
+    "large entrance door"
+  ],
   path: "/products/pivot-doors"
 });
 
@@ -98,7 +105,7 @@ export default function PivotDoorsPage() {
                 </div>
               </div>
               <div className={shared.splitImage}>
-                <img src="/assets/images/products/Pivot Prime door.jpg" alt="Oversized custom aluminum pivot entry door" />
+                <img src="/assets/images/products/Pivot Prime door.jpg" alt="Oversized custom aluminum pivot entry door" loading="eager" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -135,6 +142,13 @@ export default function PivotDoorsPage() {
                 </li>
               ))}
             </ul>
+            <p className={shared.helper}>
+              Still choosing between opening types? Read{" "}
+              <Link href="/blog/pivot-vs-traditional" className={shared.inlineLink}>
+                pivot doors compared with hinged front doors
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

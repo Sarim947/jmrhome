@@ -5,10 +5,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Steel Entry Doors | Custom Steel Front Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Steel Entry Doors | Custom Steel Front Doors | JMR HABITAT" },
+  title: "Steel Entry Doors | Custom Steel Front Doors",
   description:
     "Custom steel entry doors built to project dimensions. Explore steel front doors with custom sizes, finishes, glass options and architectural configurations.",
+  keywords: [
+    "steel entry doors",
+    "custom steel front doors",
+    "armored steel door",
+    "security entrance door",
+    "steel door manufacturer"
+  ],
   path: "/products/steel-entry-doors"
 });
 
@@ -107,7 +113,7 @@ export default function SteelEntryDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   src="/assets/images/products/steel/Steel2009.jpg"
-                  alt="Modern steel entry door"
+                  alt="Modern steel entry door" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>

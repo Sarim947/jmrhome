@@ -4,269 +4,257 @@ import { useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-process.env.NEXT_PUBLIC_SUPABASE_URL,
-process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 const PROJECT_TYPES = [
-"For my personal home",
-"I have a contractor project",
-"I am a dealer",
-"I am an architect / designer",
-"I am not sure yet, just exploring"
+  "For my personal home",
+  "I have a contractor project",
+  "I am a dealer",
+  "I am an architect / designer",
+  "I am not sure yet, just exploring"
 ];
 
 export default function InquiryForm() {
-const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null);
 
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-const [form, setForm] = useState({
-project_type: "",
-country: "",
-name: "",
-email: "",
-whatsapp: "",
-product_interest: "",
-message: ""
-});
-
-const [files, setFiles] = useState([]);
-
-function handleChange(e) {
-setForm({
-...form,
-[e.target.name]: e.target.value
-});
-}
-
-async function uploadFiles(selectedFiles) {
-if (!selectedFiles?.length) return;
-
-```
-const uploadedFiles = [];
-
-for (const file of selectedFiles) {
-  if (file.size > 25 * 1024 * 1024) {
-    alert(`${file.name} exceeds 25MB.`);
-    continue;
-  }
-
-  const allowedTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/webp",
-    "application/pdf"
-  ];
-
-  if (!allowedTypes.includes(file.type)) {
-    alert(`${file.name} is not supported.`);
-    continue;
-  }
-
-  const safeName = file.name
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-zA-Z0-9._-]/g, "_");
-
-  const filePath = `${Date.now()}-${safeName}`;
-
-  const { error } = await supabase.storage
-    .from("project-uploads")
-    .upload(filePath, file);
-
-  if (error) {
-    console.error(error);
-    continue;
-  }
-
-  const { data } = supabase.storage
-    .from("project-uploads")
-    .getPublicUrl(filePath);
-
-  uploadedFiles.push({
-    name: file.name,
-    url: data.publicUrl
+  const [form, setForm] = useState({
+    project_type: "",
+    country: "",
+    name: "",
+    email: "",
+    whatsapp: "",
+    product_interest: "",
+    message: ""
   });
-}
 
-setFiles((prev) => [...prev, ...uploadedFiles]);
-```
+  const [files, setFiles] = useState([]);
 
-}
+  function handleChange(e) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }
 
-async function handleSubmit(e) {
-e.preventDefault();
+  async function uploadFiles(selectedFiles) {
+    if (!selectedFiles?.length) return;
 
-```
-if (!form.email && !form.whatsapp) {
-  alert("Please provide Email or WhatsApp.");
-  return;
-}
+    const uploadedFiles = [];
 
-setLoading(true);
+    for (const file of selectedFiles) {
+      if (file.size > 25 * 1024 * 1024) {
+        alert(`${file.name} exceeds 25MB.`);
+        continue;
+      }
 
-await fetch("/api/lead-notify", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    email: form.email,
-    whatsapp: form.whatsapp,
-    contact: form.email || form.whatsapp,
-    country: form.country,
-    project_type: form.project_type,
-    message: form.message,
-    files,
-    source: "website_inquiry_form"
-  })
-});
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "application/pdf"
+      ];
 
-alert("Thank you. We will contact you shortly.");
+      if (!allowedTypes.includes(file.type)) {
+        alert(`${file.name} is not supported.`);
+        continue;
+      }
 
-setForm({
-  project_type: "",
-  country: "",
-  name: "",
-  email: "",
-  whatsapp: "",
-  product_interest: "",
-  message: ""
-});
+      const safeName = file.name
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9._-]/g, "_");
 
-setFiles([]);
-setLoading(false);
-```
+      const filePath = `${Date.now()}-${safeName}`;
 
-}
+      const { error } = await supabase.storage
+        .from("project-uploads")
+        .upload(filePath, file);
 
-return (
-<section
-style={{
-maxWidth: "900px",
-margin: "80px auto",
-padding: "40px"
-}}
->
-<h1 style={{ marginBottom: "10px" }}>
-Project Inquiry </h1>
+      if (error) {
+        console.error(error);
+        continue;
+      }
 
-```
-  <p style={{ marginBottom: "40px", color: "#666" }}>
-    Share your project details and our team will contact you shortly.
-  </p>
+      const { data } = supabase.storage
+        .from("project-uploads")
+        .getPublicUrl(filePath);
 
-  <form
-    onSubmit={handleSubmit}
-    style={{
-      display: "grid",
-      gap: "20px"
-    }}
-  >
-    <select
-      name="project_type"
-      value={form.project_type}
-      onChange={handleChange}
-      required
-    >
-      <option value="">
-        Select Project Type
-      </option>
+      uploadedFiles.push({
+        name: file.name,
+        url: data.publicUrl
+      });
+    }
 
-      {PROJECT_TYPES.map((item) => (
-        <option key={item} value={item}>
-          {item}
-        </option>
-      ))}
-    </select>
+    setFiles((prev) => [...prev, ...uploadedFiles]);
+  }
 
-    <input
-      name="country"
-      placeholder="Country"
-      value={form.country}
-      onChange={handleChange}
-      required
-    />
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-    <input
-      name="name"
-      placeholder="Your Name"
-      value={form.name}
-      onChange={handleChange}
-    />
+    if (!form.email && !form.whatsapp) {
+      alert("Please provide Email or WhatsApp.");
+      return;
+    }
 
-    <input
-      name="email"
-      placeholder="Email"
-      value={form.email}
-      onChange={handleChange}
-    />
+    setLoading(true);
 
-    <input
-      name="whatsapp"
-      placeholder="WhatsApp"
-      value={form.whatsapp}
-      onChange={handleChange}
-    />
+    await fetch("/api/lead-notify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: form.email,
+        whatsapp: form.whatsapp,
+        contact: form.email || form.whatsapp,
+        country: form.country,
+        project_type: form.project_type,
+        message: form.message,
+        files,
+        source: "website_inquiry_form"
+      })
+    });
 
-    <input
-      name="product_interest"
-      placeholder="Product Interest"
-      value={form.product_interest}
-      onChange={handleChange}
-    />
+    alert("Thank you. We will contact you shortly.");
 
-    <textarea
-      name="message"
-      rows="6"
-      placeholder="Project Details"
-      value={form.message}
-      onChange={handleChange}
-    />
+    setForm({
+      project_type: "",
+      country: "",
+      name: "",
+      email: "",
+      whatsapp: "",
+      product_interest: "",
+      message: ""
+    });
 
-    <div>
-      <button
-        type="button"
-        onClick={() => fileInputRef.current?.click()}
-      >
-        Upload Files
-      </button>
+    setFiles([]);
+    setLoading(false);
+  }
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        multiple
-        accept="image/jpeg,image/png,image/webp,application/pdf"
-        style={{ display: "none" }}
-        onChange={(e) => uploadFiles(e.target.files)}
-      />
-
-      {files.length > 0 && (
-        <ul style={{ marginTop: "10px" }}>
-          {files.map((file, index) => (
-            <li key={index}>{file.name}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-
-    <button
-      type="submit"
-      disabled={loading}
+  return (
+    <section
       style={{
-        padding: "14px",
-        background: "#111827",
-        color: "#fff",
-        border: "none",
-        cursor: "pointer"
+        maxWidth: "900px",
+        margin: "80px auto",
+        padding: "40px"
       }}
     >
-      {loading ? "Submitting..." : "Submit Inquiry"}
-    </button>
-  </form>
-</section>
-```
+      <h2 style={{ marginBottom: "10px" }}>Project Inquiry</h2>
 
-);
+      <p style={{ marginBottom: "40px", color: "#666" }}>
+        Share your project details and our team will contact you shortly.
+      </p>
+
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "grid",
+          gap: "20px"
+        }}
+      >
+        <select
+          name="project_type"
+          value={form.project_type}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Project Type</option>
+
+          {PROJECT_TYPES.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+
+        <input
+          name="country"
+          placeholder="Country"
+          value={form.country}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="name"
+          placeholder="Your Name"
+          value={form.name}
+          onChange={handleChange}
+        />
+
+        <input
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+        />
+
+        <input
+          name="whatsapp"
+          placeholder="WhatsApp"
+          value={form.whatsapp}
+          onChange={handleChange}
+        />
+
+        <input
+          name="product_interest"
+          placeholder="Product Interest"
+          value={form.product_interest}
+          onChange={handleChange}
+        />
+
+        <textarea
+          name="message"
+          rows="6"
+          placeholder="Project Details"
+          value={form.message}
+          onChange={handleChange}
+        />
+
+        <div>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            Upload Files
+          </button>
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept="image/jpeg,image/png,image/webp,application/pdf"
+            style={{ display: "none" }}
+            onChange={(e) => uploadFiles(e.target.files)}
+          />
+
+          {files.length > 0 && (
+            <ul style={{ marginTop: "10px" }}>
+              {files.map((file, index) => (
+                <li key={index}>{file.name}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            padding: "14px",
+            background: "#111827",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
+          {loading ? "Submitting..." : "Submit Inquiry"}
+        </button>
+      </form>
+    </section>
+  );
 }

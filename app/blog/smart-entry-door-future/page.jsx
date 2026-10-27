@@ -1,6 +1,8 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 const imageBase = "/assets/images/blog/smart-entry-door-future";
 
@@ -14,9 +16,16 @@ const tags = [
 ];
 
 export const metadata = createPageMetadata({
-  title: "The Future of Smart Entry Doors: Will the Key Become Impossible to Copy or Disappear?",
+  title: "The Future of Smart Entry Doors",
   description:
-    "A practical look at two smart entry door paths: identity-based biometric security and ecosystem-based digital access.",
+    "A practical look at two smart entry door paths: identity-based biometric security and ecosystem-based digital access, and what each means for a new front door.",
+  keywords: [
+    "smart entry doors",
+    "biometric door lock",
+    "digital key access",
+    "finger vein recognition",
+    "Matter smart home door"
+  ],
   path: "/blog/smart-entry-door-future",
   openGraph: {
     type: "article"
@@ -26,6 +35,24 @@ export const metadata = createPageMetadata({
 export default function SmartEntryDoorFuturePage() {
   return (
     <SiteShell>
+
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Journal", path: "/blog" },
+            { name: "Future of Smart Entry Doors", path: "/blog/smart-entry-door-future" }
+          ]),
+          blogPostingSchema({
+            headline: "The Future of Smart Entry Doors: Will the Key Become Impossible to Copy or Disappear?",
+            description: "Two smart entry door paths are shaping the future: stronger biometric identity verification and seamless ecosystem-based digital access.",
+            image: "${imageBase}/jmr-smart-entry-door-hero.webp",
+            path: "/blog/smart-entry-door-future",
+            datePublished: "2026-07-31"
+          })
+        ]}
+      />
+
       <main>
         <div className="container section">
           <article className="blog-article">
@@ -161,7 +188,7 @@ export default function SmartEntryDoorFuturePage() {
               />
               <p>
                 These two paths are not competing answers. They represent two different interpretations of smart access, solving the same problem with different priorities.
-              </p>
+               The same split shows up in mechanical hardware in <Link href="/blog/pivot-vs-traditional">pivot versus hinged hardware</Link>.</p>
               <h3>Identity-Based Security</h3>
               <p><strong>Core question: "Who are you?"</strong> The system verifies the person directly through biological characteristics.</p>
               <p><strong>Advantages:</strong> Strong personal verification. Independent identity recognition. Best where security is the highest priority.</p>
@@ -190,15 +217,15 @@ export default function SmartEntryDoorFuturePage() {
               </p>
               <p>For manufacturers, the answer comes down to three layers.</p>
               <h3>1. Hardware Integration</h3>
-              <p>The door itself must be designed for smart access: large door size, heavy panels, lock compatibility, and power supply. Intelligence is not an external lock bolted onto a door.</p>
+              <p>The door itself must be designed for smart access: large door size, heavy panels, lock compatibility, and power supply. Intelligence is not an external lock bolted onto a door. That is why we build <Link href="/products/modern-front-doors">modern front doors with integrated locking</Link> rather than treating locks as an add-on.</p>
               <h3>2. Digital Compatibility</h3>
               <p>
                 Future doors need smart lock compatibility, digital key support, and smart home ecosystem connection. The question is whether the door speaks the same language as the connected home. Matter&apos;s growth, from 600 certified products in 2022 to nearly 6,000 today, shows how quickly that language is spreading.
-              </p>
+               Finish matters here too: a <Link href="/door-designs/j-0555">matte anthracite entrance door</Link> hides cabling and readers better than a bright surface.</p>
               <h3>3. Long-Term Reliability</h3>
               <p>
                 A high-end entrance door outlives any single electronic component inside it. The locking electronics will be serviced or replaced during the door&apos;s life. That means the design must support replaceable components, local service, and a stable ecosystem that will not be abandoned after the first purchase.
-              </p>
+               Heavy leaves put more load on hardware, which is why <Link href="/products/pivot-doors">pivot doors built for heavier hardware</Link> are engineered around the lock rather than fitted afterwards.</p>
               <p>
                 There is also a gap between expectation and reality. In hospitality, 94% of guests say they want to check in with their phone, but only 14% actually use a digital key, and 70% still pick up a physical card. A system that works in a demo does not guarantee adoption in real life. Build for the experience people actually have, not only the one shown in marketing.
               </p>
@@ -209,7 +236,7 @@ export default function SmartEntryDoorFuturePage() {
               <h2>Conclusion</h2>
               <p>
                 The evolution of smart entry doors is moving in two directions. One direction makes the key stronger, using advanced identity verification to ensure the user is genuine. The other makes the key disappear, transforming access into a seamless digital experience.
-              </p>
+               If you are weighing either route, <Link href="/inquiry">discuss a smart door specification</Link> with our team.</p>
               <p>
                 These are not competing answers. They are options. For a homeowner who wants to walk in without thinking, the ecosystem path delivers. For a project where security cannot be compromised, identity verification delivers, because a device can be borrowed or lost, but a person&apos;s identity cannot.
               </p>

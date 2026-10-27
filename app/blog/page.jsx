@@ -5,8 +5,16 @@ import { blogPosts } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Blog",
-  description: "Read articles about entrance design, security innovations, and custom door craftsmanship.",
+  title: "Entrance Door Insights & Project Journal",
+  description:
+    "Guides and project stories from JMR Habitat on entrance door design, smart locking, pivot hardware, thermal performance and material choices for architects.",
+  keywords: [
+    "entrance door blog",
+    "door design insights",
+    "pivot door guide",
+    "smart entry door",
+    "architectural door articles"
+  ],
   path: "/blog"
 });
 
@@ -15,7 +23,7 @@ export default function BlogPage() {
     <SiteShell>
       <main>
         <div className="container section">
-          <h2>Journal</h2>
+          <h1 className="page-heading">Entrance Door Insights & Project Journal</h1>
           <div className="grid">
             {blogPosts.map((post) => (
               <BlogCard key={post.id} post={post} />

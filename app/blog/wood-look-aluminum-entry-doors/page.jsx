@@ -1,11 +1,20 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Why Architects Are Choosing Wood-Look Aluminum Entry Doors Instead of Solid Wood",
+  title: "Wood-Look Aluminum vs Solid Wood Entry Doors",
   description:
     "Why architects prefer wood-look aluminum entry doors for luxury homes, oversized entrances, and modern architectural projects.",
+  keywords: [
+    "wood-look aluminum doors",
+    "aluminum entry doors",
+    "solid wood front door",
+    "wood grain door finish",
+    "architectural entrance door"
+  ],
   path: "/blog/wood-look-aluminum-entry-doors",
   openGraph: {
     type: "article"
@@ -15,6 +24,24 @@ export const metadata = createPageMetadata({
 export default function WoodLookAluminumArticle() {
   return (
     <SiteShell>
+
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Journal", path: "/blog" },
+            { name: "Wood-Look Aluminum Entry Doors", path: "/blog/wood-look-aluminum-entry-doors" }
+          ]),
+          blogPostingSchema({
+            headline: "Why Architects Are Choosing Wood-Look Aluminum Entry Doors Instead of Solid Wood",
+            description: "Why wood-look aluminum entry doors are becoming a smarter alternative to solid wood for luxury homes, oversized entrances, and custom architectural projects.",
+            image: "/assets/images/blog/wood-look-aluminum-entry-doors/hero.jpg",
+            path: "/blog/wood-look-aluminum-entry-doors",
+            datePublished: "2026-05-11"
+          })
+        ]}
+      />
+
       <main>
         <div className="container section">
           <article className="blog-article">
@@ -31,7 +58,7 @@ export default function WoodLookAluminumArticle() {
             <img
                 className="article-hero-img"
                   src="/assets/images/blog/wood-look-aluminum-entry-doors/hero.jpg"
-                    alt="Wood Look Aluminum Entry Door For Modern Luxury Home"
+                    alt="Wood Look Aluminum Entry Door For Modern Luxury Home" loading="eager" fetchPriority="high"
             />
 
             <div className="article-content">
@@ -62,7 +89,7 @@ export default function WoodLookAluminumArticle() {
               <p>
                 There is no doubt that natural wood creates a beautiful entrance. However,
                 architects must also consider long-term performance.
-              </p>
+               For owners keeping the original look, <Link href="/blog/historic-front-doors-modern-performance">replacing historic timber doors</Link> covers the same trade-offs.</p>
 
               <h3>Moisture and Humidity</h3>
               <p>
@@ -87,7 +114,7 @@ export default function WoodLookAluminumArticle() {
               <p>
                 As modern homes continue to feature larger entrance systems, oversized solid wood
                 doors become extremely heavy and more difficult to operate.
-              </p>
+               That is why oversized openings usually move to <Link href="/products/pivot-doors">oversized pivot entrance doors</Link>.</p>
 
               <ArticleImage
                 src="/assets/images/blog/blog2/wood-look-aluminum-entry-doors.jpg"
@@ -100,7 +127,7 @@ export default function WoodLookAluminumArticle() {
                 Modern architecture demands both aesthetics and performance. Wood-look aluminum
                 doors provide the warm appearance of timber while eliminating many of the
                 maintenance concerns associated with natural wood.
-              </p>
+               The full range is on our <Link href="/products/aluminum-entry-doors">aluminium entrance doors</Link> page.</p>
 
               <p>
                 For architects, builders, and door companies, this combination offers greater
@@ -132,7 +159,7 @@ export default function WoodLookAluminumArticle() {
                 Modern powder coating and sublimation technologies can create highly realistic
                 wood grain finishes. From light oak to deep walnut tones, architects can achieve
                 the warmth of natural timber while benefiting from the durability of aluminum.
-              </p>
+               See <Link href="/daily">completed wood-look projects</Link> for how the grain reads on site.</p>
 
               <p>
                 The result is a modern entrance door that combines architectural elegance with
@@ -182,7 +209,12 @@ export default function WoodLookAluminumArticle() {
               <p>
                 Every project is different. Many architects and door companies require custom
                 dimensions, unique panel layouts, hidden frame details, oversized pivot
-                configurations, and special wood-look finishes.
+                 configurations, and special wood-look finishes.
+               </p>
+
+              <p>
+                <Link href="/inquiry">Send drawings for review</Link> and we will confirm what the
+                profile allows before production begins.
               </p>
 
               <p>
@@ -294,6 +326,7 @@ function ArticleImage({ src, alt }) {
     <img
       src={src}
       alt={alt}
+      loading="lazy"
       style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }}
     />
   );

@@ -1,11 +1,20 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "JMR's Dual-City Showcase in the Middle East",
+  title: "JMR Habitat Middle East Showcase",
   description:
     "JMR's December 2025 event review from Dubai and Riyadh, highlighting bespoke project solutions, smart manufacturing, and Middle East project support.",
+  keywords: [
+    "JMR Habitat Middle East",
+    "Dubai entrance doors",
+    "Riyadh door projects",
+    "bespoke door manufacturing",
+    "hospitality entrance doors"
+  ],
   path: "/blog/middle-east-showcase",
   openGraph: {
     type: "article"
@@ -15,6 +24,24 @@ export const metadata = createPageMetadata({
 export default function MiddleEastShowcaseArticle() {
   return (
     <SiteShell>
+
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Journal", path: "/blog" },
+            { name: "Middle East Showcase", path: "/blog/middle-east-showcase" }
+          ]),
+          blogPostingSchema({
+            headline: "JMR's Dual-City Showcase in Middle East: Defining 2026 Bespoke Projects from Dubai to Riyadh",
+            description: "A December 2025 event review from Dubai and Riyadh, highlighting JMR's bespoke project solutions, smart manufacturing, and Middle East project support.",
+            image: "/assets/images/blog/middle-east-showcase/showcase-1.jpg",
+            path: "/blog/middle-east-showcase",
+            datePublished: "2026-01-12"
+          })
+        ]}
+      />
+
       <main>
         <div className="container section">
           <article className="blog-article">
@@ -45,11 +72,11 @@ export default function MiddleEastShowcaseArticle() {
 
               <p>
                 At <strong>BDEXPO 2025</strong> in Riyadh, JMR highlighted customized solutions specifically engineered for infrastructure projects under <strong>Saudi Vision 2030</strong>. Our products earned high acclaim from local developers and contractors for their structural integrity and design flexibility.
-              </p>
+               Explore <Link href="/daily">recent project deliveries</Link> for the entrance doors behind these references.</p>
 
               <p>
                 Meanwhile, at <strong>HOMELIFE UAE</strong> in Dubai, we focused on showcasing <strong>systematic interior solutions</strong> for luxury residential and commercial spaces, perfectly aligning with the UAE market&apos;s demand for premium quality and modern aesthetics.
-              </p>
+               Entrances on projects of this scale are often curved or oversized, which is why <Link href="/products/arched-front-doors">arched and oversized entrance designs</Link> are built to the measured opening.</p>
 
               <ArticleImage
                 src="/assets/images/blog/middle-east-showcase/showcase-2.jpg"
@@ -60,11 +87,11 @@ export default function MiddleEastShowcaseArticle() {
 
               <p>
                 JMR&apos;s core competitiveness lies in our integrated ecosystem. Leveraging our advanced <strong>smart manufacturing facilities</strong>, JMR provides Middle Eastern clients with significantly shorter lead times while maintaining rigorous quality control.
-              </p>
+               More on <Link href="/about">how we manufacture</Link> custom entrance doors.</p>
 
               <p>
                 This <strong>one-stop support</strong>, spanning design refinement, precision production, and seamless logistics, is the cornerstone of our successful cooperation on multiple large-scale projects in the region.
-              </p>
+               Surface work at this level is visible in a finished <Link href="/door-designs/j-4244">hand-finished metal entrance door</Link>.</p>
 
               <ArticleImage
                 src="/assets/images/blog/middle-east-showcase/showcase-3.jpg"
@@ -75,7 +102,7 @@ export default function MiddleEastShowcaseArticle() {
 
               <p>
                 The success of these exhibitions marks a significant milestone in JMR&apos;s expansion within the Middle Eastern premium market. Moving forward, JMR will remain <strong>project-oriented</strong>, providing our partners in Saudi Arabia, the UAE, and neighboring regions with highly competitive systematic services and high-end customized products.
-              </p>
+               For a specific scheme, <Link href="/inquiry">request a project consultation</Link> and we will review the drawings.</p>
             </div>
 
             <Link href="/blog" className="back-link" style={{ marginTop: "2.5rem" }}>
@@ -89,5 +116,5 @@ export default function MiddleEastShowcaseArticle() {
 }
 
 function ArticleImage({ src, alt }) {
-  return <img src={src} alt={alt} style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }} />;
+  return <img src={src} alt={alt} loading="lazy" style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }} />;
 }

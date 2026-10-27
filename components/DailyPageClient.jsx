@@ -15,7 +15,7 @@ export default function DailyPageClient() {
     <SiteShell>
       <main>
         <div className="container section">
-          <h2>Daily Works - Each Door Unique</h2>
+          <h1 className="page-heading">Daily Works: Custom Entrance Door Builds</h1>
           <div className="daily-grid">
             {dailyWorks.map((work) => (
               <DailyCard key={work.id} work={work} onClick={() => setSelected(work)} />

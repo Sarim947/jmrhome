@@ -1,12 +1,22 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbSchema } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 import InquiryContactActions from "./InquiryContactActions";
 import InquiryForm from "./InquiryForm";
 
 export const metadata = createPageMetadata({
-  title: "Project Inquiry",
-  description: "Start a custom entrance door project with JMRHOME.LIFE.",
+  title: "Custom Entrance Door Project Inquiry",
+  description:
+    "Start a custom entrance door project with JMR Habitat. Send your opening sizes, drawings or reference images and our team will reply with a specification and quote.",
+  keywords: [
+    "custom entrance door quote",
+    "door project inquiry",
+    "bespoke door supplier",
+    "architectural door quote",
+    "JMR Habitat contact"
+  ],
   path: "/inquiry"
 });
 
@@ -64,6 +74,12 @@ const trustItems = [
 export default function InquiryPage() {
   return (
     <SiteShell>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Inquiry", path: "/inquiry" }
+        ])}
+      />
       <main className="inquiry-page">
         <section className="inquiry-landing">
           <div className="container">
@@ -73,7 +89,7 @@ export default function InquiryPage() {
                 <span className="separator">/</span>
                 <span className="active">Inquiry</span>
               </nav>
-              <div className="inquiry-brand">JMRHOME<span>.LIFE</span></div>
+              <div className="inquiry-brand">JMR <span>Habitat</span></div>
               <div className="inquiry-hero-content">
                 <h1>Start Your Custom Entrance Project</h1>
                 <p>Custom high-end entrance door solutions with size, finish, security system, smart lock, and bulk project support.</p>

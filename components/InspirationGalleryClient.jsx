@@ -50,7 +50,7 @@ export default function InspirationGalleryClient({ images }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} />
+            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>

@@ -2,12 +2,18 @@ import HomePageClient from "@/components/HomePageClient";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Entrance Architecture | Custom High-End Doors",
-  metadataTitle: {
-    absolute: "Entrance Architecture | Custom High-End Doors"
-  },
+  title: "Custom Entrance Doors for Modern Architecture | JMR Habitat",
+  absoluteTitle: true,
   description:
-    "Custom high-end entrance doors blending intelligent design, security, and artistic expression.",
+    "JMR Habitat builds custom entrance doors for architects: pivot, aluminum, steel and glass systems made to your dimensions, finishes and hardware.",
+  keywords: [
+    "custom entrance doors",
+    "architectural entrance doors",
+    "pivot doors",
+    "aluminum entry doors",
+    "steel entry doors",
+    "modern front doors"
+  ],
   path: "/"
 });
 

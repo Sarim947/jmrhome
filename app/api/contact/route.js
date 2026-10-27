@@ -13,7 +13,7 @@ export async function POST(request) {
     const result = await resend.emails.send({
       from: "Website <onboarding@resend.dev>",
       to: "740351598liu@gmail.com",
-      subject: "New Inquiry from JMRHOME.LIFE",
+      subject: "New Inquiry from JMR Habitat",
       html: `
         <h2>New Website Inquiry</h2>
         <p><strong>Name:</strong> ${name}</p>

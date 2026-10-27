@@ -5,10 +5,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Double Front Doors | Custom Double Entry Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Double Front Doors | Custom Double Entry Doors | JMR HABITAT" },
+  title: "Double Entry Doors | Custom Double Doors",
   description:
     "Custom double front doors and double entry doors built to project dimensions. Choose aluminum or steel systems, custom finishes, glass and door configurations.",
+  keywords: [
+    "double entry doors",
+    "double front doors",
+    "custom double doors",
+    "wide entrance doors",
+    "double door supplier"
+  ],
   path: "/products/double-entry-doors"
 });
 
@@ -95,7 +101,7 @@ export default function DoubleEntryDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   src="/assets/images/products/armored/jmr3670.jpg"
-                  alt="Black double front entry doors"
+                  alt="Black double front entry doors" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>

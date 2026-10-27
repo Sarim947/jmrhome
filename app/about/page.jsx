@@ -8,12 +8,16 @@ const beliefImage = "/assets/images/daily/Walnut Accent Elite render.jpg";
 const visionImage = "/assets/images/inspiration/20260613_10_final.webp";
 
 export const metadata = createPageMetadata({
-  title: "About JMR Habitat | Architectural Door & Living Systems",
-  metadataTitle: {
-    absolute: "About JMR Habitat | Architectural Door & Living Systems"
-  },
+  title: "About Us: Architectural Door & Living Systems",
   description:
     "JMR Habitat develops architectural door, railing, window and outdoor living products for project partners who need design freedom and controlled production.",
+  keywords: [
+    "about JMR Habitat",
+    "architectural door manufacturer",
+    "custom door factory",
+    "door and window systems",
+    "entrance door supplier"
+  ],
   path: "/about"
 });
 
@@ -123,7 +127,7 @@ export default function AboutPage() {
           <div className="container">
             <div className={styles.heroIntro}>
               <span className={styles.eyebrow}>JMR Habitat</span>
-              <h1>We Engineer First Impressions.</h1>
+              <h1>Architectural Door & Living Systems</h1>
               <p>
                 We create architectural entrance and living systems that combine engineering, customization and timeless design—helping architects, designers and builders transform ideas into buildings people remember.
               </p>
@@ -131,7 +135,7 @@ export default function AboutPage() {
           </div>
 
           <figure className={styles.heroImage}>
-            <img src={heroImage} alt="Modern architectural villa entrance with glass doors and landscaped outdoor living space" />
+            <img src={heroImage} alt="Modern architectural villa entrance with glass doors and landscaped outdoor living space" loading="eager" fetchPriority="high" />
           </figure>
 
           <div className="container">
@@ -154,7 +158,7 @@ export default function AboutPage() {
         <section className={`${styles.storySection} ${styles.warmSection}`}>
           <div className={`container ${styles.storyGrid}`}>
             <div className={styles.storyImage} aria-hidden="true">
-              <img src={beliefImage} alt="" />
+              <img src={beliefImage} alt="" loading="lazy" />
             </div>
             <div className={styles.storyText}>
               <span className={styles.eyebrow}>Why We Exist</span>
@@ -176,7 +180,7 @@ export default function AboutPage() {
             <div className={styles.productGrid}>
               {buildCategories.map((item) => (
                 <article className={styles.productItem} key={item.title}>
-                  <img src={item.image} alt={item.alt} />
+                  <img src={item.image} alt={item.alt} loading="lazy" />
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
                 </article>
@@ -222,7 +226,7 @@ export default function AboutPage() {
             <div className={styles.factoryGrid}>
               {factoryScenes.map((item) => (
                 <figure className={styles.factoryItem} key={item.title}>
-                  <img src={item.image} alt={item.alt} />
+                  <img src={item.image} alt={item.alt} loading="lazy" />
                   <figcaption>{item.title}</figcaption>
                 </figure>
               ))}
@@ -249,7 +253,7 @@ export default function AboutPage() {
 
         <section className={styles.visionSection}>
           <figure className={styles.visionImage}>
-            <img src={visionImage} alt="Future architectural living concept with facade, outdoor space and landscape" />
+            <img src={visionImage} alt="Future architectural living concept with facade, outdoor space and landscape" loading="lazy" />
           </figure>
           <div className={`container ${styles.visionText}`}>
             <span className={styles.eyebrow}>Where We Are Going</span>

@@ -48,7 +48,7 @@ export function DailyCard({ work, onClick }) {
 export function BlogCard({ post }) {
   const content = (
     <>
-      <img src={post.img} alt={post.title} loading="lazy" />
+      <img src={post.img} alt={post.cardAlt ?? post.title} loading="lazy" />
       <div className="blog-content">
         <h3>{post.title}</h3>
         <small>{post.date}</small>

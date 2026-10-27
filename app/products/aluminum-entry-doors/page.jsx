@@ -6,10 +6,16 @@ import shared from "../products.module.css";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Aluminum Entry Doors | Custom Aluminum Front Doors | JMR HABITAT",
-  metadataTitle: { absolute: "Aluminum Entry Doors | Custom Aluminum Front Doors | JMR HABITAT" },
+  title: "Aluminum Entry Doors | Custom Front Doors",
   description:
-    "Custom aluminum entry doors built to project dimensions. Explore aluminum front doors with custom sizes, glass options, wood-look finishes and architectural configurations.",
+    "Custom aluminum entry doors built to project dimensions. Explore aluminum front doors with custom sizes, glass options, wood-look finishes and hardware.",
+  keywords: [
+    "aluminum entry doors",
+    "custom aluminum front doors",
+    "wood-look aluminum doors",
+    "thermal break entrance door",
+    "aluminum door supplier"
+  ],
   path: "/products/aluminum-entry-doors"
 });
 
@@ -99,7 +105,7 @@ export default function AluminumEntryDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   src="/assets/images/products/Classic Grid door.jpg"
-                  alt="Aluminum entry door"
+                  alt="Aluminum entry door" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>
@@ -139,6 +145,13 @@ export default function AluminumEntryDoorsPage() {
                 </li>
               ))}
             </ul>
+            <p className={shared.helper}>
+              Comparing frame materials? Read{" "}
+              <Link href="/blog/wood-look-aluminum-entry-doors" className={shared.inlineLink}>
+                wood-look aluminium versus solid wood
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

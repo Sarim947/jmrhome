@@ -22,7 +22,7 @@ export default function ProductCollectionClient({ collection }) {
             <span className="active">{collection.title}</span>
           </nav>
 
-          <h2>{collection.title}</h2>
+          <h1 className="page-heading">{collection.h1 ?? collection.title}</h1>
           <div className="grid">
             {collection.items.map((product) => (
               <ProductCard
