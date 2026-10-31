@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
 import { doorDesigns, productCategories } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
-import { breadcrumbSchema, productSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import styles from "./page.module.css";
 
@@ -59,7 +59,7 @@ export default async function DoorDesignPage({ params }) {
       <JsonLd
         data={[
           breadcrumbSchema(breadcrumbItems),
-          productSchema({
+          serviceSchema({
             name: `${design.altText} (${design.name})`,
             description: design.description,
             image: design.img,
