@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/Cards";
 import SiteShell from "@/components/SiteShell";
-import { productCategories } from "@/lib/data";
+import { productCategories, productCollections } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -61,6 +61,26 @@ export default function ProductsPage() {
             ))}
           </div>
         </div>
+
+        <section className={styles.sectionBlock}>
+          <div className="container">
+            <span className={styles.eyebrow}>Door Collections</span>
+            <h2 className={styles.heading}>Featured Entrance Door Collections</h2>
+            <p className={styles.lead}>
+              Curated entrance door collections for residential, multi-family and commercial projects. Each collection
+              is built to project dimensions and quoted per specification.
+            </p>
+            <div className="grid">
+              {productCollections.map((collection) => (
+                <ProductCard
+                  key={collection.slug}
+                  product={collection}
+                  href={`/products/${collection.slug}`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
 
         <section className={`${styles.sectionBlock} ${styles.sectionBlockFirst}`}>
           <div className="container">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ProductCard } from "@/components/Cards";
+import { productCollections } from "@/lib/data";
 import Modal from "@/components/Modal";
 import { ProductDetail } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
@@ -33,6 +34,19 @@ export default function ProductCollectionClient({ collection }) {
               />
             ))}
           </div>
+          <section style={{ marginTop: "3.5rem" }}>
+            <h2 className="page-heading" style={{ fontSize: "1.5rem", marginBottom: "1.25rem" }}>
+              More Door Collections
+            </h2>
+            <div className="grid">
+              {productCollections
+                .filter((item) => item.slug !== collection.slug)
+                .map((item) => (
+                  <ProductCard key={item.slug} product={item} href={`/products/${item.slug}`} />
+                ))}
+            </div>
+          </section>
+
           <Link href="/products" className="back-link" style={{ marginTop: "3rem" }}>
             <i className="fas fa-arrow-left" /> Back to Products
           </Link>

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "admin": "node admin-tool/server.mjs",
+    "prebuild": "node scripts/gen-lastmod.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
