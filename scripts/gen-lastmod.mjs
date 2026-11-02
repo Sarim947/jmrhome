@@ -224,6 +224,13 @@ function main() {
     }
   }
 
+  // 路由自身的 page.jsx 改过，也要反映到 lastmod 上（静态路由页不经过 data.js 条目）
+  for (const key of Object.keys(map)) {
+    const relFile = key === "/" ? "app/page.jsx" : `app${key}/page.jsx`;
+    const pageDate = fileDate(relFile);
+    if (pageDate && (!map[key] || pageDate > map[key])) map[key] = pageDate;
+  }
+
   // 兜底：任何数据文件被改动，都至少反映在 lastmod 上
   const dataDate = fileDate(DATA_FILE);
   const cleaned = {};
