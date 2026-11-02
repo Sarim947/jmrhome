@@ -24,7 +24,9 @@ export async function generateMetadata({ params }) {
   return createPageMetadata({
     title: `${design.altText}`,
     absoluteTitle: true,
-    description: `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`,
+    description: design.params.leaf
+      ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, max size ${design.params.maxSize}, stainless steel multi-point lock, fingerprint lock optional.`
+      : `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`,
     path: `/door-designs/${design.slug}`,
     openGraph: { images: [{ url: absoluteUrl(design.img), alt: design.altText }] }
   });
@@ -42,10 +44,18 @@ export default async function DoorDesignPage({ params }) {
   const details = [
     ["Style", design.params.style],
     ["Material / system", design.params.material],
-    ["Glass", design.collections.includes("front-doors-with-glass") ? "Integrated glass configuration" : null],
     ["Configuration", design.params.configuration],
+    ["Door leaf thickness", design.params.leaf],
+    ["Frame depth", design.params.frame],
+    ["Max size (double leaf)", design.params.maxSize],
+    ["Glass", design.params.glass ?? (design.collections.includes("front-doors-with-glass") ? "Integrated glass configuration" : null)],
+    ["Locking", design.params.locking],
     ["Smart lock", design.params.smartLock]
   ].filter(([, value]) => value);
+
+  const specLine = design.params.leaf && design.params.frame && design.params.maxSize
+    ? `${design.params.leaf} door leaf and ${design.params.frame} frame; double-leaf assemblies up to ${design.params.maxSize}. ${design.params.locking}${design.params.smartLock ? ", and a fingerprint lock can be fitted on request" : ""}.`
+    : "This custom door is made to project dimensions, finish selections and configuration requirements.";
 
   const breadcrumbItems = [
     { name: "Home", path: "/" },
@@ -86,9 +96,7 @@ export default async function DoorDesignPage({ params }) {
                 <p className={styles.eyebrow}>Door Design · {design.name}</p>
                 <h1>{design.altText}</h1>
                 <p className={styles.lead}>{design.description}</p>
-                <p className={styles.customNote}>
-                  This custom door is made to project dimensions, finish selections and configuration requirements.
-                </p>
+                <p className={styles.customNote}>{specLine}</p>
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
               <figure className={styles.heroImage}>

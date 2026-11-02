@@ -26,10 +26,10 @@ const configurations = [
 ];
 
 const customizations = [
-  { label: "Size", text: "Custom-built to your opening dimensions." },
+  { label: "Size", text: "Custom-built to your opening dimensions, with assemblies up to 2280 mm overall width." },
   { label: "Door System", text: "Pivot or hinged configurations." },
   { label: "Sidelights", text: "Single, double or project-specific layouts." },
-  { label: "Glass", text: "Clear, Low-E, frosted or laminated options." },
+  { label: "Glass", text: "5+25A+5 tempered double glazing as standard on sidelights; clear, Low-E, frosted or laminated on request." },
   { label: "Frame", text: "Aluminum or steel systems." },
   { label: "Finish", text: "Wood-look, powder-coated and custom colors." }
 ];
@@ -78,7 +78,7 @@ export default function SidelightDoorsPage() {
                 <p className={shared.lead}>
                   Custom entrance doors with single or double sidelights, built to your opening dimensions.
                 </p>
-                <p className={styles.heroAux}>Aluminum and steel systems · Custom glass · Custom sizes and finishes</p>
+                <p className={styles.heroAux}>Aluminum and steel systems · 5+25A+5 tempered sidelight glazing · Up to 2280 mm overall width</p>
                 <div className={shared.ctaActions}>
                   <Link href="/inquiry" className={`${shared.button} ${shared.buttonPrimary}`}>
                     Send Your Dimensions
