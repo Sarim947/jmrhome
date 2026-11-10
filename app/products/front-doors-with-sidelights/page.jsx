@@ -79,7 +79,7 @@ export default function SidelightDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/essentials/jt-02-mqqerx58.webp"
+                  src="/assets/images/products/hires/jt-02.webp"
                   alt="Modern entry door with sidelight and wood grain finish" loading="eager" fetchPriority="high"
                 />
               </div>
