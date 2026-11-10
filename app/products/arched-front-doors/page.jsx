@@ -64,7 +64,7 @@ const references = [
   },
   {
     name: "Arched Aluminum Door with Patterned Glass",
-    img: "/assets/images/products/fusion-5843/j-4244-mqqco64v.webp",
+    img: "/assets/images/products/hires/j-4244.webp",
     alt: "Custom aluminum arched entrance door with patterned glass",
     desc: "Curved head with patterned glass and a slim aluminum frame.",
     href: "/door-designs/j-4244"
@@ -153,7 +153,7 @@ export default function ArchedFrontDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/fusion-5843/j-4244-mqqco64v.webp"
+                  src="/assets/images/products/hires/j-4244.webp"
                   alt="Custom aluminum arched entrance door with patterned glass"
                   loading="eager"
                   fetchPriority="high"

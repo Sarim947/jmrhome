@@ -811,7 +811,7 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
   overflow: hidden;
   background: #e5e7eb;
   cursor: zoom-in;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 800 / 520;
 }
 
 .inspiration-zoom-trigger img {
