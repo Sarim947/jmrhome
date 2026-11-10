@@ -34,29 +34,9 @@ const customizations = [
   { label: "Configuration", text: "Single, double, sidelight or project-specific layouts." }
 ];
 
-const designs = [
-  {
-    name: "Classic #3670",
-    img: "/assets/images/products/Classic Grid door.jpg",
-    alt: "Aluminum entry door with three-grid design",
-    desc: "Aluminum entry door with a classic three-grid design."
-  },
-  {
-    name: "Moonlight #3610",
-    img: "/assets/images/products/Modern Grey door.jpg",
-    alt: "Modern aluminum entry door",
-    desc: "Modern aluminum entry door with a satin metallic finish."
-  },
-  ...doorDesigns
-    .filter((design) => design.collections.includes("aluminum-entry-doors"))
-    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug })),
-  {
-    name: "JT-02",
-    img: "/assets/images/products/essentials/jt-02-mqqerx58.webp",
-    alt: "Wood-look aluminum front door",
-    desc: "Aluminum entry door with sidelight and wood grain finish."
-  }
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("aluminum-entry-doors"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -104,7 +84,7 @@ export default function AluminumEntryDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/Classic Grid door.jpg"
+                  src="/assets/images/products/hires/classic-3670.webp"
                   alt="Aluminum entry door" loading="eager" fetchPriority="high"
                 />
               </div>
@@ -162,19 +142,11 @@ export default function AluminumEntryDoorsPage() {
             <h2 className={shared.heading}>Aluminum Entry Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                item.slug ? (
-                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                     <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                     <h3 className={styles.designName}>{item.name}</h3>
                     <p className={styles.designDesc}>{item.desc}</p>
                   </Link>
-                ) : (
-                  <div key={item.name}>
-                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                    <h3 className={styles.designName}>{item.name}</h3>
-                    <p className={styles.designDesc}>{item.desc}</p>
-                  </div>
-                )
               ))}
             </div>
           </div>

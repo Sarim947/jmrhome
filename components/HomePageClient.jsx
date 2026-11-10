@@ -8,7 +8,7 @@ import { DailyModalContent, ProductSummary } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
 import CustomerReviews from "@/components/CustomerReviews";
 import ProjectCases from "@/components/ProjectCases";
-import { blogPosts, dailyWorks, featuredProducts, projectCases } from "@/lib/data";
+import { blogPosts, dailyWorks, designSlugFor, featuredProducts, projectCases } from "@/lib/data";
 
 function getDailyWorkTime(work) {
   const [year, month, day] = String(work.date)
@@ -59,14 +59,17 @@ export default function HomePageClient() {
           <div className="container">
             <h2>Featured Collections</h2>
             <div className="grid">
-              {featuredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  href={product.slug ? `/door-designs/${product.slug}` : undefined}
-                  onClick={() => setModal({ type: "product", item: product })}
-                />
-              ))}
+              {featuredProducts.map((product) => {
+                const designSlug = designSlugFor(product);
+                return (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    href={designSlug ? `/door-designs/${designSlug}` : product.href ?? "/products"}
+                    onClick={() => setModal({ type: "product", item: product })}
+                  />
+                );
+              })}
             </div>
             <Link href="/products" className="back-link" style={{ marginTop: "1.5rem" }}>
               <i className="fas fa-arrow-right" /> View All Products

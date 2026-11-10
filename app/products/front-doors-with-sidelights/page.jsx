@@ -34,17 +34,9 @@ const customizations = [
   { label: "Finish", text: "Wood-look, powder-coated and custom colors." }
 ];
 
-const designs = [
-  {
-    name: "JT-02",
-    img: "/assets/images/products/essentials/jt-02-mqqerx58.webp",
-    alt: "Modern front door with sidelight",
-    desc: "Modern entry door with sidelight and wood grain finish."
-  },
-  ...doorDesigns
-    .filter((design) => design.collections.includes("front-doors-with-sidelights"))
-    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }))
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("front-doors-with-sidelights"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -138,19 +130,11 @@ export default function SidelightDoorsPage() {
             <h2 className={shared.heading}>Sidelight Entrance Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                item.slug ? (
-                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                     <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                     <h3 className={styles.designName}>{item.name}</h3>
                     <p className={styles.designDesc}>{item.desc}</p>
                   </Link>
-                ) : (
-                  <div key={item.name}>
-                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                    <h3 className={styles.designName}>{item.name}</h3>
-                    <p className={styles.designDesc}>{item.desc}</p>
-                  </div>
-                )
               ))}
             </div>
           </div>

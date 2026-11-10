@@ -26,6 +26,12 @@ function originalScheme(request: NextRequest) {
  * non-www versions from being crawled as separate pages.
  */
 export function middleware(request: NextRequest) {
+  // Local preview (next dev) runs on plain http://localhost, so the canonical
+  // https redirect below must not apply there. Production behaviour is unchanged.
+  if (process.env.NODE_ENV !== "production") {
+    return NextResponse.next();
+  }
+
   const host = request.headers
     .get("x-forwarded-host")
     ?.split(",")[0]

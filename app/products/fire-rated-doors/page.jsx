@@ -159,7 +159,7 @@ export default function FireRatedDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/steel/Steel2015.jpg"
+                  src="/assets/images/products/hires/j-2015.webp"
                   alt="Matte black steel entrance door with recessed vertical grooves and integrated smart lock"
                   loading="eager"
                   fetchPriority="high"

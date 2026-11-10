@@ -84,7 +84,7 @@ export default function GlassFrontDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/fusion-thermal-break-aluminum-entrance-door.jpg"
+                  src="/assets/images/products/hires/fusion-5843.webp"
                   alt="Modern front door with glass" loading="eager" fetchPriority="high"
                 />
               </div>

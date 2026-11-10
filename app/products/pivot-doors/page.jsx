@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
@@ -38,20 +39,9 @@ const specifications = [
   { label: "Pivot Adjustment", text: "The pivot axis can be positioned for the design. The detachable mechanism permits fine vertical and horizontal adjustment after installation." }
 ];
 
-const designs = [
-  {
-    name: "Pivot Prime #5893",
-    img: "/assets/images/products/Pivot Prime door.jpg",
-    alt: "Custom oversized aluminum pivot entry door",
-    desc: "Offset aluminum pivot door with clean horizontal lines for high-end residential entrances."
-  },
-  {
-    name: "J-5496",
-    img: "/assets/images/products/fusion-5843/j-5496-mqqec8xv.webp",
-    alt: "Modern custom pivot door with faux-oxidized metal finish",
-    desc: "Modern pivot entry door with a faux-oxidized metal finish."
-  }
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("pivot-doors"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -105,7 +95,7 @@ export default function PivotDoorsPage() {
                 </div>
               </div>
               <div className={shared.splitImage}>
-                <img src="/assets/images/products/Pivot Prime door.jpg" alt="Oversized custom aluminum pivot entry door" loading="eager" fetchPriority="high" />
+                <img src="/assets/images/products/hires/pivot-prime-5893.webp" alt="Oversized custom aluminum pivot entry door" loading="eager" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -158,11 +148,11 @@ export default function PivotDoorsPage() {
             <h2 className={shared.heading}>Modern Pivot Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                   <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                   <h3 className={styles.designName}>{item.name}</h3>
                   <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

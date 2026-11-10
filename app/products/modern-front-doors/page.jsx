@@ -34,23 +34,9 @@ const customizations = [
   { label: "Configuration", text: "Single, double, glass and sidelight layouts." }
 ];
 
-const designs = [
-  {
-    name: "Moonlight #3610",
-    img: "/assets/images/products/Modern Grey door.jpg",
-    alt: "Modern front door with satin metallic finish",
-    desc: "Modern minimalist entrance door with satin metallic finish."
-  },
-  {
-    name: "Hybrid #2103",
-    img: "/assets/images/products/Hybrid material mixed door.jpg",
-    alt: "Modern front door with mixed steel and aluminum finish",
-    desc: "Multi-material modern entrance door with carved aluminum and steel."
-  },
-  ...doorDesigns
-    .filter((design) => design.collections.includes("modern-front-doors"))
-    .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }))
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("modern-front-doors"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -98,7 +84,7 @@ export default function ModernFrontDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/Modern Grey door.jpg"
+                  src="/assets/images/products/hires/moonlight-3610.webp"
                   alt="Modern front door with satin metallic finish" loading="eager" fetchPriority="high"
                 />
               </div>
@@ -156,19 +142,11 @@ export default function ModernFrontDoorsPage() {
             <h2 className={shared.heading}>Modern Entrance Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                item.slug ? (
-                  <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                     <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                     <h3 className={styles.designName}>{item.name}</h3>
                     <p className={styles.designDesc}>{item.desc}</p>
                   </Link>
-                ) : (
-                  <div key={item.name}>
-                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
-                    <h3 className={styles.designName}>{item.name}</h3>
-                    <p className={styles.designDesc}>{item.desc}</p>
-                  </div>
-                )
               ))}
             </div>
           </div>

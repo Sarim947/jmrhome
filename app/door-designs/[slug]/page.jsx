@@ -5,6 +5,7 @@ import { doorDesigns, productCategories } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
+import { imageSize } from "@/lib/imageSizes";
 import styles from "./page.module.css";
 
 function categoryForSlug(slug) {
@@ -22,11 +23,13 @@ export async function generateMetadata({ params }) {
   if (!design) return {};
 
   return createPageMetadata({
-    title: `${design.altText}`,
+    title: design.seoTitle ?? design.altText,
     absoluteTitle: true,
-    description: design.params.leaf
-      ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, max size ${design.params.maxSize}, stainless steel multi-point lock, fingerprint lock optional.`
-      : `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`,
+    description:
+      design.seoDescription ??
+      (design.params.leaf
+        ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, max size ${design.params.maxSize}, stainless steel multi-point lock, fingerprint lock optional.`
+        : `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`),
     path: `/door-designs/${design.slug}`,
     openGraph: { images: [{ url: absoluteUrl(design.img), alt: design.altText }] }
   });
@@ -40,7 +43,14 @@ export default async function DoorDesignPage({ params }) {
 
   const primaryCollection = categoryForSlug(design.collections[0]);
   const relatedCollections = design.collections.map(categoryForSlug).filter(Boolean);
-  const relatedDesigns = doorDesigns.filter((item) => item.slug !== design.slug);
+  const relatedDesigns = [
+    ...doorDesigns.filter(
+      (item) => item.slug !== design.slug && item.collections.some((c) => design.collections.includes(c))
+    ),
+    ...doorDesigns.filter(
+      (item) => item.slug !== design.slug && !item.collections.some((c) => design.collections.includes(c))
+    )
+  ].slice(0, 3);
   const details = [
     ["Style", design.params.style],
     ["Material / system", design.params.material],
@@ -57,6 +67,11 @@ export default async function DoorDesignPage({ params }) {
     ? `${design.params.leaf} door leaf and ${design.params.frame} frame; double-leaf assemblies up to ${design.params.maxSize}. ${design.params.locking}${design.params.smartLock ? ", and a fingerprint lock can be fitted on request" : ""}.`
     : "This custom door is made to project dimensions, finish selections and configuration requirements.";
 
+  const heroSize = imageSize(design.img);
+  const faqs = design.faqs ?? [];
+  const highlights = design.highlights ?? [];
+  const paragraphs = String(design.description ?? "").split("\n\n").filter(Boolean);
+
   const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Products", path: "/products" },
@@ -71,11 +86,24 @@ export default async function DoorDesignPage({ params }) {
           breadcrumbSchema(breadcrumbItems),
           serviceSchema({
             name: `${design.altText} (${design.name})`,
-            description: design.description,
+            description: design.seoDescription ?? design.description,
             image: design.img,
             path: `/door-designs/${design.slug}`,
             category: design.params.material
-          })
+          }),
+          ...(faqs.length
+            ? [
+                {
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqs.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.question,
+                    acceptedAnswer: { "@type": "Answer", text: faq.answer }
+                  }))
+                }
+              ]
+            : [])
         ]}
       />
       <main>
@@ -95,16 +123,39 @@ export default async function DoorDesignPage({ params }) {
               <div>
                 <p className={styles.eyebrow}>Door Design · {design.name}</p>
                 <h1>{design.altText}</h1>
-                <p className={styles.lead}>{design.description}</p>
+                <p className={styles.lead}>{paragraphs[0] ?? design.description}</p>
                 <p className={styles.customNote}>{specLine}</p>
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
               <figure className={styles.heroImage}>
-                <img src={design.img} alt={design.altText} loading="eager" fetchPriority="high" />
+                <img
+                  src={design.img}
+                  alt={design.altText}
+                  width={heroSize?.w}
+                  height={heroSize?.h}
+                  loading="eager"
+                  fetchPriority="high"
+                />
               </figure>
             </div>
           </div>
         </section>
+
+        {highlights.length ? (
+          <section className={styles.section}>
+            <div className="container">
+              <h2>Why this design works</h2>
+              <ul className={styles.highlights}>
+                {highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {paragraphs.slice(1).map((text) => (
+                <p key={text} className={styles.bodyText}>{text}</p>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className={styles.section}>
           <div className="container">
@@ -125,12 +176,34 @@ export default async function DoorDesignPage({ params }) {
             <h2>Image gallery</h2>
             <div className={styles.gallery}>
               <figure>
-                <img src={design.img} alt={design.altText} loading="lazy" />
+                <img
+                  src={design.img}
+                  alt={design.altText}
+                  width={heroSize?.w}
+                  height={heroSize?.h}
+                  loading="lazy"
+                />
                 <figcaption>{design.name}</figcaption>
               </figure>
             </div>
           </div>
         </section>
+
+        {faqs.length ? (
+          <section className={styles.section}>
+            <div className="container">
+              <h2>Frequently asked questions</h2>
+              <div className={styles.faqList}>
+                {faqs.map((faq) => (
+                  <details key={faq.question} className={styles.faqItem}>
+                    <summary>{faq.question}</summary>
+                    <p>{faq.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section className={styles.section}>
           <div className="container">
@@ -152,7 +225,13 @@ export default async function DoorDesignPage({ params }) {
             <div className={styles.designGrid}>
               {relatedDesigns.map((item) => (
                 <Link key={item.slug} href={`/door-designs/${item.slug}`} className={styles.designCard}>
-                  <img src={item.img} alt={item.altText} loading="lazy" />
+                  <img
+                    src={item.img}
+                    alt={item.altText}
+                    width={imageSize(item.img)?.w}
+                    height={imageSize(item.img)?.h}
+                    loading="lazy"
+                  />
                   <strong>{item.name}</strong>
                   <span>{item.shortDesc}</span>
                 </Link>

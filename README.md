@@ -17,11 +17,10 @@ Then open `http://localhost:3000`.
 - `/about`
 - `/products`
 - `/products/essentials`
-- `/products/classic-3670`
-- `/products/pivot-prime-5893`
-- `/products/fusion-5843`
-- `/products/neoclassical-2250`
-- `/products/moonlight-3610`
+- `/products/elegant-steel-doors`
+- `/products/doors-with-lites`
+- `/products/steel-core-armored`
+- `/door-designs/<slug>` — one page per door design (31 total)
 - `/daily`
 - `/blog`
 - `/blog/pivot-vs-traditional`

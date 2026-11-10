@@ -24,7 +24,7 @@ export const metadata = createPageMetadata({
 const buildCategories = [
   {
     title: "Architectural Doors",
-    image: "/assets/images/products/Pivot Prime door.jpg",
+    image: "/assets/images/products/hires/pivot-prime-5893.webp",
     alt: "Architectural pivot entrance door",
     text: "Entry doors, pivot doors and courtyard doors configured around the facade and opening size."
   },

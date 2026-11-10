@@ -57,10 +57,10 @@ const customizations = [
 const references = [
   {
     name: "Arched Neoclassical Entry",
-    img: "/assets/images/daily/Arch new classic door real.jpg",
+    img: "/assets/images/products/hires/arched-neoclassical.webp",
     alt: "Cream lacquered steel arched entrance door with brass detailing",
     desc: "Arched townhouse entrance delivered for a Paris residential project.",
-    href: "/daily"
+    href: "/door-designs/arched-neoclassical-entry"
   },
   {
     name: "Arched Aluminum Door with Patterned Glass",
@@ -74,7 +74,7 @@ const references = [
     img: "/assets/images/products/British panel door.jpg",
     alt: "Steel entrance door with tiered moldings in deep blue satin lacquer",
     desc: "Moulded panels and recessed detailing adapted to curved openings.",
-    href: "/products/neoclassical-2250"
+    href: "/products/steel-core-armored"
   }
 ];
 

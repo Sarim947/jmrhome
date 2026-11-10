@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
@@ -33,38 +34,9 @@ const customizations = [
   { label: "Configuration", text: "Custom layouts built around the project opening." }
 ];
 
-const designs = [
-  {
-    name: "J-2009",
-    img: "/assets/images/products/steel/Steel2009.jpg",
-    alt: "Steel entry door with vertical fluted panel",
-    desc: "Modern steel entry door with vertical fluted aluminum accents."
-  },
-  {
-    name: "J-2002",
-    img: "/assets/images/products/steel/Steel2002.jpg",
-    alt: "Steel front door with wood grain finish",
-    desc: "Steel entry door with heat transfer wood grain finish."
-  },
-  {
-    name: "J-2006",
-    img: "/assets/images/products/steel/Steel2006.jpg",
-    alt: "Steel entry door with fluted texture and brushed gold handle",
-    desc: "Steel entry door with full-surface fluted texture and brushed gold handle."
-  },
-  {
-    name: "J-2007",
-    img: "/assets/images/products/steel/Steel2007.jpg",
-    alt: "Custom steel entry door with sandalwood wood grain finish",
-    desc: "Steel entry door with sandalwood wood grain finish."
-  },
-  {
-    name: "J-2015",
-    img: "/assets/images/products/steel/Steel2015.jpg",
-    alt: "Steel front door with pressed pattern design",
-    desc: "Steel entry door with a subtle pressed pattern."
-  }
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("steel-entry-doors"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -112,7 +84,7 @@ export default function SteelEntryDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/steel/Steel2009.jpg"
+                  src="/assets/images/products/hires/j-2009.webp"
                   alt="Modern steel entry door" loading="eager" fetchPriority="high"
                 />
               </div>
@@ -163,11 +135,11 @@ export default function SteelEntryDoorsPage() {
             <h2 className={shared.heading}>Steel Entry Door Designs</h2>
             <div className={styles.designGrid}>
               {designs.map((item) => (
-                <div key={item.name}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                   <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                   <h3 className={styles.designName}>{item.name}</h3>
                   <p className={styles.designDesc}>{item.desc}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

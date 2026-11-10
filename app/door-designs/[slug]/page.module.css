@@ -66,13 +66,17 @@
 .gallery img {
   display: block;
   width: 100%;
+  height: auto;
   border-radius: 18px;
   background: #f3f4f6;
-  object-fit: cover;
 }
 
-.heroImage img {
-  aspect-ratio: 4 / 5;
+/* 不再用 4/5 竖框去裁切产品照：源图多为 4:3 / 1:1，竖裁要放大 1.7 倍才填满，
+   正是详情页大图发虚的原因。这里保留源图比例，并限制最大宽度不超过最少的源图像素。 */
+.heroImage {
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
 }
 
 .cta {
@@ -120,12 +124,12 @@
 }
 
 .gallery {
-  max-width: 720px;
+  max-width: 600px;
   margin-top: 2rem;
 }
 
 .gallery img {
-  aspect-ratio: 4 / 3;
+  object-fit: contain;
 }
 
 .gallery figcaption {
@@ -197,6 +201,84 @@
 
   .heroGrid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-top: 3px solid #9a7b4f;
+  border-radius: 10px;
+  background: #fbfaf8;
+  color: #1f2937;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.bodyText {
+  max-width: 760px;
+  margin-top: 1.5rem;
+  color: #4b5563;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.faqList {
+  max-width: 820px;
+  margin-top: 1.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faqItem summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  color: #111827;
+  font-size: 1.02rem;
+  font-weight: 600;
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  color: #9a7b4f;
+  font-weight: 700;
+}
+
+.faqItem[open] summary::after {
+  content: "–";
+}
+
+.faqItem p {
+  margin: 0 0 1.15rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+@media (max-width: 860px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
 }

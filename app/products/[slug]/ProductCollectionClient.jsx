@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ProductCard } from "@/components/Cards";
-import { productCollections } from "@/lib/data";
+import { productCollections, designSlugFor } from "@/lib/data";
 import Modal from "@/components/Modal";
 import { ProductDetail } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
@@ -25,14 +25,17 @@ export default function ProductCollectionClient({ collection }) {
 
           <h1 className="page-heading">{collection.h1 ?? collection.title}</h1>
           <div className="grid">
-            {collection.items.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                href={product.slug ? `/door-designs/${product.slug}` : undefined}
-                onClick={() => setSelected(product)}
-              />
-            ))}
+            {collection.items.map((product) => {
+              const designSlug = designSlugFor(product);
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  href={designSlug ? `/door-designs/${designSlug}` : `/products/${collection.slug}`}
+                  onClick={() => setSelected(product)}
+                />
+              );
+            })}
           </div>
           <section style={{ marginTop: "3.5rem" }}>
             <h2 className="page-heading" style={{ fontSize: "1.5rem", marginBottom: "1.25rem" }}>

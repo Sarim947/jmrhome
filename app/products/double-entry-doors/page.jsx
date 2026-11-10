@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
@@ -33,26 +34,9 @@ const customizations = [
   { label: "Finish", text: "Wood-look, powder-coated and custom colors." }
 ];
 
-const designs = [
-  {
-    name: "Jmr-3670",
-    img: "/assets/images/products/armored/jmr3670.jpg",
-    alt: "Black double front entry doors",
-    desc: "Classic double entry doors in a deep matte black finish."
-  },
-  {
-    name: "Jmr-3672",
-    img: "/assets/images/products/armored/jmr3672.jpg",
-    alt: "Double front entry doors with sage green finish",
-    desc: "Classic double entry doors in a soft sage green finish."
-  },
-  {
-    name: "Celestial Bronze",
-    img: "/assets/images/daily/Bronze Relic render.jpg",
-    alt: "Bronze double front entry doors",
-    desc: "Double entry doors with radiant bronze textures."
-  }
-];
+const designs = doorDesigns
+  .filter((design) => design.collections.includes("double-entry-doors"))
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
@@ -152,12 +136,12 @@ export default function DoubleEntryDoorsPage() {
             {designs.length > 0 ? (
               <div className={styles.designGrid}>
                 {designs.map((item) => (
-                  <div key={item.name}>
+                <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
                     <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
                     <h3 className={styles.designName}>{item.name}</h3>
                     <p className={styles.designDesc}>{item.desc}</p>
-                  </div>
-                ))}
+                  </Link>
+              ))}
               </div>
             ) : null}
           </div>
