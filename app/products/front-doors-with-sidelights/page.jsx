@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
   title: "Front Doors with Sidelights | Entry Doors",
@@ -79,7 +80,7 @@ export default function SidelightDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  src="/assets/images/products/hires/jt-02.webp"
+                  width={1448} height={1086} src="/assets/images/products/hires/jt-02.webp"
                   alt="Modern entry door with sidelight and wood grain finish" loading="eager" fetchPriority="high"
                 />
               </div>
@@ -131,7 +132,7 @@ export default function SidelightDoorsPage() {
             <div className={styles.designGrid}>
               {designs.map((item) => (
                 <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
-                    <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                    <img className={styles.designImage} {...sizeAttrs(item.img)} src={item.img} alt={item.alt} loading="lazy" />
                     <h3 className={styles.designName}>{item.name}</h3>
                     <p className={styles.designDesc}>{item.desc}</p>
                   </Link>

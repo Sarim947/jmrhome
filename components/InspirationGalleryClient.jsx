@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export default function InspirationGalleryClient({ images }) {
   const [lightbox, setLightbox] = useState(null);
@@ -33,7 +34,7 @@ export default function InspirationGalleryClient({ images }) {
                 onClick={() => setLightbox({ src: fullImage, alt, label })}
                 aria-label={`View larger image: ${label}`}
               >
-                <img src={coverImage} alt={alt} loading={index < 4 ? "eager" : "lazy"} />
+                <img {...sizeAttrs(coverImage)} src={coverImage} alt={alt} loading={index < 4 ? "eager" : "lazy"} />
                 <span className="inspiration-zoom-hint" aria-hidden="true">
                   <i className="fas fa-search-plus" />
                 </span>
@@ -50,7 +51,7 @@ export default function InspirationGalleryClient({ images }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
+            <img {...sizeAttrs(lightbox.src)} src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>

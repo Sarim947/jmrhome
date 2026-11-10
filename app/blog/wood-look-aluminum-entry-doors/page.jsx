@@ -3,6 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/JsonLd";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
   title: "Wood-Look Aluminum vs Solid Wood Entry Doors",
@@ -57,7 +58,7 @@ export default function WoodLookAluminumArticle() {
 
             <img
                 className="article-hero-img"
-                  src="/assets/images/blog/wood-look-aluminum-entry-doors/hero.jpg"
+                  width={4001} height={2251} src="/assets/images/blog/wood-look-aluminum-entry-doors/hero.jpg"
                     alt="Wood Look Aluminum Entry Door For Modern Luxury Home" loading="eager" fetchPriority="high"
             />
 
@@ -324,10 +325,10 @@ export default function WoodLookAluminumArticle() {
 function ArticleImage({ src, alt }) {
   return (
     <img
-      src={src}
+      {...sizeAttrs(src)} src={src}
       alt={alt}
       loading="lazy"
-      style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }}
+      style={{ width: "100%", height: "auto", borderRadius: 20, margin: "2rem 0" }}
     />
   );
 }

@@ -3,6 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/JsonLd";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
   title: "Middle East Showcase: Dubai & Riyadh Exhibitions (2025)",
@@ -58,7 +59,7 @@ export default function MiddleEastShowcaseArticle() {
             <figure style={{ margin: 0 }}>
               <img
                 className="article-hero-img"
-                src="/assets/images/blog/middle-east-showcase/showcase-1.jpg"
+                width={1200} height={1200} src="/assets/images/blog/middle-east-showcase/showcase-1.jpg"
                 alt="The 18 sqm JMR Habitat stand at HOMELIFE UAE, Dubai World Trade Centre, with visitors inspecting entrance door samples"
                 loading="eager"
               />
@@ -164,7 +165,7 @@ export default function MiddleEastShowcaseArticle() {
 function ArticleImage({ src, alt, caption }) {
   return (
     <figure style={{ margin: "2rem 0" }}>
-      <img src={src} alt={alt} loading="lazy" style={{ width: "100%", borderRadius: 20 }} />
+      <img {...sizeAttrs(src)} src={src} alt={alt} loading="lazy" style={{ width: "100%", height: "auto", borderRadius: 20 }} />
       {caption ? (
         <figcaption style={{ fontSize: "0.85rem", color: "#666", marginTop: "0.6rem" }}>{caption}</figcaption>
       ) : null}

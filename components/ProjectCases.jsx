@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 const categories = ["All", "Villa", "Residential", "Apartment", "Hotel", "Commercial"];
 
@@ -39,7 +40,7 @@ export default function ProjectCases({ cases }) {
         <div className="project-case-grid">
           {visibleCases.map((projectCase) => (
             <article className="project-case-card" key={projectCase.id}>
-              <img src={projectCase.img} alt={projectCase.title} loading="lazy" />
+              <img {...sizeAttrs(projectCase.img)} src={projectCase.img} alt={projectCase.title} loading="lazy" />
               <div className="project-case-content">
                 <div className="project-case-meta">
                   <span>{projectCase.category}</span>

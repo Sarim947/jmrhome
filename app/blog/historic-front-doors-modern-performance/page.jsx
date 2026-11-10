@@ -3,6 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/JsonLd";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 const imageBase = "/assets/images/blog/historic-front-doors-modern-performance";
 
@@ -70,7 +71,7 @@ export default function HistoricFrontDoorsArticlePage() {
             <figure className="article-figure" style={{ marginTop: 0 }}>
               <img
                 className="article-hero-img"
-                src={`${imageBase}/larimer-square-historic-district.webp`}
+                {...sizeAttrs(`${imageBase}/larimer-square-historic-district.webp`)} src={`${imageBase}/larimer-square-historic-district.webp`}
                 alt="Historic brick buildings in Larimer Square, Denver"
                 loading="eager"
                 fetchPriority="high"
@@ -192,7 +193,7 @@ export default function HistoricFrontDoorsArticlePage() {
 function ArticleFigure({ src, alt, caption }) {
   return (
     <figure className="article-figure">
-      <img src={src} alt={alt} loading="lazy" decoding="async" />
+      <img {...sizeAttrs(src)} src={src} alt={alt} loading="lazy" decoding="async" />
       {caption ? <figcaption>{caption}</figcaption> : null}
     </figure>
   );

@@ -219,6 +219,7 @@
 }
 
 .productItem img {
+  height: auto;
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -319,6 +320,7 @@
 }
 
 .factoryItem img {
+  height: auto;
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;

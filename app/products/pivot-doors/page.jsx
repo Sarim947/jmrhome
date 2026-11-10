@@ -4,6 +4,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
   title: "Custom Pivot Doors | Oversized Pivot Doors",
@@ -95,7 +96,7 @@ export default function PivotDoorsPage() {
                 </div>
               </div>
               <div className={shared.splitImage}>
-                <img src="/assets/images/products/hires/pivot-prime-5893.webp" alt="Oversized custom aluminum pivot entry door" loading="eager" fetchPriority="high" />
+                <img width={1600} height={1200} src="/assets/images/products/hires/pivot-prime-5893.webp" alt="Oversized custom aluminum pivot entry door" loading="eager" fetchPriority="high" />
               </div>
             </div>
           </div>
@@ -149,7 +150,7 @@ export default function PivotDoorsPage() {
             <div className={styles.designGrid}>
               {designs.map((item) => (
                 <Link key={item.name} href={`/door-designs/${item.slug}`} className={styles.designCard}>
-                  <img className={styles.designImage} src={item.img} alt={item.alt} loading="lazy" />
+                  <img className={styles.designImage} {...sizeAttrs(item.img)} src={item.img} alt={item.alt} loading="lazy" />
                   <h3 className={styles.designName}>{item.name}</h3>
                   <p className={styles.designDesc}>{item.desc}</p>
                 </Link>

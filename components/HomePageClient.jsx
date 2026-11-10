@@ -47,7 +47,7 @@ export default function HomePageClient() {
               <p>JMR Habitat builds bespoke entrance doors where intelligent design meets security and art. Each door is made to your project dimensions, finish and hardware.</p>
               <div className="hero-img" style={{ height: 400 }}>
                 <img
-                  src="/assets/images/hero/hero-main.webp"
+                  width={1950} height={800} src="/assets/images/hero/hero-main.webp"
                   alt="Custom pivot entrance door on a modern architectural villa"
                   loading="eager"
                   fetchPriority="high"

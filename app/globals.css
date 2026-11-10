@@ -201,9 +201,22 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 /* ===== Card ===== */
 .card, .blog-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; overflow: hidden; }
 .card:hover, .blog-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.05); }
-.card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.card-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
 .blog-card { padding: 1.5rem; }
-.blog-card img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 24px; margin-bottom: 1rem; }
+.blog-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  border-radius: 24px;
+  margin-bottom: 1rem;
+}
 .card-content, .blog-card-content { padding: 1.5rem; }
 .card h3, .blog-card h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #1f2937; }
 .card h3 + p { margin-top: 0.35rem; }
@@ -399,6 +412,7 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 }
 
 .image-column img {
+  height: auto;
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -457,6 +471,7 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 }
 
 .article-hero-img {
+  height: auto;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -519,6 +534,7 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 }
 
 .article-figure-narrow img {
+  height: auto;
     width: min(100%, 420px);
     margin: 0 auto;
 }
@@ -592,7 +608,13 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 /* ===== Daily ===== */
 .daily-item { border: 1px solid #e5e7eb; border-radius: 24px; overflow: hidden; }
 .daily-item:hover { transform: translateY(-4px); }
-.daily-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.daily-item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
 .daily-info { padding: 1rem; }
 .daily-info strong { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #1f2937; }
 .daily-info p { font-size: 16px; line-height: 1.4; color: #4b5563; margin-top: 0.5rem; }
@@ -680,6 +702,7 @@ h2, .page-heading { font-size: 2rem; margin-bottom: 2rem; border-left: 4px solid
 }
 
 .project-case-card img {
+  height: auto;
   width: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;

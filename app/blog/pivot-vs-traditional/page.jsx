@@ -3,6 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/JsonLd";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
   title: "Pivot Door vs Traditional Front Door",
@@ -54,7 +55,7 @@ export default function PivotArticlePage() {
               </div>
             </header>
 
-            <img className="article-hero-img" src="/assets/images/blog/pivot-hero.jpg" alt="Modern luxury villa with oversized pivot door entrance" loading="eager" />
+            <img className="article-hero-img" width={2918} height={1876} src="/assets/images/blog/pivot-hero.jpg" alt="Modern luxury villa with oversized pivot door entrance" loading="eager" />
 
             <div className="article-content">
               <p>Modern luxury homes are increasingly using pivot doors as a centerpiece of exterior design. Their oversized appearance, clean lines, and architectural impact make them one of the most requested entrance styles in high-end residential projects.</p>
@@ -130,5 +131,5 @@ export default function PivotArticlePage() {
 }
 
 function ArticleImage({ src, alt }) {
-  return <img src={src} alt={alt} loading="lazy" style={{ width: "100%", borderRadius: 20, margin: "2rem 0" }} />;
+  return <img {...sizeAttrs(src)} src={src} alt={alt} loading="lazy" style={{ width: "100%", height: "auto", borderRadius: 20, margin: "2rem 0" }} />;
 }

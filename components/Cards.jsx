@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export function ProductCard({ product, href, onClick }) {
   const title = product.name ?? product.title;
@@ -6,7 +7,7 @@ export function ProductCard({ product, href, onClick }) {
 
   const content = (
     <>
-      {image ? <img className="card-img" src={image} alt={product.altText ?? title} loading="lazy" /> : null}
+      {image ? <img className="card-img" {...sizeAttrs(image)} src={image} alt={product.altText ?? title} loading="lazy" /> : null}
       <div className="card-content">
         <h3>{title}</h3>
         <p>{product.shortDesc}</p>
@@ -34,7 +35,7 @@ export function DailyCard({ work, onClick }) {
 
   return (
     <button className="daily-item as-card-button" onClick={onClick}>
-      {image ? <img src={image} alt={work.altText ?? work.name} loading="lazy" /> : null}
+      {image ? <img {...sizeAttrs(image)} src={image} alt={work.altText ?? work.name} loading="lazy" /> : null}
       <div className="daily-info">
         <strong>{work.name}</strong>
         <br />
@@ -48,7 +49,7 @@ export function DailyCard({ work, onClick }) {
 export function BlogCard({ post }) {
   const content = (
     <>
-      <img src={post.img} alt={post.cardAlt ?? post.title} loading="lazy" />
+      <img {...sizeAttrs(post.img)} src={post.img} alt={post.cardAlt ?? post.title} loading="lazy" />
       <div className="blog-content">
         <h3>{post.title}</h3>
         <small>{post.date}</small>

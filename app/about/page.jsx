@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import styles from "./about.module.css";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 const heroImage = "/assets/images/about/architectural-habitat-entrance.png";
 const beliefImage = "/assets/images/daily/Walnut Accent Elite render.jpg";
@@ -135,7 +136,7 @@ export default function AboutPage() {
           </div>
 
           <figure className={styles.heroImage}>
-            <img src={heroImage} alt="Modern architectural villa entrance with glass doors and landscaped outdoor living space" loading="eager" fetchPriority="high" />
+            <img {...sizeAttrs(heroImage)} src={heroImage} alt="Modern architectural villa entrance with glass doors and landscaped outdoor living space" loading="eager" fetchPriority="high" />
           </figure>
 
           <div className="container">
@@ -158,7 +159,7 @@ export default function AboutPage() {
         <section className={`${styles.storySection} ${styles.warmSection}`}>
           <div className={`container ${styles.storyGrid}`}>
             <div className={styles.storyImage} aria-hidden="true">
-              <img src={beliefImage} alt="" loading="lazy" />
+              <img {...sizeAttrs(beliefImage)} src={beliefImage} alt="" loading="lazy" />
             </div>
             <div className={styles.storyText}>
               <span className={styles.eyebrow}>Why We Exist</span>
@@ -180,7 +181,7 @@ export default function AboutPage() {
             <div className={styles.productGrid}>
               {buildCategories.map((item) => (
                 <article className={styles.productItem} key={item.title}>
-                  <img src={item.image} alt={item.alt} loading="lazy" />
+                  <img {...sizeAttrs(item.image)} src={item.image} alt={item.alt} loading="lazy" />
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
                 </article>
@@ -226,7 +227,7 @@ export default function AboutPage() {
             <div className={styles.factoryGrid}>
               {factoryScenes.map((item) => (
                 <figure className={styles.factoryItem} key={item.title}>
-                  <img src={item.image} alt={item.alt} loading="lazy" />
+                  <img {...sizeAttrs(item.image)} src={item.image} alt={item.alt} loading="lazy" />
                   <figcaption>{item.title}</figcaption>
                 </figure>
               ))}
@@ -253,7 +254,7 @@ export default function AboutPage() {
 
         <section className={styles.visionSection}>
           <figure className={styles.visionImage}>
-            <img src={visionImage} alt="Future architectural living concept with facade, outdoor space and landscape" loading="lazy" />
+            <img {...sizeAttrs(visionImage)} src={visionImage} alt="Future architectural living concept with facade, outdoor space and landscape" loading="lazy" />
           </figure>
           <div className={`container ${styles.visionText}`}>
             <span className={styles.eyebrow}>Where We Are Going</span>

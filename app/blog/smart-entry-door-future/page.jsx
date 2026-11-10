@@ -3,6 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import { createPageMetadata } from "@/lib/metadata";
 import JsonLd from "@/components/JsonLd";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 const imageBase = "/assets/images/blog/smart-entry-door-future";
 
@@ -70,7 +71,7 @@ export default function SmartEntryDoorFuturePage() {
 
             <img
               className="article-hero-img"
-              src={`${imageBase}/jmr-smart-entry-door-hero.webp`}
+              {...sizeAttrs(`${imageBase}/jmr-smart-entry-door-hero.webp`)} src={`${imageBase}/jmr-smart-entry-door-hero.webp`}
               alt="Luxury JMR smart entry door with integrated biometric handle and architectural wall lighting"
               loading="eager"
             />
@@ -266,7 +267,7 @@ export default function SmartEntryDoorFuturePage() {
 function ArticleFigure({ src, alt, source, className = "" }) {
   return (
     <figure className={`article-figure ${className}`.trim()}>
-      <img src={src} alt={alt} loading="lazy" />
+      <img {...sizeAttrs(src)} src={src} alt={alt} loading="lazy" />
       {source ? <figcaption>{source}</figcaption> : null}
     </figure>
   );

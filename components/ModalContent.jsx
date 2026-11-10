@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sizeAttrs } from "@/lib/imageSizes";
 
 export function ProductDetail({ product }) {
   const [lightbox, setLightbox] = useState(null);
@@ -27,7 +28,7 @@ export function ProductDetail({ product }) {
               onClick={() => setLightbox({ src: product.img, alt: product.altText ?? product.name, label: product.name })}
               aria-label={`View larger image of ${product.name}`}
             >
-              <img src={product.img} alt={product.altText ?? product.name} loading="lazy" />
+              <img {...sizeAttrs(product.img)} src={product.img} alt={product.altText ?? product.name} loading="lazy" />
               <span className="zoom-hint">
                 <i className="fas fa-search-plus" />
               </span>
@@ -47,7 +48,7 @@ export function ProductDetail({ product }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
+            <img {...sizeAttrs(lightbox.src)} src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>
@@ -63,10 +64,10 @@ export function ProductSummary({ product }) {
       <p>{product.description}</p>
       {product.img ? (
         <img
-          src={product.img}
+          {...sizeAttrs(product.img)} src={product.img}
           alt={product.altText ?? product.name}
           loading="lazy"
-          style={{ width: "100%", maxWidth: 400, borderRadius: 16, margin: "0 auto 1.5rem", display: "block" }}
+          style={{ width: "100%", height: "auto", maxWidth: 400, borderRadius: 16, margin: "0 auto 1.5rem", display: "block" }}
         />
       ) : null}
       <ParamsTable params={product.params} />
@@ -104,7 +105,7 @@ export function DailyModalContent({ work }) {
               aria-label={`View larger real photo of ${work.name}`}
             >
               <img
-                src={work.realImg}
+                {...sizeAttrs(work.realImg)} src={work.realImg}
                 alt={`${work.altText ?? work.name} - real photo`}
                 loading="lazy"
               />
@@ -121,7 +122,7 @@ export function DailyModalContent({ work }) {
               aria-label={`View larger render of ${work.name}`}
             >
               <img
-                src={work.renderImg}
+                {...sizeAttrs(work.renderImg)} src={work.renderImg}
                 alt={`${work.altText ?? work.name} - render`}
                 loading="lazy"
               />
@@ -152,7 +153,7 @@ export function DailyModalContent({ work }) {
             <button type="button" className="image-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close large image">
               ×
             </button>
-            <img src={lightbox.src} alt={lightbox.alt} loading="lazy" />
+            <img {...sizeAttrs(lightbox.src)} src={lightbox.src} alt={lightbox.alt} loading="lazy" />
             <p>{lightbox.label}</p>
           </div>
         </div>

@@ -87,7 +87,7 @@ export default function ProductsPage() {
             <div className={styles.split}>
               <div className={styles.splitImage}>
                 <img
-                  src="/assets/images/products/pivot-prime-5893/oversized-pivot-cover-mqqb8sao.webp"
+                  width={1200} height={900} src="/assets/images/products/pivot-prime-5893/oversized-pivot-cover-mqqb8sao.webp"
                   alt="Oversized custom pivot entrance door"
                   loading="lazy"
                 />
