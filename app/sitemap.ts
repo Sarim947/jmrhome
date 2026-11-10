@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { blogPosts, doorDesigns, productCategories, productCollections } from "../lib/data";
+import { blogPosts, doorDesigns, inspirationImages, productCategories, productCollections } from "../lib/data";
 import lastmodData from "../lib/generated/lastmod.json";
 
 const siteUrl = "https://jmrhabitat.com";
@@ -14,6 +14,16 @@ const fallbackDate = lastmodMap.__fallback ?? "2026-10-27";
 
 function absoluteUrl(path: string) {
   return `${siteUrl}${path === "/" ? "" : path}`;
+}
+
+/**
+ * 图片条目（image sitemap）让 Google 图片搜索直接发现素材，
+ * 不必等它自己从页面里爬到。没有图片时返回 undefined，避免输出空数组。
+ */
+function imageEntries(paths: Array<string | undefined>): string[] | undefined {
+  const urls = paths.filter((value): value is string => Boolean(value)).map(absoluteUrl);
+  const unique = Array.from(new Set(urls));
+  return unique.length ? unique : undefined;
 }
 
 function lastModifiedFor(path: string): Date {
@@ -35,7 +45,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(path),
     lastModified: lastModifiedFor(path),
     changeFrequency: (["weekly", "yearly", "weekly", "monthly", "weekly", "weekly", "weekly"] as const)[index],
-    priority: [1, 0.5, 0.9, 0.7, 0.8, 0.7, 0.8][index]
+    priority: [1, 0.5, 0.9, 0.7, 0.8, 0.7, 0.8][index],
+    images: path === "/inspiration" ? imageEntries(inspirationImages.map((item) => item.src)) : undefined
   }));
 
   const productCategoryRoutes: MetadataRoute.Sitemap = productCategories
@@ -44,21 +55,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(category.href),
       lastModified: lastModifiedFor(category.href),
       changeFrequency: "monthly",
-      priority: 0.7
+      priority: 0.7,
+      images: imageEntries([category.img])
     }));
 
   const productRoutes: MetadataRoute.Sitemap = productCollections.map((collection) => ({
     url: absoluteUrl(`/products/${collection.slug}`),
     lastModified: lastModifiedFor(`/products/${collection.slug}`),
     changeFrequency: "monthly",
-    priority: 0.7
+    priority: 0.7,
+    images: imageEntries([collection.img, ...(collection.items ?? []).map((item: { img?: string }) => item.img)])
   }));
 
   const doorDesignRoutes: MetadataRoute.Sitemap = doorDesigns.map((design) => ({
     url: absoluteUrl(`/door-designs/${design.slug}`),
     lastModified: lastModifiedFor(`/door-designs/${design.slug}`),
     changeFrequency: "monthly",
-    priority: 0.7
+    priority: 0.7,
+    images: imageEntries([design.img])
   }));
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts
