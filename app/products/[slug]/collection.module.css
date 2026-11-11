@@ -1,0 +1,52 @@
+/* FAQ block for the generated collection pages (/products/[slug]).
+   Kept separate from the per-series page modules so the four collection
+   routes and the nine hand-built series pages can drift independently. */
+
+.faqSection {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.faqHeading {
+  margin: 0 0 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.faqList {
+  border-top: 1px solid #e5e7eb;
+}
+
+.faqItem {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faqQuestion {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.faqAnswer {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .faqSection {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+  }
+
+  .faqQuestion {
+    font-size: 1rem;
+  }
+}

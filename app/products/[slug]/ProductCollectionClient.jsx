@@ -7,8 +7,9 @@ import { productCollections, designSlugFor } from "@/lib/data";
 import Modal from "@/components/Modal";
 import { ProductDetail } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
+import styles from "./collection.module.css";
 
-export default function ProductCollectionClient({ collection, specSlot }) {
+export default function ProductCollectionClient({ collection, specSlot, faqs = [] }) {
   const [selected, setSelected] = useState(null);
 
   return (
@@ -38,6 +39,22 @@ export default function ProductCollectionClient({ collection, specSlot }) {
             })}
           </div>
           {specSlot}
+
+          {faqs.length > 0 ? (
+            <section className={styles.faqSection}>
+              <h2 className={styles.faqHeading}>
+                {collection.h1 ?? collection.title} FAQ
+              </h2>
+              <div className={styles.faqList}>
+                {faqs.map((item) => (
+                  <div className={styles.faqItem} key={item.question}>
+                    <h3 className={styles.faqQuestion}>{item.question}</h3>
+                    <p className={styles.faqAnswer}>{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           <section style={{ marginTop: "3.5rem" }}>
             <h2 className="page-heading" style={{ fontSize: "1.5rem", marginBottom: "1.25rem" }}>
