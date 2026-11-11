@@ -7,6 +7,7 @@ import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import ProcurementSpec from "@/components/ProcurementSpec";
 import { resolveSpecSeries } from "@/lib/procurementSpecs";
+import { noteForDesign } from "@/lib/designNotes";
 import { imageSize } from "@/lib/imageSizes";
 import styles from "./page.module.css";
 
@@ -71,6 +72,7 @@ export default async function DoorDesignPage({ params }) {
     : "This custom door is made to project dimensions, finish selections and configuration requirements.";
 
   const heroSize = imageSize(design.img);
+  const note = noteForDesign(design.slug);
   const faqs = design.faqs ?? [];
   const highlights = design.highlights ?? [];
   const paragraphs = String(design.description ?? "").split("\n\n").filter(Boolean);
@@ -173,6 +175,19 @@ export default async function DoorDesignPage({ params }) {
             </dl>
           </div>
         </section>
+
+        {note ? (
+          <section className={styles.section}>
+            <div className="container">
+              <h2>{note.heading}</h2>
+              <div className={styles.noteBody}>
+                {note.paragraphs.map((text) => (
+                  <p key={text}>{text}</p>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <ProcurementSpec
           series={specSeries}

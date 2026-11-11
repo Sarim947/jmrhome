@@ -234,13 +234,27 @@
   line-height: 1.75;
 }
 
+.noteBody {
+  max-width: 720px;
+  margin-top: 1.75rem;
+}
+
+.noteBody p {
+  margin: 0 0 1.35rem;
+  color: #374151;
+  font-size: 1.04rem;
+  line-height: 1.78;
+}
+
+.noteBody p:last-child {
+  margin-bottom: 0;
+}
+
 .faqList {
   max-width: 820px;
   margin-top: 1.75rem;
   border-top: 1px solid #e5e7eb;
-}
-
-.faqItem {
+}.faqItem {
   border-bottom: 1px solid #e5e7eb;
 }
 
