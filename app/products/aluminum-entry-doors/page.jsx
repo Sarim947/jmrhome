@@ -1,10 +1,13 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Aluminum Entry Doors | Custom Front Doors",
@@ -62,9 +65,25 @@ const faqs = [
   }
 ];
 
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Aluminum Entry Doors", path: "/products/aluminum-entry-doors" }
+  ]),
+  collectionServiceSchema({
+    name: "Aluminum Entry Doors",
+    description:
+      "Custom aluminum entry doors built to project dimensions, with modern profiles, custom finishes and architectural configurations.",
+    path: "/products/aluminum-entry-doors"
+  }),
+  faqPageSchema(faqs)
+];
+
 export default function AluminumEntryDoorsPage() {
   return (
     <SiteShell>
+      <JsonLd data={structuredData} />
       <main>
         {/* SECTION 1 — Hero */}
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
@@ -137,6 +156,8 @@ export default function AluminumEntryDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <ProcurementSpec series="aluminum-entry-doors" />
+
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Designs</span>

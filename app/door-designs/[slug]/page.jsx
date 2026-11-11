@@ -5,6 +5,8 @@ import { doorDesigns, productCategories } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
+import ProcurementSpec from "@/components/ProcurementSpec";
+import { resolveSpecSeries } from "@/lib/procurementSpecs";
 import { imageSize } from "@/lib/imageSizes";
 import styles from "./page.module.css";
 
@@ -42,6 +44,7 @@ export default async function DoorDesignPage({ params }) {
   if (!design) notFound();
 
   const primaryCollection = categoryForSlug(design.collections[0]);
+  const specSeries = resolveSpecSeries(design.collections);
   const relatedCollections = design.collections.map(categoryForSlug).filter(Boolean);
   const relatedDesigns = [
     ...doorDesigns.filter(
@@ -170,6 +173,12 @@ export default async function DoorDesignPage({ params }) {
             </dl>
           </div>
         </section>
+
+        <ProcurementSpec
+          series={specSeries}
+          id={design.slug}
+          seriesHref={primaryCollection?.href}
+        />
 
         <section className={styles.section}>
           <div className="container">

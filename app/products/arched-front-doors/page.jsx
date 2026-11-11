@@ -1,7 +1,8 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, collectionServiceSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns, productCategories } from "@/lib/data";
 import shared from "../products.module.css";
@@ -130,7 +131,13 @@ export default function ArchedFrontDoorsPage() {
             { name: "Products", path: "/products" },
             { name: "Arched Front Doors", path: "/products/arched-front-doors" }
           ]),
-          faqJsonLd
+          faqJsonLd,
+          collectionServiceSchema({
+            name: "Arched Front Doors",
+            description:
+              "Custom arched entrance doors built to a measured opening, with curved heads, sidelights or transoms combined in the same entrance system.",
+            path: "/products/arched-front-doors"
+          })
         ]}
       />
       <main>
@@ -201,6 +208,8 @@ export default function ArchedFrontDoorsPage() {
             </ul>
           </div>
         </section>
+
+        <ProcurementSpec series="arched-front-doors" />
 
         <section className={shared.sectionBlock}>
           <div className="container">

@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Double Entry Doors | Custom Double Doors",
@@ -62,9 +65,25 @@ const faqs = [
   }
 ];
 
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Double Front Doors", path: "/products/double-entry-doors" }
+  ]),
+  collectionServiceSchema({
+    name: "Double Front Doors",
+    description:
+      "Custom double front doors built for wider entrance openings, with project-specific dimensions, materials, finishes and configurations.",
+    path: "/products/double-entry-doors"
+  }),
+  faqPageSchema(faqs)
+];
+
 export default function DoubleEntryDoorsPage() {
   return (
     <SiteShell>
+      <JsonLd data={structuredData} />
       <main>
         {/* SECTION 1 — Hero */}
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
@@ -130,6 +149,8 @@ export default function DoubleEntryDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <ProcurementSpec series="double-entry-doors" />
+
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Designs</span>

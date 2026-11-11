@@ -1,10 +1,13 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Front Doors with Sidelights | Entry Doors",
@@ -58,9 +61,25 @@ const faqs = [
   }
 ];
 
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Front Doors with Sidelights", path: "/products/front-doors-with-sidelights" }
+  ]),
+  collectionServiceSchema({
+    name: "Front Doors with Sidelights",
+    description:
+      "Custom entrance doors with single or double sidelights, built to your opening dimensions.",
+    path: "/products/front-doors-with-sidelights"
+  }),
+  faqPageSchema(faqs)
+];
+
 export default function SidelightDoorsPage() {
   return (
     <SiteShell>
+      <JsonLd data={structuredData} />
       <main>
         {/* SECTION 1 — Hero */}
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
@@ -125,6 +144,8 @@ export default function SidelightDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <ProcurementSpec series="front-doors-with-sidelights" />
+
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Designs</span>

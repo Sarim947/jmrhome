@@ -1,10 +1,13 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Modern Front Doors | Custom Modern Entry Doors",
@@ -62,9 +65,25 @@ const faqs = [
   }
 ];
 
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Modern Front Doors", path: "/products/modern-front-doors" }
+  ]),
+  collectionServiceSchema({
+    name: "Modern Front Doors",
+    description:
+      "Custom modern front doors built to project dimensions, with clean architectural lines, custom finishes and aluminum or steel entrance systems.",
+    path: "/products/modern-front-doors"
+  }),
+  faqPageSchema(faqs)
+];
+
 export default function ModernFrontDoorsPage() {
   return (
     <SiteShell>
+      <JsonLd data={structuredData} />
       <main>
         {/* SECTION 1 — Hero */}
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
@@ -137,6 +156,8 @@ export default function ModernFrontDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <ProcurementSpec series="modern-front-doors" />
+
         <section className={shared.sectionBlock}>
           <div className="container">
             <span className={shared.eyebrow}>Designs</span>

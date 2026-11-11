@@ -3,6 +3,8 @@ import { productCollections } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
+import ProcurementSpec from "@/components/ProcurementSpec";
+import { collectionSpecMap } from "@/lib/procurementSpecs";
 import ProductCollectionClient from "./ProductCollectionClient";
 
 export function generateStaticParams() {
@@ -34,7 +36,14 @@ export default async function ProductCollectionPage({ params }) {
           { name: collection.title, path: `/products/${collection.slug}` }
         ])}
       />
-      <ProductCollectionClient collection={collection} />
+      <ProductCollectionClient
+        collection={collection}
+        specSlot={
+          collectionSpecMap[collection.slug] ? (
+            <ProcurementSpec series={collection.slug} id={collection.slug} />
+          ) : null
+        }
+      />
     </>
   );
 }

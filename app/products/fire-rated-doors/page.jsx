@@ -1,7 +1,8 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, collectionServiceSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "../modern-front-doors/page.module.css";
@@ -134,7 +135,13 @@ export default function FireRatedDoorsPage() {
             { name: "Products", path: "/products" },
             { name: "Fire Rated Doors", path: "/products/fire-rated-doors" }
           ]),
-          faqJsonLd
+          faqJsonLd,
+          collectionServiceSchema({
+            name: "Fire Rated Entrance Doors",
+            description:
+              "Fire rated entrance door assemblies built to the rating and standard named in your project documents, in steel or aluminum systems, single or double leaf.",
+            path: "/products/fire-rated-doors"
+          })
         ]}
       />
       <main>
@@ -206,6 +213,8 @@ export default function FireRatedDoorsPage() {
             </ul>
           </div>
         </section>
+
+        <ProcurementSpec series="fire-rated-doors" />
 
         <section className={styles.sectionTight}>
           <div className="container">

@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
+import ProcurementSpec from "@/components/ProcurementSpec";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
   title: "Custom Pivot Doors | Oversized Pivot Doors",
@@ -75,9 +78,25 @@ const faqs = [
   }
 ];
 
+const structuredData = [
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "Custom Aluminum Pivot Doors", path: "/products/pivot-doors" }
+  ]),
+  collectionServiceSchema({
+    name: "Custom Aluminum Pivot Doors",
+    description:
+      "Custom pivot entry doors engineered for residential and architectural openings, from 48 × 80 in to oversized 96 × 138 in configurations.",
+    path: "/products/pivot-doors"
+  }),
+  faqPageSchema(faqs)
+];
+
 export default function PivotDoorsPage() {
   return (
     <SiteShell>
+      <JsonLd data={structuredData} />
       <main>
         <section className={`${shared.sectionBlock} ${shared.sectionBlockFirst}`}>
           <div className="container">
@@ -142,6 +161,8 @@ export default function PivotDoorsPage() {
             </p>
           </div>
         </section>
+
+        <ProcurementSpec series="pivot-doors" />
 
         <section className={shared.sectionBlock}>
           <div className="container">

@@ -8,7 +8,7 @@ import Modal from "@/components/Modal";
 import { ProductDetail } from "@/components/ModalContent";
 import SiteShell from "@/components/SiteShell";
 
-export default function ProductCollectionClient({ collection }) {
+export default function ProductCollectionClient({ collection, specSlot }) {
   const [selected, setSelected] = useState(null);
 
   return (
@@ -37,6 +37,8 @@ export default function ProductCollectionClient({ collection }) {
               );
             })}
           </div>
+          {specSlot}
+
           <section style={{ marginTop: "3.5rem" }}>
             <h2 className="page-heading" style={{ fontSize: "1.5rem", marginBottom: "1.25rem" }}>
               More Door Collections
