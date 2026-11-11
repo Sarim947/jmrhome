@@ -2,6 +2,7 @@ import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
 import SeriesEditorial from "@/components/SeriesEditorial";
+import FireAssemblyDiagram from "@/components/FireAssemblyDiagram";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/metadata";
@@ -218,6 +219,9 @@ export default function FireRatedDoorsPage() {
         <ProcurementSpec series="fire-rated-doors" />
 
         <SeriesEditorial series="fire-rated-doors" part="anatomy" />
+        <div className="container">
+          <FireAssemblyDiagram />
+        </div>
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>

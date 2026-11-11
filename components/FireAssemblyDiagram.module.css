@@ -1,0 +1,59 @@
+.figure {
+  margin: 0;
+  padding: 4.5rem 0 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #111827;
+}
+
+.labelStrong {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  fill: #111827;
+}
+
+.labelMuted {
+  font-size: 12px;
+  font-weight: 500;
+  fill: #6b7280;
+}
+
+.labelSeal {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #3d2c0c;
+}
+
+.caption {
+  max-width: 760px;
+  margin: 1.5rem auto 0;
+  color: #858b93;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .figure {
+    padding-top: 3.5rem;
+  }
+
+  .caption {
+    text-align: left;
+  }
+}
