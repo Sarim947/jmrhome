@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/metadata";
@@ -216,6 +217,7 @@ export default function FireRatedDoorsPage() {
 
         <ProcurementSpec series="fire-rated-doors" />
 
+        <SeriesEditorial series="fire-rated-doors" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -254,6 +256,8 @@ export default function FireRatedDoorsPage() {
           </div>
         </section>
 
+        <SeriesEditorial series="fire-rated-doors" part="specify" muted />
+        <SeriesEditorial series="fire-rated-doors" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Fire Rated Entrance Doors FAQ</h2>

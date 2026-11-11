@@ -2,6 +2,7 @@ import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
@@ -121,6 +122,7 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
+        <SeriesEditorial series="pivot-doors" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -180,6 +182,8 @@ export default function PivotDoorsPage() {
           </div>
         </section>
 
+        <SeriesEditorial series="pivot-doors" part="specify" muted />
+        <SeriesEditorial series="pivot-doors" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Custom Pivot Doors FAQ</h2>

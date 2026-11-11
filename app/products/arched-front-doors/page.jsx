@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/metadata";
@@ -171,6 +172,7 @@ export default function ArchedFrontDoorsPage() {
           </div>
         </section>
 
+        <SeriesEditorial series="arched-front-doors" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -240,6 +242,8 @@ export default function ArchedFrontDoorsPage() {
           </div>
         </section>
 
+        <SeriesEditorial series="arched-front-doors" part="specify" muted />
+        <SeriesEditorial series="arched-front-doors" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Arched Front Doors FAQ</h2>

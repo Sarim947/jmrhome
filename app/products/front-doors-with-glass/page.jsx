@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
@@ -113,6 +114,7 @@ export default function GlassFrontDoorsPage() {
         </section>
 
         {/* SECTION 2 — Configurations */}
+        <SeriesEditorial series="front-doors-with-glass" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -168,6 +170,8 @@ export default function GlassFrontDoorsPage() {
         </section>
 
         {/* SECTION 5 — FAQ */}
+        <SeriesEditorial series="front-doors-with-glass" part="specify" muted />
+        <SeriesEditorial series="front-doors-with-glass" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Front Doors with Glass FAQ</h2>

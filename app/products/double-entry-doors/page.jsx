@@ -2,6 +2,7 @@ import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import { createPageMetadata } from "@/lib/metadata";
 import shared from "../products.module.css";
 import styles from "./page.module.css";
@@ -113,6 +114,7 @@ export default function DoubleEntryDoorsPage() {
         </section>
 
         {/* SECTION 2 — Configurations */}
+        <SeriesEditorial series="double-entry-doors" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -170,6 +172,8 @@ export default function DoubleEntryDoorsPage() {
         </section>
 
         {/* SECTION 5 — FAQ */}
+        <SeriesEditorial series="double-entry-doors" part="specify" muted />
+        <SeriesEditorial series="double-entry-doors" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Double Front Doors FAQ</h2>

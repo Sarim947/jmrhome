@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import SeriesEditorial from "@/components/SeriesEditorial";
 import { createPageMetadata } from "@/lib/metadata";
 import { doorDesigns } from "@/lib/data";
 import shared from "../products.module.css";
@@ -108,6 +109,7 @@ export default function SidelightDoorsPage() {
         </section>
 
         {/* SECTION 2 — Configurations */}
+        <SeriesEditorial series="front-doors-with-sidelights" part="anatomy" />
         <section className={styles.sectionTight}>
           <div className="container">
             <span className={shared.eyebrow}>Configurations</span>
@@ -163,6 +165,8 @@ export default function SidelightDoorsPage() {
         </section>
 
         {/* SECTION 6 — FAQ */}
+        <SeriesEditorial series="front-doors-with-sidelights" part="specify" muted />
+        <SeriesEditorial series="front-doors-with-sidelights" part="install" />
         <section className={shared.sectionBlock}>
           <div className="container">
             <h2 className={shared.heading}>Front Doors with Sidelights FAQ</h2>
