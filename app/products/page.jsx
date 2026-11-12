@@ -60,6 +60,11 @@ export default function ProductsPage() {
               <ProductCard key={category.slug} product={category} href={category.href} />
             ))}
           </div>
+          <p style={{ marginTop: "2rem", fontSize: "0.9375rem" }}>
+            <Link href="/door-designs" className={styles.inlineLink}>
+              View every door design in one grid -&gt;
+            </Link>
+          </p>
         </div>
 
         <section className={styles.sectionBlock}>

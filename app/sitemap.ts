@@ -67,6 +67,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: imageEntries([collection.img, ...(collection.items ?? []).map((item: { img?: string }) => item.img)])
   }));
 
+  // The all-designs index: one entry for the grid, carrying every design image
+  // so image search sees the whole range from a single URL.
+  const doorIndexRoute: MetadataRoute.Sitemap = [
+    {
+      url: absoluteUrl("/door-designs"),
+      lastModified: lastModifiedFor("/door-designs"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+      images: imageEntries(doorDesigns.map((design) => design.img))
+    }
+  ];
+
   const doorDesignRoutes: MetadataRoute.Sitemap = doorDesigns.map((design) => ({
     url: absoluteUrl(`/door-designs/${design.slug}`),
     lastModified: lastModifiedFor(`/door-designs/${design.slug}`),
@@ -84,5 +96,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6
     }));
 
-  return [...staticRoutes, ...productCategoryRoutes, ...productRoutes, ...doorDesignRoutes, ...blogRoutes];
+  return [
+    ...staticRoutes,
+    ...productCategoryRoutes,
+    ...productRoutes,
+    ...doorIndexRoute,
+    ...doorDesignRoutes,
+    ...blogRoutes
+  ];
 }

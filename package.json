@@ -8,6 +8,8 @@
     "prebuild": "node scripts/gen-lastmod.mjs",
     "build": "next build",
     "start": "next start",
+    "check:designs": "node scripts/check-new-designs.mjs",
+    "check:designs:accept": "node scripts/check-new-designs.mjs --update",
     "lint": "next lint"
   },
   "dependencies": {
