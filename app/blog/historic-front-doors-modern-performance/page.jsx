@@ -46,7 +46,7 @@ export default function HistoricFrontDoorsArticlePage() {
           blogPostingSchema({
             headline: "Historic Front Door Replacement: Keep the Original Look, Add Modern Performance",
             description: "How historic front doors can retain traditional proportions, panels, glass and hardware while adding modern insulation, sealing and security.",
-            image: "${imageBase}/larimer-square-historic-district.webp",
+            image: `${imageBase}/larimer-square-historic-district.webp`,
             path: "/blog/historic-front-doors-modern-performance",
             datePublished: "2026-10-02"
           })

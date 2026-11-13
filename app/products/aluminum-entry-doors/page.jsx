@@ -105,7 +105,7 @@ export default function AluminumEntryDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  width={1600} height={1200} src="/assets/images/products/hires/classic-3670.webp"
+                  width={1600} height={1200} src="/assets/images/products/hires/fusion-5843.webp"
                   alt="Aluminum entry door" loading="eager" fetchPriority="high"
                 />
               </div>

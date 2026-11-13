@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
 import { doorDesigns, productCategories } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 import ProcurementSpec from "@/components/ProcurementSpec";
+import ProductImage from "@/components/ProductImage";
 import { resolveSpecSeries } from "@/lib/procurementSpecs";
 import { noteForDesign } from "@/lib/designNotes";
 import { imageSize } from "@/lib/imageSizes";
@@ -40,6 +41,16 @@ export async function generateMetadata({ params }) {
 
 export default async function DoorDesignPage({ params }) {
   const { slug } = await params;
+  // Retired duplicate: retain inbound links to the user-confirmed model.
+  const retiredDesigns = {
+    "jmr-2105": "j-2015",
+    "classic-3670": "jmr-3670",
+    "moonlight-3610": "jmr-3610",
+    "hybrid-2103": "jmr-2103"
+  };
+  if (Object.hasOwn(retiredDesigns, slug)) {
+    permanentRedirect(`/door-designs/${retiredDesigns[slug]}`);
+  }
   const design = doorDesigns.find((item) => item.slug === slug);
 
   if (!design) notFound();
@@ -133,7 +144,7 @@ export default async function DoorDesignPage({ params }) {
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
               <figure className={styles.heroImage}>
-                <img
+                <ProductImage
                   src={design.img}
                   alt={design.altText}
                   width={heroSize?.w}
@@ -200,7 +211,7 @@ export default async function DoorDesignPage({ params }) {
             <h2>Image gallery</h2>
             <div className={styles.gallery}>
               <figure>
-                <img
+                <ProductImage
                   src={design.img}
                   alt={design.altText}
                   width={heroSize?.w}

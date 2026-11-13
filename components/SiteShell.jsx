@@ -97,7 +97,7 @@ export default function SiteShell({ children }) {
                   <li className={`nav-dropdown ${productsOpen ? "open" : ""}`} key={item.href}>
                     <button
                       type="button"
-                      className={`nav-dropdown-toggle ${isActive(item.href) ? "active" : ""}`}
+                      className={`nav-dropdown-toggle ${(isActive(item.href) || isActive("/door-designs")) ? "active" : ""}`}
                       onClick={() => setProductsOpen((value) => !value)}
                       aria-expanded={productsOpen}
                     >
@@ -107,6 +107,9 @@ export default function SiteShell({ children }) {
                     <div className="nav-dropdown-menu">
                       <Link href="/products" className={pathname === "/products" ? "active" : ""} onClick={closeNavigation}>
                         All Products
+                      </Link>
+                      <Link href="/door-designs" className={isActive("/door-designs") ? "active" : ""} onClick={closeNavigation}>
+                        All Door Designs
                       </Link>
                       {productCategories
                         .filter((category) => category.href)

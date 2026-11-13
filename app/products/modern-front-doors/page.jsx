@@ -105,8 +105,8 @@ export default function ModernFrontDoorsPage() {
               </div>
               <div className={shared.splitImage}>
                 <img
-                  width={1600} height={1200} src="/assets/images/products/hires/moonlight-3610.webp"
-                  alt="Modern front door with satin metallic finish" loading="eager" fetchPriority="high"
+                  width={1251} height={939} src="/assets/images/products/armored/jmr3610.jpg"
+                  alt="JMR-3610 modern entrance door" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>

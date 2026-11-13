@@ -23,7 +23,13 @@ export const metadata = createPageMetadata({
  */
 export default function DoorDesignsIndexPage() {
   const designs = doorDesigns.map((design) => {
-    const cutout = cutoutImages[design.slug];
+    const candidate = cutoutImages[design.slug];
+    // A shared model number or similar silhouette does not establish that two
+    // products have the same finish, hardware or material. Use only this
+    // design's own cutout; otherwise retain its published source photograph.
+    const cutout = candidate?.src === `/assets/images/products/cutouts/${design.slug}.webp`
+      ? candidate
+      : null;
     const meta = metaForDesign(design.slug);
 
     return {
