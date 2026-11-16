@@ -6,17 +6,10 @@ import { blogPostingSchema, breadcrumbSchema } from "@/lib/schema";
 import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
-  title: "Middle East Showcase: Dubai & Riyadh Exhibitions (2025)",
+  title: "JMR Habitat at Dubai & Riyadh Door Exhibitions",
   description:
-    "Two 18 sqm booths, four entrance door systems and 200+ visitors per show: JMR Habitat at HOMELIFE UAE Dubai and SAUDI ARABIA BDEXPO Riyadh in December 2025.",
-  keywords: [
-    "JMR Habitat Middle East",
-    "HOMELIFE UAE",
-    "SAUDI ARABIA BDEXPO",
-    "Dubai entrance doors",
-    "Riyadh door projects",
-    "front doors with sidelights"
-  ],
+    "Explore JMR Habitat entrance door displays at the 2025 Dubai and Riyadh exhibitions, including door systems, finishes and project conversations.",
+  keywords: ["JMR Habitat exhibitions", "Dubai door exhibition", "Riyadh door exhibition", "HOMELIFE UAE", "SAUDI ARABIA BDEXPO"],
   path: "/blog/middle-east-showcase",
   openGraph: {
     type: "article"

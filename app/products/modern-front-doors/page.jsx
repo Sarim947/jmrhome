@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
@@ -11,21 +12,15 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Modern Front Doors | Custom Modern Entry Doors",
+  title: "Modern Entry Doors & Contemporary Front Doors",
   description:
-    "Custom modern front doors built to project dimensions. Aluminum and steel entrance systems with glass, custom finishes and architectural configurations.",
-  keywords: [
-    "modern front doors",
-    "modern entry doors",
-    "contemporary front door",
-    "minimalist entrance door",
-    "custom modern doors"
-  ],
+    "Custom modern entry doors with clean panels, glass or wood-look finishes. Compare contemporary front doors in aluminum and steel, made to project dimensions.",
+  keywords: ["modern entry doors", "contemporary front doors", "modern front doors", "custom modern front doors", "minimalist entrance door"],
   path: "/products/modern-front-doors"
 });
 
 const configurations = [
-  { title: "Modern Entry Doors", text: "Clean architectural entrance doors built around project dimensions." },
+  { title: "Choosing a Modern Front Door", text: "Compare modern entrance doors by panel layout, material, glazing and handle design, with each entrance built around project dimensions." },
   { title: "Modern Front Doors with Glass", text: "Integrated glass configurations for natural light and contemporary entrances.", href: "/products/front-doors-with-glass" },
   { title: "Modern Double Front Doors", text: "Double-door configurations for wider modern entrance openings.", href: "/products/double-entry-doors" }
 ];
@@ -91,7 +86,7 @@ export default function ModernFrontDoorsPage() {
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Modern Front Doors</h1>
+                <h1 className={styles.heroTitle}>Modern Entry Doors</h1>
                 <p className={shared.lead}>
                   Custom modern front doors built to project dimensions, with clean architectural lines, custom
                   finishes and aluminum or steel entrance systems.
@@ -158,6 +153,8 @@ export default function ModernFrontDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="modern-front-doors" />
+
         <ProcurementSpec series="modern-front-doors" />
 
         <section className={shared.sectionBlock}>

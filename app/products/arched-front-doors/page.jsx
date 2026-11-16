@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
@@ -11,22 +12,10 @@ import styles from "../modern-front-doors/page.module.css";
 import { sizeAttrs } from "@/lib/imageSizes";
 
 export const metadata = createPageMetadata({
-  title: "Arched Front Doors | Custom Arched Entrances",
+  title: "Arched Front Door Designs in Custom Sizes",
   description:
-    "Custom arched front doors built to your opening dimensions, with semicircular or segmented profiles, aluminum or steel systems, glass options and sidelights.",
-  keywords: [
-    "arched front doors",
-    "custom arched front doors",
-    "arched double front doors",
-    "arched entry doors",
-    "arched exterior doors",
-    "arched front door with sidelights",
-    "curved top front door",
-    "round top front door",
-    "arched steel front door",
-    "arched aluminum front door",
-    "custom size arched door"
-  ],
+    "Find an arched front door made to your opening profile. Explore round-top entrances, steel or aluminum systems, glazing and double-door configurations.",
+  keywords: ["arched front door", "custom arched doors", "arched front doors", "round top front door", "arched exterior doors", "arched double front doors", "arched steel front door"],
   path: "/products/arched-front-doors"
 });
 
@@ -52,7 +41,7 @@ const customizations = [
   { label: "Opening", text: "Built to your measured width, height and springing line." },
   { label: "Arc profile", text: "Semicircular, segmented, elliptical or bespoke radius." },
   { label: "Frame system", text: "Arched subframe fabricated to suit masonry or timber openings." },
-  { label: "Material", text: "Aluminum or steel systems, including thermal break construction." },
+  { label: "Material", text: "Aluminum or steel systems. Thermal-break availability depends on the selected construction; J-4244 uses non-thermally broken aluminum." },
   { label: "Glazing", text: "Clear, Low-E, frosted, laminated or patterned glass." },
   { label: "Finish", text: "Powder-coated colours, wood-look and hand-applied patinas." }
 ];
@@ -69,7 +58,7 @@ const references = [
     name: "Arched Aluminum Door with Patterned Glass",
     img: "/assets/images/products/hires/j-4244.webp",
     alt: "Custom aluminum arched entrance door with patterned glass",
-    desc: "Curved head with patterned glass and a slim aluminum frame.",
+    desc: "True arched head, patterned glazing in the leaf, and a matte black non-thermal aluminum frame; no sidelight.",
     href: "/door-designs/j-4244"
   },
   {
@@ -146,7 +135,7 @@ export default function ArchedFrontDoorsPage() {
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Arched Front Doors</h1>
+                <h1 className={styles.heroTitle}>Arched Front Door Designs</h1>
                 <p className={shared.lead}>
                   Custom arched front doors built to your opening dimensions, with semicircular, segmented or
                   elliptical heads in aluminum or steel systems.
@@ -210,6 +199,8 @@ export default function ArchedFrontDoorsPage() {
             </ul>
           </div>
         </section>
+
+        <EntranceDoorGuide topic="arched-front-doors" />
 
         <ProcurementSpec series="arched-front-doors" />
 

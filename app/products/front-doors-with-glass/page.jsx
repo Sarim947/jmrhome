@@ -1,3 +1,5 @@
+import GlassTextureGallery from "@/components/GlassTextureGallery";
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
@@ -11,29 +13,23 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Front Doors with Glass | Custom Glass Doors",
+  title: "Front Doors with Glass in Custom Designs",
   description:
-    "Custom front doors with glass built to project dimensions. Choose custom glass layouts, aluminum or steel systems, sidelights and architectural finishes.",
-  keywords: [
-    "front doors with glass",
-    "custom glass entry doors",
-    "glass entrance door",
-    "fluted glass front door",
-    "modern glass front door"
-  ],
+    "Custom modern front doors with glass. Compare frosted, fluted and reeded glass, door-panel glazing and sidelights for light, privacy and project dimensions.",
+  keywords: ["modern front doors with glass", "front doors with glass", "frosted glass front door", "fluted glass front door", "reeded glass front door", "aluminum front door with glass"],
   path: "/products/front-doors-with-glass"
 });
 
 const configurations = [
-  { title: "Vertical Glass", text: "Front doors with vertical glass panels integrated into the door design." },
-  { title: "Large Glass Panels", text: "Entry doors with larger glass areas for natural light and modern architectural entrances." },
-  { title: "Door + Sidelight Glass", text: "Front entry doors with integrated glass combined with single or double sidelights.", href: "/products/front-doors-with-sidelights" }
+  { title: "Front Door with Glass Panels", text: "For a modern glass front door, first locate the glazing: J-4244 uses patterned glass in the opening leaf; Fusion 5843 places fluted glass in a fixed sidelight." },
+  { title: "Glass Front Entrance Doors", text: "When selecting a glass front door, distinguish glazing within the opening leaf from a fixed sidelight. Compare panel position and texture, then confirm the glass build-up for the chosen model." },
+  { title: "Double Front Doors with Glass", text: "Explore custom glass double-door configurations for wider entrances. Glass build-up, leaf layout and overall frame dimensions are specified for each project.", href: "/products/double-entry-doors" }
 ];
 
 const customizations = [
   { label: "Size", text: "Custom-built to your opening dimensions." },
   { label: "Glass Layout", text: "Custom glass size, position and proportions." },
-  { label: "Glass", text: "Clear, Low-E, frosted or laminated options." },
+  { label: "Glass", text: "Clear, frosted, fluted or reeded textures; glass build-up confirmed for the selected configuration." },
   { label: "Door System", text: "Pivot or hinged configurations." },
   { label: "Frame", text: "Aluminum or steel systems." },
   { label: "Finish", text: "Wood-look, powder-coated and custom colors." }
@@ -50,7 +46,7 @@ const faqs = [
   },
   {
     question: "What glass can be used in a front door?",
-    answer: "Clear, Low-E, frosted and laminated glass are available, depending on the project requirements."
+    answer: "Clear, frosted and patterned textures, including fluted or reeded glass, can be discussed for the selected door or sidelight. Confirm the glass build-up and texture on the project drawing."
   },
   {
     question: "Can the size and position of the glass be customized?",
@@ -106,12 +102,14 @@ export default function GlassFrontDoorsPage() {
               <div className={shared.splitImage}>
                 <img
                   width={1600} height={1200} src="/assets/images/products/hires/fusion-5843.webp"
-                  alt="Modern front door with glass" loading="eager" fetchPriority="high"
+                  alt="Fusion aluminum entrance door with a fixed glass sidelight" loading="eager" fetchPriority="high"
                 />
               </div>
             </div>
           </div>
         </section>
+
+        <GlassTextureGallery />
 
         {/* SECTION 2 — Configurations */}
         <SeriesEditorial series="front-doors-with-glass" part="anatomy" />
@@ -151,6 +149,8 @@ export default function GlassFrontDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="front-doors-with-glass" />
+
         <ProcurementSpec series="front-doors-with-glass" />
 
         <section className={shared.sectionBlock}>

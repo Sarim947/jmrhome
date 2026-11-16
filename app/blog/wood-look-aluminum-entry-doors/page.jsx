@@ -8,14 +8,8 @@ import { sizeAttrs } from "@/lib/imageSizes";
 export const metadata = createPageMetadata({
   title: "Wood-Look Aluminum vs Solid Wood Entry Doors",
   description:
-    "Why architects prefer wood-look aluminum entry doors for luxury homes, oversized entrances, and modern architectural projects.",
-  keywords: [
-    "wood-look aluminum doors",
-    "aluminum entry doors",
-    "solid wood front door",
-    "wood grain door finish",
-    "architectural entrance door"
-  ],
+    "Compare wood-look aluminum entry doors with solid wood: finish samples, construction, maintenance and choices for a custom entrance.",
+  keywords: ["wood look aluminum doors", "timber look aluminium doors", "wood look front doors", "wood grain door finish"],
   path: "/blog/wood-look-aluminum-entry-doors",
   openGraph: {
     type: "article"
@@ -273,6 +267,8 @@ export default function WoodLookAluminumArticle() {
 
               <h2>Frequently Asked Questions</h2>
 
+              <h3>Are timber-look aluminium doors solid timber?</h3>
+              <p>Timber-look aluminium doors use a decorative finish on a metal system rather than a solid wood leaf. The wood grain, coating and underlying frame construction are separate choices. Compare a physical sample with the <Link href="/products/aluminum-entry-doors">aluminum entry door system</Link> and the <Link href="/door-designs/jt-02">JT-02 wood-grain door with a sidelight</Link> before approving the finish.</p>
               <h3>Do wood-look aluminum doors look like real wood?</h3>
               <p>
                 Modern coating technologies can reproduce highly realistic wood grain textures

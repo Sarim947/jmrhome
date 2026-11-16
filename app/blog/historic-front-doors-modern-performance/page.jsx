@@ -18,14 +18,8 @@ const tags = [
 export const metadata = createPageMetadata({
   title: "Historic Front Door Replacement: What to Know",
   description:
-    "Discover how historic front doors can retain traditional proportions, panels, glass and hardware while adding modern insulation, sealing and security.",
-  keywords: [
-    "historic front doors",
-    "front door replacement",
-    "traditional door design",
-    "thermal break doors",
-    "custom front doors"
-  ],
+    "Plan a historic front door replacement around the original proportions, panels, glazing and hardware, with project-specific sealing and construction choices.",
+  keywords: ["historic front door replacement", "historic front doors", "traditional door design", "arched front door replacement"],
   path: "/blog/historic-front-doors-modern-performance",
   openGraph: {
     type: "article"

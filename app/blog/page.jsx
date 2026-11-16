@@ -5,16 +5,10 @@ import { blogPosts } from "@/lib/data";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Entrance Door Insights & Project Journal",
+  title: "Entrance Door Guides: Materials & Design",
   description:
-    "Guides and project stories from JMR Habitat on entrance door design, smart locking, pivot hardware, thermal performance and material choices for architects.",
-  keywords: [
-    "entrance door blog",
-    "door design insights",
-    "pivot door guide",
-    "smart entry door",
-    "architectural door articles"
-  ],
+    "Read practical entrance door guides on pivot versus hinged doors, wood-look aluminum, historic replacements and smart entry hardware.",
+  keywords: ["entrance door guides", "pivot door vs hinged door", "wood look aluminum doors", "front door design advice"],
   path: "/blog"
 });
 

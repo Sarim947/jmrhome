@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
@@ -11,16 +12,10 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Steel Entry Doors | Custom Steel Front Doors",
+  title: "Steel Front Doors in Custom Sizes",
   description:
-    "Custom steel entry doors built to project dimensions. Explore steel front doors with custom sizes, finishes, glass options and architectural configurations.",
-  keywords: [
-    "steel entry doors",
-    "custom steel front doors",
-    "armored steel door",
-    "security entrance door",
-    "steel door manufacturer"
-  ],
+    "Custom steel front doors with black, wood-grain and textured finishes. Compare modern steel entry doors, panel designs and single or double configurations.",
+  keywords: ["custom steel front doors", "steel entry doors", "black steel front door", "modern steel front doors", "wood grain steel front door", "armored steel door"],
   path: "/products/steel-entry-doors"
 });
 
@@ -91,7 +86,7 @@ export default function SteelEntryDoorsPage() {
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Steel Entry Doors</h1>
+                <h1 className={styles.heroTitle}>Steel Front Doors in Custom Sizes</h1>
                 <p className={shared.lead}>
                   Custom steel entry doors built around project dimensions, architectural requirements and custom
                   finishes.
@@ -151,6 +146,8 @@ export default function SteelEntryDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="steel-entry-doors" />
+
         <ProcurementSpec series="steel-entry-doors" />
 
         <section className={shared.sectionBlock}>

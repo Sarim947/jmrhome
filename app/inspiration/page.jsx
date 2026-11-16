@@ -7,16 +7,10 @@ import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata = createPageMetadata({
-  title: "Entrance Door Inspiration Gallery",
+  title: "Front Door Inspiration & Entrance Design Ideas",
   description:
-    "An editorial gallery of custom entrance door inspiration from JMR Habitat: pivot, glass, armored and wood-look fronts for villas, hotels and residential projects.",
-  keywords: [
-    "entrance door inspiration",
-    "front door gallery",
-    "modern entrance design",
-    "pivot door ideas",
-    "villa entrance doors"
-  ],
+    "Explore front door inspiration in pivot, glass, wood-look and sculptural entrance designs. Follow design ideas through to related JMR Habitat door collections.",
+  keywords: ["front door inspiration", "entrance door inspiration", "pivot door ideas", "modern entrance design"],
   path: "/inspiration"
 });
 

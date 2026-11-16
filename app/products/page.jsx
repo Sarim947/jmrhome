@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import { ProductCard } from "@/components/Cards";
 import SiteShell from "@/components/SiteShell";
@@ -8,17 +9,10 @@ import JsonLd from "@/components/JsonLd";
 import styles from "./products.module.css";
 
 export const metadata = createPageMetadata({
-  title: "Custom Entrance Doors & Door Collections",
+  title: "Entrance Doors in Custom Sizes",
   description:
-    "Explore JMR Habitat entrance door collections and categories: pivot, modern, glass, sidelight, double, aluminum and steel systems, all custom built to project size.",
-  keywords: [
-    "custom entrance doors",
-    "door collections",
-    "pivot doors",
-    "glass entry doors",
-    "aluminum entry doors",
-    "steel entry doors"
-  ],
+    "Explore entrance doors by material and configuration. Compare custom size exterior doors, pivot systems, glass, sidelights and double entry doors.",
+  keywords: ["entrance doors", "custom size exterior doors", "custom door sizes", "door collections"],
   path: "/products"
 });
 
@@ -51,9 +45,9 @@ export default function ProductsPage() {
             <span className="separator">/</span>
             <span className="active">Products</span>
           </nav>
-          <h1 className="page-heading">Custom Entrance Doors & Door Collections</h1>
+          <h1 className="page-heading">Entrance Doors in Custom Sizes</h1>
           <p style={{ marginTop: "-1.25rem", marginBottom: "2rem", color: "#4b5563", fontSize: "1.0625rem", maxWidth: "40rem" }}>
-            Custom-built entrance doors for residential and commercial projects.
+            Compare entrance doors by material, style and opening arrangement, from modern entrance doors to classic panelled designs, all made to project dimensions.
           </p>
           <div className="grid">
             {productCategories.map((category) => (
@@ -66,6 +60,8 @@ export default function ProductsPage() {
             </Link>
           </p>
         </div>
+
+        <EntranceDoorGuide topic="products" />
 
         <section className={styles.sectionBlock}>
           <div className="container">
@@ -112,7 +108,7 @@ export default function ProductsPage() {
                     </li>
                   ))}
                 </ul>
-                <span className={`${styles.button} ${styles.buttonOutline}`}>Explore Custom Doors</span>
+                <Link href="/inquiry" className={`${styles.button} ${styles.buttonOutline}`}>Discuss Your Custom Door</Link>
               </div>
             </div>
           </div>

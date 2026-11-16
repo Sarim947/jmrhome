@@ -9,16 +9,10 @@ const beliefImage = "/assets/images/daily/Walnut Accent Elite render.jpg";
 const visionImage = "/assets/images/inspiration/20260613_10_final.webp";
 
 export const metadata = createPageMetadata({
-  title: "About Us: Architectural Door & Living Systems",
+  title: "Custom Entrance Door Manufacturer | About Us",
   description:
-    "JMR Habitat develops architectural door, railing, window and outdoor living products for project partners who need design freedom and controlled production.",
-  keywords: [
-    "about JMR Habitat",
-    "architectural door manufacturer",
-    "custom door factory",
-    "door and window systems",
-    "entrance door supplier"
-  ],
+    "Meet JMR Habitat, a China-based custom entrance door manufacturer. See the workshop, production steps, inspection and packaging behind our project door systems.",
+  keywords: ["JMR Habitat", "custom entrance door manufacturer", "custom door factory", "architectural door manufacturer"],
   path: "/about"
 });
 

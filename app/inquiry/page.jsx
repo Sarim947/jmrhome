@@ -7,16 +7,10 @@ import InquiryContactActions from "./InquiryContactActions";
 import InquiryForm from "./InquiryForm";
 
 export const metadata = createPageMetadata({
-  title: "Custom Entrance Door Project Inquiry",
+  title: "Custom Front Door Quotes & Project Inquiry",
   description:
-    "Start a custom entrance door project with JMR Habitat. Send your opening sizes, drawings or reference images and our team will reply with a specification and quote.",
-  keywords: [
-    "custom entrance door quote",
-    "door project inquiry",
-    "bespoke door supplier",
-    "architectural door quote",
-    "JMR Habitat contact"
-  ],
+    "Request a custom front door quote. Send opening dimensions, drawings, finish preferences and destination for a project-specific specification and scope of supply.",
+  keywords: ["custom front door quote", "custom entrance door quote", "door project inquiry", "JMR Habitat contact"],
   path: "/inquiry"
 });
 

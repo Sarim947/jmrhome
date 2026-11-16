@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
@@ -11,27 +12,21 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Front Doors with Sidelights | Entry Doors",
+  title: "Custom Front Doors with Sidelights",
   description:
-    "Custom front doors with single or double sidelights, built to project dimensions. Aluminum and steel entrance systems with custom glass and finishes.",
-  keywords: [
-    "front doors with sidelights",
-    "sidelight entry doors",
-    "custom entrance system",
-    "glass sidelight door",
-    "architectural front door"
-  ],
+    "Modern front doors with sidelights, made to your opening. Compare one or two side panels, privacy glass and aluminum or steel entrance configurations.",
+  keywords: ["front doors with sidelights", "modern front door with sidelights", "front door with one sidelight", "front door with two sidelights", "entry doors with sidelights", "front door with side panels"],
   path: "/products/front-doors-with-sidelights"
 });
 
 const configurations = [
-  { title: "Single Sidelight", text: "One sidelight positioned on either side of the entrance door." },
+  { title: "Front Door with One Sidelight", text: "A front door with sidelights can use one fixed glass panel beside the opening leaf. Confirm the side, frame width and glass specification on the drawing." },
   { title: "Double Sidelights", text: "Glass sidelights on both sides for wider entrance openings." },
-  { title: "Sidelights + Transom", text: "Side glass combined with a top transom for larger architectural entrances." }
+  { title: "Front Door with Sidelights and Transom", text: "A front door with sidelights and transom can be custom made, combining fixed side glass with a glazed panel above the door. Overall dimensions, glass build-up and opening arrangement are confirmed on the project drawing." }
 ];
 
 const customizations = [
-  { label: "Size", text: "Custom-built to your opening dimensions, with assemblies up to 2280 mm overall width." },
+  { label: "Size", text: "Custom-built to your opening dimensions; confirm the frame, door leaf and additional sidelight widths separately." },
   { label: "Door System", text: "Pivot or hinged configurations." },
   { label: "Sidelights", text: "Single, double or project-specific layouts." },
   { label: "Glass", text: "5+25A+5 tempered double glazing as standard on sidelights; clear, Low-E, frosted or laminated on request." },
@@ -58,7 +53,7 @@ const faqs = [
   },
   {
     question: "Can sidelights be combined with a transom?",
-    answer: "Yes. Sidelights can be combined with a top transom to fill larger architectural openings."
+    answer: "Yes. A front door with sidelights and transom can be custom made. Send the overall opening, preferred glass and door arrangement so the team can specify the frame and glazing for your project."
   }
 ];
 
@@ -71,7 +66,7 @@ const structuredData = [
   collectionServiceSchema({
     name: "Front Doors with Sidelights",
     description:
-      "Custom entrance doors with single or double sidelights, built to your opening dimensions.",
+      "Front doors with sidelights bring glass beside the opening leaf. Compare a front door with one sidelight or a wider layout, with configuration confirmed on your project drawing.",
     path: "/products/front-doors-with-sidelights"
   }),
   faqPageSchema(faqs)
@@ -89,9 +84,9 @@ export default function SidelightDoorsPage() {
               <div>
                 <h1 className={styles.heroTitle}>Front Doors with Sidelights</h1>
                 <p className={shared.lead}>
-                  Custom entrance doors with single or double sidelights, built to your opening dimensions.
+                  Front doors with sidelights bring glass beside the opening leaf. Compare a front door with one sidelight or a wider layout, with configuration confirmed on your project drawing.
                 </p>
-                <p className={styles.heroAux}>Aluminum and steel systems · 5+25A+5 tempered sidelight glazing · Up to 2280 mm overall width</p>
+                <p className={styles.heroAux}>Aluminum and steel systems · 5+25A+5 tempered sidelight glazing · Overall dimensions confirmed by drawing</p>
                 <div className={shared.ctaActions}>
                   <Link href="/inquiry" className={`${shared.button} ${shared.buttonPrimary}`}>
                     Send Your Dimensions
@@ -129,7 +124,7 @@ export default function SidelightDoorsPage() {
         <section className={styles.sectionCompact}>
           <div className="container">
             <span className={shared.eyebrow}>Built to Your Project</span>
-            <h2 className={shared.heading}>Custom Front Doors with Sidelights</h2>
+            <h2 className={shared.heading}>Modern Front Door with Sidelights</h2>
             <p className={shared.lead} style={{ marginTop: "0.75rem" }}>
               Send us your opening dimensions, drawings or reference images. We build the complete entrance system
               around your project requirements.
@@ -146,6 +141,8 @@ export default function SidelightDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="front-doors-with-sidelights" />
+
         <ProcurementSpec series="front-doors-with-sidelights" />
 
         <section className={shared.sectionBlock}>

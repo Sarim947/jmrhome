@@ -9,10 +9,11 @@ import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "All Entrance Door Designs",
+  title: "Front Door Designs: All Entrance Door Models",
   description:
-    "Every entrance door design JMR Habitat builds, in one place. Open any thumbnail for its leaf and frame build, glazing, hardware and size range.",
-  path: "/door-designs"
+    "Browse custom front door designs in aluminum and steel. Compare individual pivot, glass, wood-grain and arched entrance models, with dimensions and specifications.",
+  path: "/door-designs",
+  keywords: ["front door designs", "entrance door designs", "JMR Habitat door models"],
 });
 
 /**
@@ -93,7 +94,7 @@ export default function DoorDesignsIndexPage() {
             <span className="active">Door Designs</span>
           </nav>
 
-          <h1 className="page-heading">All Entrance Door Designs</h1>
+          <h1 className="page-heading">Front Door Designs: All Entrance Models</h1>
           <p className={styles.intro}>
             Every door in the current range on one page. Open a thumbnail to see how that design is
             built, what it is made to, and which collections it belongs to.

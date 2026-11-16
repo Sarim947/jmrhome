@@ -1,3 +1,4 @@
+import GlassTextureGallery from "@/components/GlassTextureGallery";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }) {
     description:
       design.seoDescription ??
       (design.params.leaf
-        ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, max size ${design.params.maxSize}, stainless steel multi-point lock, fingerprint lock optional.`
+        ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, sizes confirmed by leaf configuration, stainless steel multi-point lock, fingerprint lock optional.`
         : `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`),
     path: `/door-designs/${design.slug}`,
     openGraph: { images: [{ url: absoluteUrl(design.img), alt: design.altText }] }
@@ -72,14 +73,16 @@ export default async function DoorDesignPage({ params }) {
     ["Configuration", design.params.configuration],
     ["Door leaf thickness", design.params.leaf],
     ["Frame depth", design.params.frame],
-    ["Max size (double leaf)", design.params.maxSize],
+    ["Maximum frame sizes by configuration", design.params.size],
+    ["Core filling", design.params.core],
+    ["Thermal break", design.params.thermalBreak],
     ["Glass", design.params.glass ?? (design.collections.includes("front-doors-with-glass") ? "Integrated glass configuration" : null)],
     ["Locking", design.params.locking],
     ["Smart lock", design.params.smartLock]
   ].filter(([, value]) => value);
 
-  const specLine = design.params.leaf && design.params.frame && design.params.maxSize
-    ? `${design.params.leaf} door leaf and ${design.params.frame} frame; double-leaf assemblies up to ${design.params.maxSize}. ${design.params.locking}${design.params.smartLock ? ", and a fingerprint lock can be fitted on request" : ""}.`
+  const specLine = design.params.leaf && design.params.frame
+    ? `${design.params.leaf} door leaf and ${design.params.frame} frame; final configuration and overall frame dimensions are confirmed on your project drawing. ${design.params.locking}${design.params.smartLock ? ", and a fingerprint lock can be fitted on request" : ""}.`
     : "This custom door is made to project dimensions, finish selections and configuration requirements.";
 
   const heroSize = imageSize(design.img);
@@ -157,6 +160,8 @@ export default async function DoorDesignPage({ params }) {
           </div>
         </section>
 
+        {design.slug === "j-4244" ? <GlassTextureGallery /> : null}
+
         {highlights.length ? (
           <section className={styles.section}>
             <div className="container">
@@ -202,6 +207,9 @@ export default async function DoorDesignPage({ params }) {
 
         <ProcurementSpec
           series={specSeries}
+          sizeFamily={design.sizeFamily}
+          material={design.params.material}
+          glazing={design.params.glass}
           id={design.slug}
           seriesHref={primaryCollection?.href}
         />

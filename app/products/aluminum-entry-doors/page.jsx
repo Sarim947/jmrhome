@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
 import ProcurementSpec from "@/components/ProcurementSpec";
@@ -11,16 +12,10 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Aluminum Entry Doors | Custom Front Doors",
+  title: "Aluminum Entry Doors in Custom Sizes",
   description:
-    "Custom aluminum entry doors built to project dimensions. Explore aluminum front doors with custom sizes, glass options, wood-look finishes and hardware.",
-  keywords: [
-    "aluminum entry doors",
-    "custom aluminum front doors",
-    "wood-look aluminum doors",
-    "thermal break entrance door",
-    "aluminum door supplier"
-  ],
+    "Custom aluminum entry doors with glass, wood-look finishes and project-specific dimensions. Explore aluminium front doors and available frame configurations.",
+  keywords: ["aluminum entry doors", "aluminium front doors", "aluminium entry doors", "aluminium entrance doors", "custom aluminium doors", "wood look aluminum doors"],
   path: "/products/aluminum-entry-doors"
 });
 
@@ -158,6 +153,8 @@ export default function AluminumEntryDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="aluminum-entry-doors" />
+
         <ProcurementSpec series="aluminum-entry-doors" />
 
         <section className={shared.sectionBlock}>

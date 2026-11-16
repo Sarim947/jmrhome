@@ -12,19 +12,8 @@ import styles from "../modern-front-doors/page.module.css";
 export const metadata = createPageMetadata({
   title: "Fire Rated Entrance Doors for Projects",
   description:
-    "Custom fire rated entrance doors for hotel and apartment projects. Steel or aluminum, single or double leaf, built to the rating named in your specification.",
-  keywords: [
-    "fire rated entrance doors",
-    "fire rated doors for projects",
-    "fire rated steel entrance doors",
-    "custom fire rated doors",
-    "fire rated double doors",
-    "fire rated doors with glass",
-    "fire rated entrance door supplier",
-    "fire rated doors for hotels",
-    "fire rated apartment entrance doors",
-    "fire door system supplier"
-  ],
+    "Discuss fire rated entrance doors for hotel and apartment projects. Confirm the required rating, test standard, assembly and documentation before quotation.",
+  keywords: ["fire rated entrance doors", "fire rated apartment entrance doors", "fire rated steel entrance doors", "fire door project specification"],
   path: "/products/fire-rated-doors"
 });
 

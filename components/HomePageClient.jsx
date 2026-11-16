@@ -43,8 +43,8 @@ export default function HomePageClient() {
         <section className="section">
           <div className="hero">
             <div className="container">
-              <h1>Custom Entrance Doors for Modern Architecture</h1>
-              <p>JMR Habitat builds bespoke entrance doors where intelligent design meets security and art. Each door is made to your project dimensions, finish and hardware.</p>
+              <h1>Custom Front Doors for Modern Architecture</h1>
+              <p>JMR Habitat makes custom front doors in aluminum and steel, with pivot, hinged, glass and sidelight configurations. Each entrance is built to your project dimensions, finish and hardware.</p>
               <div className="hero-img" style={{ height: 400 }}>
                 <img
                   width={1950} height={800} src="/assets/images/hero/hero-main.webp"
@@ -57,7 +57,8 @@ export default function HomePageClient() {
           </div>
 
           <div className="container">
-            <h2>Featured Collections</h2>
+            <h2>Featured Custom Front Door Designs</h2>
+            <p>Explore <Link href="/products/pivot-doors">custom pivot doors</Link>, <Link href="/products/front-doors-with-sidelights">front doors with sidelights</Link> and <Link href="/products/arched-front-doors">custom arched front doors</Link>, or compare all <Link href="/products">entrance door configurations</Link>.</p>
             <div className="grid">
               {featuredProducts.map((product) => {
                 const designSlug = designSlugFor(product);

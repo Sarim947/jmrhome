@@ -1,0 +1,10 @@
+.block { margin: 2rem 0; }
+.block h3 { margin: 0 0 0.75rem; }
+.block p { max-width: 80ch; color: #5b616b; line-height: 1.65; margin: 0.75rem 0; }
+.scroll { overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 12px; }
+.scroll:focus-visible { outline: 2px solid #936d39; outline-offset: 3px; }
+.scroll table { border-collapse: collapse; width: 100%; min-width: 670px; text-align: left; font-size: 0.9rem; }
+.scroll th, .scroll td { padding: 1rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+.scroll thead { background: #f5f5f3; }
+.scroll tbody th { font-weight: 500; }
+.scroll tr:last-child th, .scroll tr:last-child td { border-bottom: 0; }

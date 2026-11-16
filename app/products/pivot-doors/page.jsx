@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
@@ -11,30 +12,24 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Custom Pivot Doors | Oversized Pivot Doors",
+  title: "Pivot Doors for Custom Front Entrances",
   description:
-    "Custom aluminum pivot doors from 48 x 80 in to 96 x 138 in. Compare Olang PL-01 and optional FritsJurgens hardware, glass and panel options.",
-  keywords: [
-    "custom pivot doors",
-    "oversized pivot doors",
-    "aluminum pivot door",
-    "Olang PL-01",
-    "FritsJurgens hardware",
-    "large entrance door"
-  ],
+    "Custom aluminum pivot doors for modern front entrances. Explore oversized sizes, panel finishes and pivot hardware, with drawings reviewed for your opening.",
+  keywords: ["pivot door", "pivot doors", "custom pivot doors", "pivot front door", "oversized pivot doors", "aluminum pivot doors", "aluminium pivot doors", "modern pivot front door"],
   path: "/products/pivot-doors"
 });
 
 const configurations = [
-  { title: "Modern Pivot Entry Doors", text: "Custom aluminum pivot entry doors for contemporary homes, villas and architectural entrances." },
-  { title: "Oversized Pivot Doors", text: "Large-format pivot doors available up to 96 × 138 in (approximately 2440 × 3505 mm), subject to project review." },
-  { title: "Aluminum Pivot Doors", text: "Non-thermally broken aluminum door and frame systems with custom panel and finish options.", href: "/products/aluminum-entry-doors" }
+  { title: "Single-Leaf Pivot Doors", text: "Our pivot doors have one opening leaf only. Unequal and equal double pivot doors are not offered; fixed glass sidelights can accompany the single leaf." },
+  { title: "Modern Pivot Front Door", text: "A pivoting front door turns on an offset floor-and-head axis. Our aluminum exterior pivot doors use a single opening leaf, with the frame, threshold and hardware specified for the project." },
+  { title: "Oversized Pivot Doors", text: "Large-format pivot doors available up to 2440 × 3550 mm overall frame size, subject to project review." },
+  { title: "Aluminum Pivot Doors", text: "Aluminum pivot doors (aluminium pivot doors for Australian projects) use non-thermally broken profiles with custom panel and finish options.", href: "/products/aluminum-entry-doors" }
 ];
 
 const specifications = [
   { label: "Minimum Size", text: "48 × 80 in (approximately 1220 × 2030 mm)." },
   { label: "Typical Size", text: "72 × 96 in (approximately 1830 × 2440 mm)." },
-  { label: "Maximum Size", text: "96 × 138 in / 8 ft × 11 ft 6 in (approximately 2440 × 3505 mm), subject to engineering review." },
+  { label: "Maximum Size", text: "2440 × 3550 mm, measured to the outside of the frame, subject to engineering review." },
   { label: "Door Leaf", text: "3-3/4 in (95 mm) thick aluminum door leaf; non-thermally broken construction." },
   { label: "Aluminum Frame", text: "3-3/4 in (95 mm) deep aluminum profile with 0.080 in (2.0 mm) wall thickness; non-thermally broken construction." },
   { label: "Door Weight", text: "Approximately 660–1,100 lb (300–500 kg), depending on door dimensions, construction and selected pivot hardware." },
@@ -51,7 +46,7 @@ const designs = doorDesigns
 const faqs = [
   {
     question: "What sizes are available for custom pivot doors?",
-    answer: "Our custom pivot doors start at approximately 48 × 80 in, with 72 × 96 in as a typical project size. Oversized doors can reach approximately 96 × 138 in, subject to engineering review. Metric equivalents are provided in the specification table."
+    answer: "Our custom pivot doors start at approximately 48 × 80 in, with 72 × 96 in as a typical project size. Oversized doors can reach approximately 2440 × 3550 mm overall frame, subject to engineering review. Metric equivalents are provided in the specification table."
   },
   {
     question: "How much weight can the pivot hardware support?",
@@ -88,7 +83,7 @@ const structuredData = [
   collectionServiceSchema({
     name: "Custom Aluminum Pivot Doors",
     description:
-      "Custom pivot entry doors engineered for residential and architectural openings, from 48 × 80 in to oversized 96 × 138 in configurations.",
+      "Custom pivot entry doors engineered for residential and architectural openings, in custom sizes up to 2440 × 3550 mm overall frame dimensions.",
     path: "/products/pivot-doors"
   }),
   faqPageSchema(faqs)
@@ -103,10 +98,10 @@ export default function PivotDoorsPage() {
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Custom Aluminum Pivot Doors</h1>
+                <h1 className={styles.heroTitle}>Pivot Doors for Custom Front Entrances</h1>
                 <p className={shared.lead}>
-                  Custom pivot entry doors engineered for residential and architectural openings, from 48 × 80 in to
-                  oversized 96 × 138 in configurations.
+                  Custom pivot doors for modern front entrances, in custom sizes up to 2440 × 3550 mm overall frame dimensions.
+                  Aluminum construction, panel finishes and pivot hardware are reviewed for your opening.
                 </p>
                 <p className={styles.heroAux}>Custom sizes · Aluminum systems · Olang or FritsJurgens hardware · Custom glass</p>
                 <div className={shared.ctaActions}>
@@ -163,6 +158,8 @@ export default function PivotDoorsPage() {
             </p>
           </div>
         </section>
+
+        <EntranceDoorGuide topic="pivot-doors" />
 
         <ProcurementSpec series="pivot-doors" />
 

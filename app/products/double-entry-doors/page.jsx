@@ -1,3 +1,4 @@
+import EntranceDoorGuide from "@/components/EntranceDoorGuide";
 import Link from "next/link";
 import { doorDesigns } from "@/lib/data";
 import SiteShell from "@/components/SiteShell";
@@ -11,23 +12,18 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, collectionServiceSchema, faqPageSchema } from "@/lib/schema";
 
 export const metadata = createPageMetadata({
-  title: "Double Entry Doors | Custom Double Doors",
+  title: "Double Front Doors in Custom Sizes",
   description:
-    "Custom double front doors and double entry doors built to project dimensions. Choose aluminum or steel systems, custom finishes, glass and door configurations.",
-  keywords: [
-    "double entry doors",
-    "double front doors",
-    "custom double doors",
-    "wide entrance doors",
-    "double door supplier"
-  ],
+    "Double front doors made to your opening. Compare modern double front doors, equal or unequal leaves, steel or aluminum systems and project glazing options.",
+  keywords: ["double front doors", "double entry doors", "modern double front doors", "custom double front doors", "double front doors with glass", "unequal double front door"],
   path: "/products/double-entry-doors"
 });
 
 const configurations = [
-  { title: "Equal Double Doors", text: "Two coordinated door leaves with equal proportions for wide entrance openings." },
+  { title: "Steel Double Front Doors", text: "JMR-3670 offers black double front doors with classical panels and ring knockers. Its steel-core construction, leaf split and overall frame size are specified for the project.", href: "/door-designs/jmr-3670" },
+  { title: "Double Front Entry Doors", text: "Compare exterior front double doors with equal leaves or an unequal split. Confirm the active leaf, frame size and meeting detail for your entrance." },
   { title: "Unequal Double Doors", text: "A primary entrance door combined with a narrower secondary leaf for project-specific openings." },
-  { title: "Double Front Doors with Glass", text: "Double entry doors incorporating glass panels, sidelights or project-specific glazing.", href: "/products/front-doors-with-glass" }
+  { title: "Double Front Doors with Glass", text: "Glass double front doors can be custom made for your project. Confirm the glazing position, glass build-up and overall frame dimensions on the approved drawing.", href: "/products/front-doors-with-glass" }
 ];
 
 const customizations = [
@@ -54,7 +50,7 @@ const faqs = [
   },
   {
     question: "Can double front doors include glass?",
-    answer: "Yes. Glass can be integrated into the door leaves or coordinated with sidelights depending on the entrance design."
+    answer: "Yes. Double front doors with glass can be custom made. Glass build-up, leaf proportions and frame dimensions are confirmed for the selected project, rather than inferred from a solid-panel reference image."
   },
   {
     question: "What materials are available for double entry doors?",
@@ -62,7 +58,7 @@ const faqs = [
   },
   {
     question: "Can you make modern double front doors?",
-    answer: "Yes. Modern double front doors can be produced with clean architectural detailing, custom finishes and glass options."
+    answer: "Modern double front doors can use clean panels and coordinated finishes. Confirm any proposed glazed configuration separately for the selected model."
   }
 ];
 
@@ -91,7 +87,7 @@ export default function DoubleEntryDoorsPage() {
           <div className="container">
             <div className={shared.split}>
               <div>
-                <h1 className={styles.heroTitle}>Double Front Doors</h1>
+                <h1 className={styles.heroTitle}>Double Front Doors in Custom Sizes</h1>
                 <p className={shared.lead}>
                   Custom double front doors built for wider entrance openings, with project-specific dimensions,
                   materials, finishes and configurations.
@@ -151,6 +147,8 @@ export default function DoubleEntryDoorsPage() {
         </section>
 
         {/* SECTION 4 — Designs */}
+        <EntranceDoorGuide topic="double-entry-doors" />
+
         <ProcurementSpec series="double-entry-doors" />
 
         <section className={shared.sectionBlock}>

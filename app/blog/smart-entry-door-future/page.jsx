@@ -17,16 +17,10 @@ const tags = [
 ];
 
 export const metadata = createPageMetadata({
-  title: "The Future of Smart Entry Doors",
+  title: "Smart Entry Doors: Locks & Digital Access",
   description:
-    "A practical look at two smart entry door paths: identity-based biometric security and ecosystem-based digital access, and what each means for a new front door.",
-  keywords: [
-    "smart entry doors",
-    "biometric door lock",
-    "digital key access",
-    "finger vein recognition",
-    "Matter smart home door"
-  ],
+    "Explore smart entry doors, biometric locks and digital key access. Learn which compatibility and hardware questions to ask before specifying a new entrance.",
+  keywords: ["smart entry doors", "biometric door lock", "digital key access", "smart front door hardware"],
   path: "/blog/smart-entry-door-future",
   openGraph: {
     type: "article"
@@ -47,7 +41,7 @@ export default function SmartEntryDoorFuturePage() {
           blogPostingSchema({
             headline: "The Future of Smart Entry Doors: Will the Key Become Impossible to Copy or Disappear?",
             description: "Two smart entry door paths are shaping the future: stronger biometric identity verification and seamless ecosystem-based digital access.",
-            image: "${imageBase}/jmr-smart-entry-door-hero.webp",
+            image: `${imageBase}/jmr-smart-entry-door-hero.webp`,
             path: "/blog/smart-entry-door-future",
             datePublished: "2026-07-31"
           })
