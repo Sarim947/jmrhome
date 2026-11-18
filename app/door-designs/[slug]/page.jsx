@@ -44,6 +44,9 @@ export default async function DoorDesignPage({ params }) {
   const { slug } = await params;
   // Retired duplicate: retain inbound links to the user-confirmed model.
   const retiredDesigns = {
+    "jdh-01": "j-2008",
+    "jdh-02": "j-2215",
+    "jmr-3358": "j-2055",
     "jmr-2105": "j-2015",
     "classic-3670": "jmr-3670",
     "moonlight-3610": "jmr-3610",
