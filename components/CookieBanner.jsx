@@ -8,6 +8,10 @@ export default function CookieBanner() {
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
 
+    if (consent === "accepted") {
+      window.gtag?.("consent", "update", { analytics_storage: "granted" });
+    }
+
     if (!consent) {
       setShow(true);
     }
@@ -62,7 +66,9 @@ export default function CookieBanner() {
       >
         <button
           onClick={() => {
+            window.gtag?.("consent", "update", { analytics_storage: "denied" });
             localStorage.setItem("cookie-consent", "rejected");
+            window.dispatchEvent(new Event("cookie-consent-change"));
             setShow(false);
           }}
           style={{
@@ -85,6 +91,7 @@ export default function CookieBanner() {
             });
 
             localStorage.setItem("cookie-consent", "accepted");
+            window.dispatchEvent(new Event("cookie-consent-change"));
             setShow(false);
           }}
           style={{
