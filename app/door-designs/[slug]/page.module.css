@@ -297,3 +297,6 @@
     gap: 2rem;
   }
 }
+
+.photographicHero img { max-height: 640px; object-fit: contain; }
+.photographicHero figcaption { color: #6b7280; font-size: .85rem; margin-top: .75rem; line-height: 1.6; }

@@ -1,3 +1,5 @@
+import ProductDetailStory from "@/components/ProductDetailStory";
+import { productStories } from "@/lib/productStories";
 import GlassTextureGallery from "@/components/GlassTextureGallery";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }) {
 
   if (!design) return {};
 
+  const hero = productStories[design.slug]?.hero;
   return createPageMetadata({
     title: design.seoTitle ?? design.altText,
     absoluteTitle: true,
@@ -36,7 +39,7 @@ export async function generateMetadata({ params }) {
         ? `${design.altText}. ${design.params.leaf} door leaf, ${design.params.frame} frame, sizes confirmed by leaf configuration, stainless steel multi-point lock, fingerprint lock optional.`
         : `${design.altText}. Custom-made to your opening dimensions, with finish, glass and hardware options.`),
     path: `/door-designs/${design.slug}`,
-    openGraph: { images: [{ url: absoluteUrl(design.img), alt: design.altText }] }
+    openGraph: { images: [{ url: absoluteUrl(hero?.src ?? design.img), alt: hero?.alt ?? design.altText }] }
   });
 }
 
@@ -88,7 +91,11 @@ export default async function DoorDesignPage({ params }) {
     ? `${design.params.leaf} door leaf and ${design.params.frame} frame; final configuration and overall frame dimensions are confirmed on your project drawing. ${design.params.locking}${design.params.smartLock ? ", and a fingerprint lock can be fitted on request" : ""}.`
     : "This custom door is made to project dimensions, finish selections and configuration requirements.";
 
-  const heroSize = imageSize(design.img);
+  const story = productStories[design.slug];
+  const heroImage = story?.hero;
+  const heroSrc = heroImage?.src ?? design.img;
+  const heroAlt = heroImage?.alt ?? design.altText;
+  const heroSize = heroImage ? { w: heroImage.width, h: heroImage.height } : imageSize(design.img);
   const note = noteForDesign(design.slug);
   const faqs = design.faqs ?? [];
   const highlights = design.highlights ?? [];
@@ -109,10 +116,22 @@ export default async function DoorDesignPage({ params }) {
           serviceSchema({
             name: `${design.altText} (${design.name})`,
             description: design.seoDescription ?? design.description,
-            image: design.img,
+            image: heroSrc,
             path: `/door-designs/${design.slug}`,
             category: design.params.material
           }),
+          ...(story ? [story.hero, story.feature, ...story.details, story.scene].filter(Boolean).map((photo) => ({
+            "@context": "https://schema.org",
+            "@type": "ImageObject",
+            contentUrl: absoluteUrl(photo.src),
+            name: photo.alt,
+            caption: photo.caption,
+            description: photo.description ?? photo.caption,
+            width: photo.width,
+            height: photo.height,
+            encodingFormat: "image/webp",
+            isPartOf: { "@id": absoluteUrl(`/door-designs/${design.slug}`) }
+          })) : []),
           ...(faqs.length
             ? [
                 {
@@ -149,19 +168,22 @@ export default async function DoorDesignPage({ params }) {
                 <p className={styles.customNote}>{specLine}</p>
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
-              <figure className={styles.heroImage}>
+              <figure className={`${styles.heroImage} ${story ? styles.photographicHero : ""}`}>
                 <ProductImage
-                  src={design.img}
-                  alt={design.altText}
+                  src={heroSrc}
+                  alt={heroAlt}
                   width={heroSize?.w}
                   height={heroSize?.h}
                   loading="eager"
                   fetchPriority="high"
                 />
+                {heroImage ? <figcaption>{heroImage.caption}</figcaption> : null}
               </figure>
             </div>
           </div>
         </section>
+
+        {story ? <ProductDetailStory story={story} /> : null}
 
         {design.slug === "j-4244" ? <GlassTextureGallery /> : null}
 
@@ -217,6 +239,7 @@ export default async function DoorDesignPage({ params }) {
           seriesHref={primaryCollection?.href}
         />
 
+        {!story ? (
         <section className={styles.section}>
           <div className="container">
             <h2>Image gallery</h2>
@@ -234,6 +257,7 @@ export default async function DoorDesignPage({ params }) {
             </div>
           </div>
         </section>
+        ) : null}
 
         {faqs.length ? (
           <section className={styles.section}>
