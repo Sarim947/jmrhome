@@ -63,7 +63,7 @@ export default async function DoorDesignPage({ params }) {
   if (!design) notFound();
 
   const primaryCollection = categoryForSlug(design.collections[0]);
-  const specSeries = resolveSpecSeries(design.collections);
+  const specSeries = design.specSeries ?? resolveSpecSeries(design.collections);
   const relatedCollections = design.collections.map(categoryForSlug).filter(Boolean);
   const relatedDesigns = [
     ...doorDesigns.filter(
@@ -77,6 +77,7 @@ export default async function DoorDesignPage({ params }) {
     ["Style", design.params.style],
     ["Material / system", design.params.material],
     ["Configuration", design.params.configuration],
+    ["Availability", design.params.availability],
     ["Door leaf thickness", design.params.leaf],
     ["Frame depth", design.params.frame],
     ["Maximum frame sizes by configuration", design.params.size],
@@ -165,7 +166,7 @@ export default async function DoorDesignPage({ params }) {
                 <p className={styles.eyebrow}>Door Design · {design.name}</p>
                 <h1>{design.altText}</h1>
                 <p className={styles.lead}>{paragraphs[0] ?? design.description}</p>
-                <p className={styles.customNote}>{specLine}</p>
+                <p className={styles.customNote}>{design.supplyNote ?? specLine}</p>
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>
               </div>
               <figure className={`${styles.heroImage} ${story ? styles.photographicHero : ""}`}>

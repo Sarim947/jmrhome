@@ -34,9 +34,21 @@ const customizations = [
   { label: "Configuration", text: "Custom layouts built around the project opening." }
 ];
 
+// Generated studio catalog images; retain original product images for other uses.
+const catalogImages = {
+  "jmr-2662": {
+    "src": "/assets/images/products/catalog/jmr-2662-studio-v1.webp",
+    "alt": "J-2662 unequal double steel entrance door in a grey studio visualization with floor reflection"
+  },
+  "jt-27": {
+    "src": "/assets/images/products/catalog/jt-27-studio-v1.webp",
+    "alt": "JT-27 steel entrance door in a grey studio visualization with floor reflection"
+  }
+};
+
 const designs = doorDesigns
   .filter((design) => design.collections.includes("steel-entry-doors"))
-  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img: catalogImages[slug]?.src ?? img, alt: catalogImages[slug]?.alt ?? altText, desc: shortDesc, slug }));
 
 const faqs = [
   {
