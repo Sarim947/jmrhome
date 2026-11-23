@@ -34,9 +34,25 @@ const customizations = [
   { label: "Configuration", text: "Single, double, glass and sidelight layouts." }
 ];
 
+const catalogImages = {
+  "jt-27": { img: "/assets/images/products/jt-27/card-01-jt-27-studio.webp", alt: "JT-27 dark textured entrance door with a vertical metallic accent and recessed pull detail" },
+  "jmr-5801": {
+    "img": "/assets/images/products/jmr-5801/card-01-jmr-5801-studio.webp",
+    "alt": "JMR-5801 geometric relief entrance door with paired gold-tone pulls"
+  },
+  "jmr-3701": {
+    "img": "/assets/images/products/jmr-3701/card-01-jmr-3701-studio.webp",
+    "alt": "JMR-3701 dark textured entrance door with a horizontal gold-tone accent"
+  },
+  "pz-05": {
+    "img": "/assets/images/products/pz-05/card-01-pz-05-studio.webp",
+    "alt": "PZ-05 radial panel entrance door with a sculptural pull"
+  }
+};
+
 const designs = doorDesigns
   .filter((design) => design.collections.includes("modern-front-doors"))
-  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img, alt: altText, desc: shortDesc, slug }));
+  .map(({ name, img, altText, shortDesc, slug }) => ({ name, img: catalogImages[slug]?.img ?? img, alt: catalogImages[slug]?.alt ?? altText, desc: shortDesc, slug }));
 
 const faqs = [
   {

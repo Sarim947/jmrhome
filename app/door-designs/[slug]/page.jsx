@@ -4,7 +4,7 @@ import GlassTextureGallery from "@/components/GlassTextureGallery";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
-import { doorDesigns, productCategories } from "@/lib/data";
+import { doorDesigns, productCategories, productCollections } from "@/lib/data";
 import { absoluteUrl, createPageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -16,7 +16,10 @@ import { imageSize } from "@/lib/imageSizes";
 import styles from "./page.module.css";
 
 function categoryForSlug(slug) {
-  return productCategories.find((category) => category.slug === slug && category.href);
+  const category = productCategories.find((item) => item.slug === slug && item.href);
+  if (category) return category;
+  const collection = productCollections.find((item) => item.slug === slug);
+  return collection ? { title: collection.title, href: `/products/${collection.slug}` } : null;
 }
 
 export function generateStaticParams() {
@@ -164,7 +167,7 @@ export default async function DoorDesignPage({ params }) {
             <div className={styles.heroGrid}>
               <div>
                 <p className={styles.eyebrow}>Door Design · {design.name}</p>
-                <h1>{design.altText}</h1>
+                <h1>{design.heading ?? design.altText}</h1>
                 <p className={styles.lead}>{paragraphs[0] ?? design.description}</p>
                 <p className={styles.customNote}>{design.supplyNote ?? specLine}</p>
                 <Link href="/inquiry" className={styles.cta}>Discuss This Design</Link>

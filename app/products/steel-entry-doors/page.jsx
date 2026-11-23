@@ -26,7 +26,7 @@ const configurations = [
 ];
 
 const customizations = [
-  { label: "Size", text: "Custom-built to your opening dimensions." },
+  { label: "Size", text: "Project dimensions for custom models; confirm available sizes for stock-range models." },
   { label: "Door System", text: "Single or double configurations." },
   { label: "Material", text: "Steel systems." },
   { label: "Glass", text: "Clear, Low-E, frosted or laminated options." },
@@ -53,7 +53,7 @@ const designs = doorDesigns
 const faqs = [
   {
     question: "Can steel entry doors be custom sized?",
-    answer: "Yes. Each steel entry door is built to your opening dimensions."
+    answer: "Custom models can be made to project dimensions. For stock-range models, confirm available sizes and quantities before ordering."
   },
   {
     question: "What finishes are available for steel entry doors?",
