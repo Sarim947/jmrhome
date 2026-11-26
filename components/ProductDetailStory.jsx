@@ -14,7 +14,7 @@ export default function ProductDetailStory({ story }) {
         </header>
         <div className={styles.stories}>
           {photos.map((photo, index) => (
-            <article key={`${photo.src}-${index}`} className={styles.row}>
+            <article key={`story-photo-${index}`} className={styles.row}>
               <figure className={styles.photo}>
                 <ProductImage src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" />
                 <figcaption>{photo.caption}</figcaption>

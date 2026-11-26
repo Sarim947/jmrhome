@@ -4,6 +4,27 @@ const SITE = "https://jmrhabitat.com";
 const nextConfig = {
   async redirects() {
     return [
+      // Known image-like React keys discovered as URLs; keep recovery exact.
+      {
+        source: "/assets/images/products/mh-01/scene-square.webp-4",
+        destination: `${SITE}/assets/images/products/mh-01/scene-square.webp`,
+        permanent: true
+      },
+      {
+        source: "/assets/images/products/details/j-2007-product-view.webp-0",
+        destination: `${SITE}/assets/images/products/details/j-2007-product-view.webp`,
+        permanent: true
+      },
+      {
+        source: "/assets/images/products/j-2211/real-04.webp-3",
+        destination: `${SITE}/assets/images/products/j-2211/real-04.webp`,
+        permanent: true
+      },
+      {
+        source: "/assets/images/products/jt-6004/scene-square.webp-7",
+        destination: `${SITE}/assets/images/products/jt-6004/scene-square.webp`,
+        permanent: true
+      },
       // ── 旧集合 slug 更名（集合页仍在，仅换了更语义化的地址） ──────────────
       // classic-3670 / neoclassical-2250 / aluminum-glass-lite-doors 原本与门款设计
       // 页 slug 撞车，已改名，避免同一关键词两个可索引 URL 互相蚕食。
